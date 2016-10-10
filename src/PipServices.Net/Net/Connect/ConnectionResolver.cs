@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using PipServices.Commons.Config;
 using PipServices.Commons.Errors;
 using PipServices.Commons.Refer;
@@ -66,7 +68,7 @@ namespace PipServices.Net.Net.Connect
             _connections.Add(connection);
         }
 
-        private void RegisterInDiscovery(string correlationId, ConnectionParams connection)
+        private async Task RegisterInDiscoveryAsync(string correlationId, ConnectionParams connection, CancellationToken token)
         {
 
             if (connection.UseDiscovery == false) return;
@@ -79,18 +81,21 @@ namespace PipServices.Net.Net.Connect
             {
                 var discovery = component as IDiscovery;
 
-                discovery?.Register(correlationId, key, connection);
+                var registerAsync = discovery?.RegisterAsync(correlationId, key, connection, token);
+
+                if (registerAsync != null)
+                    await registerAsync;
             }
         }
 
-        public void Register(string correlationId, ConnectionParams connection)
+        public async Task RegisterAsync(string correlationId, ConnectionParams connection, CancellationToken token)
         {
-            RegisterInDiscovery(correlationId, connection);
+            await RegisterInDiscoveryAsync(correlationId, connection, token);
 
             _connections.Add(connection);
         }
 
-        private ConnectionParams ResolveInDiscovery(string correlationId, ConnectionParams connection)
+        private async Task<ConnectionParams> ResolveInDiscoveryAsync(string correlationId, ConnectionParams connection, CancellationToken token)
         {
 
             if (connection.UseDiscovery == false)
@@ -106,7 +111,12 @@ namespace PipServices.Net.Net.Connect
             {
                 var discovery = component as IDiscovery;
 
-                var resolvedConnection = discovery?.ResolveOne(correlationId, key);
+                var resolveOneTask = discovery?.ResolveOneAsync(correlationId, key, token);
+
+                if (resolveOneTask == null)
+                    continue;
+
+                var resolvedConnection = await resolveOneTask;
 
                 if (resolvedConnection != null)
                     return resolvedConnection;
@@ -115,7 +125,7 @@ namespace PipServices.Net.Net.Connect
             return null;
         }
 
-        public ConnectionParams Resolve(string correlationId)
+        public async Task<ConnectionParams> ResolveAsync(string correlationId, CancellationToken token)
         {
             if (_connections.Count == 0)
                 return null;
@@ -133,7 +143,7 @@ namespace PipServices.Net.Net.Connect
                 if (!connection.UseDiscovery)
                     continue;
 
-                var resolvedConnection = ResolveInDiscovery(correlationId, connection);
+                var resolvedConnection = await ResolveInDiscoveryAsync(correlationId, connection, token);
 
                 if (resolvedConnection == null)
                     continue;
@@ -148,7 +158,7 @@ namespace PipServices.Net.Net.Connect
             return null;
         }
 
-        private IEnumerable<ConnectionParams> ResolveAllInDiscovery(string correlationId, ConnectionParams connection)
+        private async Task<IEnumerable<ConnectionParams>> ResolveAllInDiscoveryAsync(string correlationId, ConnectionParams connection, CancellationToken token)
         {
             var result = new List<ConnectionParams>();
 
@@ -166,7 +176,12 @@ namespace PipServices.Net.Net.Connect
             {
                 var discovery = component as IDiscovery;
 
-                var resolvedConnections = discovery?.ResolveAll(correlationId, key);
+                var resolveAllTask = discovery?.ResolveAllAsync(correlationId, key, token);
+
+                if (resolveAllTask == null)
+                    continue;
+
+                var resolvedConnections = await resolveAllTask;
 
                 if (resolvedConnections != null)
                     result.AddRange(resolvedConnections);
@@ -175,7 +190,7 @@ namespace PipServices.Net.Net.Connect
             return result;
         }
 
-        public IEnumerable<ConnectionParams> ResolveAllstring(string correlationId)
+        public async Task<IEnumerable<ConnectionParams>> ResolveAllstringAsync(string correlationId, CancellationToken token)
         {
             var resolved = new List<ConnectionParams>();
             var toResolve = new List<ConnectionParams>();
@@ -195,7 +210,7 @@ namespace PipServices.Net.Net.Connect
 
             foreach (var connection in toResolve)
             {
-                var resolvedConnections = ResolveAllInDiscovery(correlationId, connection);
+                var resolvedConnections = await ResolveAllInDiscoveryAsync(correlationId, connection, token);
 
                 foreach (var resolvedConnection in resolvedConnections)
                 {

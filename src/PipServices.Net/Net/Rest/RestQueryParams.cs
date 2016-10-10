@@ -4,7 +4,7 @@ using PipServices.Commons.Convert;
 
 namespace PipServices.Net.Net.Rest
 {
-    public sealed class RestQueryParams : MultiValueDictionary<string, string>
+    public sealed class RestQueryParams : MultiValueDictionary<string, object>
     {
         private static long SerialVersionUid { get; } = -903917330561942092L;
 

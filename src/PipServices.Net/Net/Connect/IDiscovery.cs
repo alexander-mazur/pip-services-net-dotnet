@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PipServices.Net.Net.Connect
 {
@@ -11,7 +13,7 @@ namespace PipServices.Net.Net.Connect
          * @param connection the connection to be registered.
          * @throws ApplicationException when registration fails for whatever reasons
          */
-        void Register(string correlationId, string key, ConnectionParams connection);
+        Task RegisterAsync(string correlationId, string key, ConnectionParams connection, CancellationToken token);
 
         /**
          * Resolves one connection from the list of service connections.
@@ -20,7 +22,7 @@ namespace PipServices.Net.Net.Connect
          * @return a resolved connection.
          * @throws ApplicationException when resolution failed for whatever reasons.
          */
-        ConnectionParams ResolveOne(string correlationId, string key);
+        Task<ConnectionParams> ResolveOneAsync(string correlationId, string key, CancellationToken token);
 
         /**
          * Resolves a list of connections from to be called by a client.
@@ -29,6 +31,6 @@ namespace PipServices.Net.Net.Connect
          * @return a list with resolved connections.
          * @throws ApplicationException when resolution failed for whatever reasons.
          */
-        List<ConnectionParams> ResolveAll(string correlationId, string key);
+        Task<IList<ConnectionParams>> ResolveAllAsync(string correlationId, string key, CancellationToken token);
     }
 }
