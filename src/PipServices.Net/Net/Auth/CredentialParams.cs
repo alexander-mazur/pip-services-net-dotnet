@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using PipServices.Commons.Config;
 using PipServices.Commons.Data;
 
@@ -26,7 +27,7 @@ namespace PipServices.Net.Net.Auth
          * Create an instance of credentials from free-form configuration map.
          * @param content a map with the credentials. 
          */
-        public CredentialParams(IDictionary map)
+        public CredentialParams(IDictionary<string, object> map)
             : base(map)
         {
         }

@@ -1,4 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using PipServices.Commons.Config;
 using PipServices.Commons.Count;
 using PipServices.Commons.Errors;
@@ -6,6 +10,7 @@ using PipServices.Commons.Log;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Run;
 using PipServices.Net.Net.Connect;
+using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 
 namespace PipServices.Net.Net.Rest
 {
@@ -14,21 +19,17 @@ namespace PipServices.Net.Net.Rest
         private static readonly ConfigParams DefaultConfig = ConfigParams.FromTuples(
             "connection.protocol", "http",
             "connection.host", "0.0.0.0",
-            //"connection.port", 3000,
+            "connection.port", 3000,
             "connection.request_max_size", 1024*1024,
             "connection.connect_timeout", 60000,
             "connection.debug", true
             );
 
-        protected HttpSelfHostServer _server;
+        protected IWebHost Server { get; private set; }
         protected ConnectionResolver Resolver = new ConnectionResolver();
         protected ILogger Logger = new NullLogger();
         protected ICounters Counters = new NullCounters();
         protected string Url;
-
-        protected RestService()
-        {
-        }
 
         public void SetReferences(IReferences references)
         {
@@ -60,9 +61,9 @@ namespace PipServices.Net.Net.Rest
             return Counters.BeginTiming(name + ".exec_time");
         }
 
-        protected ConnectionParams GetConnection(string correlationId)
+        protected async Task<ConnectionParams> GetConnectionAsync(string correlationId, CancellationToken token)
         {
-            var connection = Resolver.ResolveAsync(correlationId);
+            var connection = await Resolver.ResolveAsync(correlationId, token);
 
             // Check for connection
             if (connection == null)
@@ -97,50 +98,67 @@ namespace PipServices.Net.Net.Rest
             return connection;
         }
 
-        public void Open(string correlationId)
+        public async Task OpenAsync(string correlationId, CancellationToken token)
         {
-            var connection = GetConnection(correlationId);
+            var connection = await GetConnectionAsync(correlationId, token);
 
             var protocol = connection.GetProtocol("http");
             var host = connection.Host;
             var port = connection.Port;
             var address = protocol + "://" + host + ":" + port;
 
-            var config = new HttpSelfHostConfiguration(address);
-
-            // Use routes
-            config.MapHttpAttributeRoutes();
-
-            // Override dependency resolver to inject this service as a controller
-            config.DependencyResolver = new WebApiControllerResolver<T, I>(config.DependencyResolver, Logic);
-
-            config.Services.Replace(typeof(IExceptionHandler), new MicroserviceExceptionHandler());
-
             try
             {
-                _host = new HttpSelfHostServer(config);
-                _host.OpenAsync().Wait();
-            // RegisterAsync the service URI
-            Resolver.RegisterAsync(correlationId, connection);
+                var builder = new WebHostBuilder()
+                    .UseWebListener(options =>
+                    {
+                        // AllowAnonymous is the default WebListner configuration
+                        options.Listener.AuthenticationManager.AuthenticationSchemes =
+                            AuthenticationSchemes.AllowAnonymous;
+                    })
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseUrls(address)
+                    //.UseConfiguration()
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
+
+                // The default listening address is http://localhost:5000 if none is specified.
+                // Replace "localhost" with "*" to listen to external requests.
+                // You can use the --urls flag to change the listening address. Ex:
+                // > dotnet run --urls http://*:8080;http://*:8081
+
+                // Uncomment the following to configure URLs programmatically.
+                // Since this is after UseConfiguraiton(config), this will clobber command line configuration.
+                //builder.UseUrls("http://*:8080", "http://*:8081");
+
+                // If this app isn't hosted by IIS, UseIISIntegration() no-ops.
+                // It isn't possible to both listen to requests directly and from IIS using the same WebHost,
+                // since this will clobber your UseUrls() configuration when hosted by IIS.
+                // If UseIISIntegration() is called before UseUrls(), IIS hosting will fail.
+                //builder.UseIISIntegration();
+
+                Server = builder.Build();
+                Server.Run(token);
 
                 Logger.Info(correlationId, "Opened REST service at %s", Url);
             }
             catch (Exception ex)
             {
-                _server = null;
+                Server = null;
                 throw new ConnectionException(correlationId, "CANNOT_CONNECT", "Opening REST service failed")
-                    .WithCause(ex.Message).WithDetails("url", Url);
+                    .WithCause(ex).WithDetails("url", Url);
             }
         }
 
-        public void Close(string correlationId)
+        public Task CloseAsync(string correlationId, CancellationToken token)
         {
-            if (_server != null)
+            if (Server != null)
             {
                 // Eat exceptions
                 try
                 {
-                    _server.stop(0);
+                    Server.Dispose();
                     Logger.Info(correlationId, "Closed REST service at %s", Url);
                 }
                 catch (Exception ex)
@@ -148,9 +166,11 @@ namespace PipServices.Net.Net.Rest
                     Logger.Warn(correlationId, "Failed while closing REST service: %s", ex);
                 }
 
-                _server = null;
+                Server = null;
                 Url = null;
             }
+
+            return Task.CompletedTask;
         }
     }
 }

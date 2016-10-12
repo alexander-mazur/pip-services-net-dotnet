@@ -67,7 +67,7 @@ namespace PipServices.Net.Net.Auth
             if (credential.UseCredentialStore() == false)
                 return null;
 
-            var key = credential.GetStoreKey();
+            var key = credential.StoreKey;
 
             var components = _references.GetOptional(new Descriptor("*", "credential_store", "*", "*"));
 

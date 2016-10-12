@@ -70,9 +70,9 @@ namespace PipServices.Net.Net.Rest
             return Counters.BeginTiming(name + ".call_time");
         }
 
-        protected ConnectionParams GetConnection(string correlationId)
+        protected async Task<ConnectionParams> GetConnectionAsync(string correlationId, CancellationToken token)
         {
-            var connection = Resolver.Resolve(correlationId);
+            var connection = await Resolver.ResolveAsync(correlationId, token);
 
             // Check for connection
             if (connection == null)
@@ -107,9 +107,9 @@ namespace PipServices.Net.Net.Rest
             return connection;
         }
 
-        public Task OpenAsync(string correlationId, CancellationToken token)
+        public async Task OpenAsync(string correlationId, CancellationToken token)
         {
-            var connection = GetConnection(correlationId);
+            var connection = await GetConnectionAsync(correlationId, token);
 
             var protocol = connection.GetProtocol("http");
             var host = connection.Host;
@@ -145,8 +145,6 @@ namespace PipServices.Net.Net.Rest
             Client.DefaultRequestHeaders.ConnectionClose = true;
 
             Logger.Debug(correlationId, "Connected via REST to %s", Url);
-
-            return Task.CompletedTask;
         }
 
         public Task CloseAsync(string correlationId, CancellationToken token)

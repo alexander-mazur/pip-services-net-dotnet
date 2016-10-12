@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections.Generic;
 using PipServices.Commons.Config;
 using PipServices.Commons.Data;
 
@@ -18,7 +17,7 @@ namespace PipServices.Net.Net.Connect
          * Create an instance of service address with free-form configuration map.
          * @param content a map with the address configuration parameters. 
          */
-        public ConnectionParams(IDictionary map)
+        public ConnectionParams(IDictionary<string, object> map)
             : base(map)
         {
         }
