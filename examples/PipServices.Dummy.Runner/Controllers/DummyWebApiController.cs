@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PipServices.Net.Test.Models;
 using PipServices.Commons.Data;
-using PipServices.Net.Test.Persistance;
+using PipServices.Dummy.Runner.Models;
+using PipServices.Dummy.Runner.Persistance;
 
 namespace PipServices.Dummy.Runner.Controllers
 {

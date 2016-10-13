@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PipServices.Net.Net.Connect;
 
 namespace PipServices.Net.Net.Rest
 {
@@ -27,7 +25,7 @@ namespace PipServices.Net.Net.Rest
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc();//.AddApplicationPart(typeof(ConnectionResolver).Assembly).AddControllersAsServices();
 
             //services.AddSingleton<ITodoRepository, TodoRepository>();
         }
@@ -39,6 +37,13 @@ namespace PipServices.Net.Net.Rest
             loggerFactory.AddDebug();
 
             app.UseMvc();
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("default", "{controller=DummyWebApi}");
+            //});
+
+            app.UseStatusCodePages();//context => context.HttpContext.Response.);
 
             //app.UseMvc(routes =>
             //{

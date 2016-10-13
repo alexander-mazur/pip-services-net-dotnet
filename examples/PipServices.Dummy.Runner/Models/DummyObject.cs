@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using PipServices.Commons.Data;
 
-namespace PipServices.Net.Test.Models
+namespace PipServices.Dummy.Runner.Models
 {
     [DataContract]
     [JsonObject(MemberSerialization.OptIn)]

@@ -31,7 +31,7 @@ namespace PipServices.Net.Net.Rest
         protected ICounters Counters = new NullCounters();
         protected string Url;
 
-        public void SetReferences(IReferences references)
+        public virtual void SetReferences(IReferences references)
         {
             Resolver.SetReferences(references);
 
@@ -109,18 +109,18 @@ namespace PipServices.Net.Net.Rest
 
             try
             {
+                //.UseWebListener(options =>
+                //{
+                //    // AllowAnonymous is the default WebListner configuration
+                //    options.Listener.AuthenticationManager.AuthenticationSchemes =
+                //        AuthenticationSchemes.AllowAnonymous;
+                //})
                 var builder = new WebHostBuilder()
-                    .UseWebListener(options =>
-                    {
-                        // AllowAnonymous is the default WebListner configuration
-                        options.Listener.AuthenticationManager.AuthenticationSchemes =
-                            AuthenticationSchemes.AllowAnonymous;
-                    })
                     .UseKestrel()
                     .UseContentRoot(Directory.GetCurrentDirectory())
                     .UseUrls(address)
-                    //.UseConfiguration()
                     .UseIISIntegration()
+                    //.UseConfiguration()
                     .UseStartup<Startup>();
 
                 // The default listening address is http://localhost:5000 if none is specified.

@@ -1,7 +1,10 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using PipServices.Commons.Config;
 using PipServices.Commons.Count;
 using PipServices.Commons.Errors;
@@ -22,6 +25,11 @@ namespace PipServices.Net.Net.Rest
             "connection.connect_timeout", 60000,
             "connection.debug", true
             );
+
+        private static readonly JsonSerializerSettings TransportSettings = new JsonSerializerSettings
+        {
+            DefaultValueHandling = DefaultValueHandling.Ignore
+        };
 
         protected ConnectionResolver Resolver = new ConnectionResolver();
         protected ILogger Logger = new NullLogger();
@@ -157,6 +165,148 @@ namespace PipServices.Net.Net.Rest
             Logger.Debug(correlationId, "Disconnected from %s", Url);
 
             return Task.CompletedTask;
+        }
+
+        private static HttpContent CreateEntityContent(object value)
+        {
+            var content = JsonConvert.SerializeObject(value, TransportSettings);
+            var result = new StringContent(content, Encoding.UTF8, "application/json");
+
+            return result;
+        }
+
+        private Uri CreateRequestUri(string route)
+        {
+            var builder = new StringBuilder(Url + "/" + route);
+
+            var result = new Uri(builder.ToString(), UriKind.Absolute);
+
+            return result;
+        }
+
+        private async Task<HttpResponseMessage> ExecuteRequestAsync(string correlationId, HttpMethod method, Uri uri, CancellationToken token,
+            HttpContent content = null)
+        {
+            if (Client == null)
+                throw new InvalidOperationException("REST client is not configured");
+
+            HttpResponseMessage result;
+
+            try
+            {
+                if (method == HttpMethod.Get)
+                    result = await Client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, token);
+                else if (method == HttpMethod.Post)
+                    result = await Client.PostAsync(uri, content, token);
+                else if (method == HttpMethod.Put)
+                    result = await Client.PutAsync(uri, content, token);
+                else if (method == HttpMethod.Delete)
+                    result = await Client.DeleteAsync(uri, token);
+                else
+                    throw new InvalidOperationException("Invalid request type");
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new ConnectionException(correlationId, null, "Unknown communication problem on REST client", ex);
+            }
+
+            switch (result.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                case HttpStatusCode.NoContent:
+                    break;
+                case HttpStatusCode.BadRequest:
+                case HttpStatusCode.Unauthorized:
+                case HttpStatusCode.NotFound:
+                case HttpStatusCode.InternalServerError:
+                case HttpStatusCode.ServiceUnavailable:
+                    {
+                        var responseContent = await result.Content.ReadAsStringAsync();
+
+                        var errorObject = JsonConvert.DeserializeObject<ErrorDescription>(responseContent);
+
+                        var ex = ApplicationExceptionFactory.Create(errorObject);
+
+                        throw ex;
+                    }
+                default:
+                    {
+                        var responseContent = await result.Content.ReadAsStringAsync();
+
+                        throw new BadRequestException(correlationId, null, responseContent);
+                    }
+            }
+
+            return result;
+        }
+
+        protected async Task ExecuteAsync(string correlationId, HttpMethod method, string route, CancellationToken token)
+        {
+            var uri = CreateRequestUri(route);
+
+            using (await ExecuteRequestAsync(correlationId, method, uri, token))
+            {
+            }
+        }
+
+        protected async Task ExecuteAsync(string correlationId, HttpMethod method, string route, object requestEntity, CancellationToken token)
+        {
+            var uri = CreateRequestUri(route);
+
+            using (var requestContent = CreateEntityContent(requestEntity))
+            {
+                using (await ExecuteRequestAsync(correlationId, method, uri, token, requestContent))
+                {
+                }
+            }
+        }
+
+        private static async Task<T> ExtractContentEntityAsync<T>(string correlationId, HttpContent content)
+        {
+            // ReSharper disable RedundantAssignment
+
+            var result = default(T);
+
+            // ReSharper restore RedundantAssignment
+
+            var value = await content.ReadAsStringAsync();
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<T>(value);
+            }
+            catch (JsonReaderException ex)
+            {
+                throw new BadRequestException(correlationId, null, "Unexpected protocol format", ex);
+            }
+
+            return result;
+        }
+
+        protected async Task<T> ExecuteAsync<T>(string correlationId, HttpMethod method, string route, CancellationToken token)
+            where T : class
+        {
+            var uri = CreateRequestUri(route);
+
+            using (var response = await ExecuteRequestAsync(correlationId, method, uri, token))
+            {
+                return await ExtractContentEntityAsync<T>(correlationId, response.Content);
+            }
+        }
+
+        protected async Task<T> ExecuteAsync<T>(string correlationId, HttpMethod method, string route, object requestEntity,
+            CancellationToken token)
+            where T : class
+        {
+            var uri = CreateRequestUri(route);
+
+            using (var requestContent = CreateEntityContent(requestEntity))
+            {
+                using (var response = await ExecuteRequestAsync(correlationId, method, uri, token, requestContent))
+                {
+                    return await ExtractContentEntityAsync<T>(correlationId, response.Content);
+                }
+            }
         }
     }
 }

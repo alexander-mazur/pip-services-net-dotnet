@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using PipServices.Net.Test.Services;
 using PipServices.Commons.Config;
+using PipServices.Dummy.Runner.Services;
 
 namespace PipServices.Dummy.Runner
 {

@@ -1,6 +1,6 @@
 ﻿using PipServices.Net.Net.Rest;
 
-namespace PipServices.Net.Test.Services
+namespace PipServices.Dummy.Runner.Services
 {
     public class DummyRestService : RestService
     {
