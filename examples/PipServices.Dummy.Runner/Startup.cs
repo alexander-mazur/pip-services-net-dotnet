@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PipServices.Dummy.Runner.Persistance;
 using PipServices.Net.Net.Connect;
 
 namespace PipServices.Dummy.Runner
@@ -27,7 +28,7 @@ namespace PipServices.Dummy.Runner
             // Add framework services.
             services.AddMvc(); //.AddApplicationPart(typeof(ConnectionResolver).Assembly).AddControllersAsServices();
 
-            //services.AddSingleton<ITodoRepository, TodoRepository>();
+            services.AddSingleton<IDummyRepository, DummyRepository>();
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
