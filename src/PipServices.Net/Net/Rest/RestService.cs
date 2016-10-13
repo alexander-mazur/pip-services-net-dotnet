@@ -14,7 +14,8 @@ using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 
 namespace PipServices.Net.Net.Rest
 {
-    public abstract class RestService : IOpenable, IClosable, IConfigurable, IReferenceable
+    public abstract class RestService<TStartup> : IOpenable, IClosable, IConfigurable, IReferenceable
+        where TStartup : class
     {
         private static readonly ConfigParams DefaultConfig = ConfigParams.FromTuples(
             "connection.protocol", "http",
@@ -121,7 +122,7 @@ namespace PipServices.Net.Net.Rest
                     .UseUrls(address)
                     .UseIISIntegration()
                     //.UseConfiguration()
-                    .UseStartup<Startup>();
+                    .UseStartup<TStartup>();
 
                 // The default listening address is http://localhost:5000 if none is specified.
                 // Replace "localhost" with "*" to listen to external requests.

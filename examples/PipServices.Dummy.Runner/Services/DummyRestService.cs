@@ -2,7 +2,7 @@
 
 namespace PipServices.Dummy.Runner.Services
 {
-    public class DummyRestService : RestService
+    public class DummyRestService : RestService<Startup>
     {
         public DummyRestService()
         {

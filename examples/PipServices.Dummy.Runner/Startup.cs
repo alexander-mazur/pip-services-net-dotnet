@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PipServices.Net.Net.Connect;
 
-namespace PipServices.Net.Net.Rest
+namespace PipServices.Dummy.Runner
 {
     public class Startup
     {
@@ -25,7 +25,7 @@ namespace PipServices.Net.Net.Rest
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();//.AddApplicationPart(typeof(ConnectionResolver).Assembly).AddControllersAsServices();
+            services.AddMvc(); //.AddApplicationPart(typeof(ConnectionResolver).Assembly).AddControllersAsServices();
 
             //services.AddSingleton<ITodoRepository, TodoRepository>();
         }
