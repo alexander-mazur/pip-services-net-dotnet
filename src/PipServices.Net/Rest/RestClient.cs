@@ -11,9 +11,10 @@ using PipServices.Commons.Errors;
 using PipServices.Commons.Log;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Run;
+using PipServices.Net.Connect;
 using PipServices.Net.Net.Connect;
 
-namespace PipServices.Net.Net.Rest
+namespace PipServices.Net.Rest
 {
     public class RestClient : IOpenable, IClosable, IConfigurable, IReferenceable
     {

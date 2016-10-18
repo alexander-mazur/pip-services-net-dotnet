@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using PipServices.Net.Net.Connect;
 
-namespace PipServices.Net.Net.Connect
+namespace PipServices.Net.Connect
 {
     public interface IDiscovery
     {

@@ -2,7 +2,7 @@
 using PipServices.Commons.Config;
 using PipServices.Commons.Refer;
 
-namespace PipServices.Net.Net.Auth
+namespace PipServices.Net.Auth
 {
     public sealed class CredentialResolver : IConfigurable, IReferenceable
     {

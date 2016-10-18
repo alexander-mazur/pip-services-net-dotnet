@@ -9,10 +9,10 @@ using PipServices.Commons.Errors;
 using PipServices.Commons.Log;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Run;
+using PipServices.Net.Connect;
 using PipServices.Net.Net.Connect;
-using AuthenticationSchemes = Microsoft.Net.Http.Server.AuthenticationSchemes;
 
-namespace PipServices.Net.Net.Rest
+namespace PipServices.Net.Rest
 {
     public abstract class RestService<TStartup> : IOpenable, IClosable, IConfigurable, IReferenceable
         where TStartup : class

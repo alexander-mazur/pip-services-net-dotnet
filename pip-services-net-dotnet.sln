@@ -22,6 +22,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PipServices.Dummy.Runner", 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PipServices.Data", "..\pip-services-data-dotnet\src\PipServices.Data\PipServices.Data.xproj", "{FC371D4C-3D7C-4B20-B216-490FD41306ED}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PipServices.Net.Test", "test\PipServices.Net.Test\PipServices.Net.Test.xproj", "{FF56436A-4E8C-463B-ACC4-E0DDC98DB38F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{FC371D4C-3D7C-4B20-B216-490FD41306ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC371D4C-3D7C-4B20-B216-490FD41306ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC371D4C-3D7C-4B20-B216-490FD41306ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF56436A-4E8C-463B-ACC4-E0DDC98DB38F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF56436A-4E8C-463B-ACC4-E0DDC98DB38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF56436A-4E8C-463B-ACC4-E0DDC98DB38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF56436A-4E8C-463B-ACC4-E0DDC98DB38F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,5 +59,6 @@ Global
 		{6D9CC0D7-45A5-4A70-A226-3D29BBD06892} = {C0D48D19-60FD-45FE-88ED-B8C6A245EB93}
 		{DAF5FD69-DA5B-4177-B6F7-2E7108142391} = {7EFB73BA-C675-4992-8DD1-ADBB50D52C03}
 		{FC371D4C-3D7C-4B20-B216-490FD41306ED} = {C0D48D19-60FD-45FE-88ED-B8C6A245EB93}
+		{FF56436A-4E8C-463B-ACC4-E0DDC98DB38F} = {F6D4488F-65E1-4FE2-8E2B-67F875F71D17}
 	EndGlobalSection
 EndGlobal

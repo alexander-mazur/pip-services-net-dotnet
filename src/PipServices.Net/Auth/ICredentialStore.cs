@@ -1,4 +1,4 @@
-﻿namespace PipServices.Net.Net.Auth
+﻿namespace PipServices.Net.Auth
 {
     public interface ICredentialStore
     {

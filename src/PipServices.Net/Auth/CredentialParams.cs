@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PipServices.Commons.Config;
 using PipServices.Commons.Data;
 
-namespace PipServices.Net.Net.Auth
+namespace PipServices.Net.Auth
 {
     /**
      * Credentials such as login and password, client id and key,

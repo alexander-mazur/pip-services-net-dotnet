@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using PipServices.Commons.Data;
 using PipServices.Commons.Convert;
+using PipServices.Commons.Data;
 
-namespace PipServices.Net.Net.Rest
+namespace PipServices.Net.Rest
 {
     public sealed class RestQueryParams : MultiValueDictionary<string, object>
     {

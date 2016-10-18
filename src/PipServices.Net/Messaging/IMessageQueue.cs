@@ -4,26 +4,24 @@ using PipServices.Commons.Run;
 
 namespace PipServices.Net.Messaging
 {
-    public interface IMessageQueue : IConfigurable, IOpenable, IClosable
+    public interface IMessageQueue : IConfigurable, IOpenable, IClosable, ICleanable
     {
         MessagingCapabilities Capabilities { get; }
         long MessageCount { get; }
 
-        void Send(MessageEnvelop envelop);
+        void Send(string correlationId, MessageEnvelop envelop);
         void Send(string correlationId, string messageType, object message);
-        MessageEnvelop Peek();
-        IEnumerable<MessageEnvelop> PeekBatch(int messageCount);
-        MessageEnvelop Receive(long timeout);
+        MessageEnvelop Peek(string correlationId);
+        IEnumerable<MessageEnvelop> PeekBatch(string correlationId, int messageCount);
+        MessageEnvelop Receive(string correlationId, long timeout);
 
-        void RenewLock(MessageEnvelop message);
+        void RenewLock(MessageEnvelop message, long lockTimeout);
         void Complete(MessageEnvelop message);
         void Abandon(MessageEnvelop message);
         void MoveToDeadLetter(MessageEnvelop message);
 
-        void OnMessage(IMessageReceiver receiver);
-        void BeginOnMessage(IMessageReceiver receiver);
-        void EndOnMessage();
-
-        void Clear();
+        void Listen(string correlationId, IMessageReceiver receiver);
+        void BeginListen(string correlationId, IMessageReceiver receiver);
+        void EndListen(string correlationId);
     }
 }

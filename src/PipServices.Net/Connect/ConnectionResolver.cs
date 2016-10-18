@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using PipServices.Commons.Config;
 using PipServices.Commons.Errors;
 using PipServices.Commons.Refer;
+using PipServices.Net.Net.Connect;
 
-namespace PipServices.Net.Net.Connect
+namespace PipServices.Net.Connect
 {
     public sealed class ConnectionResolver
     {
