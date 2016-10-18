@@ -2,7 +2,7 @@
 using PipServices.Commons.Config;
 using PipServices.Commons.Data;
 
-namespace PipServices.Net.Net.Connect
+namespace PipServices.Net.Connect
 {
     public sealed class ConnectionParams : ConfigParams
     {
@@ -46,7 +46,10 @@ namespace PipServices.Net.Net.Connect
 
         public string Protocol
         {
-            get { return GetAsNullableString("protocol"); }
+            get
+            {
+                return GetAsNullableString("protocol") ?? "http";
+            }
             set { this["protocol"] = value; }
         }
 
@@ -69,7 +72,7 @@ namespace PipServices.Net.Net.Connect
             {
                 var host = GetAsNullableString("host");
                 host = host ?? GetAsNullableString("ip");
-                return host;
+                return string.IsNullOrWhiteSpace(host) ? "localhost" : host;
             }
             set
             {

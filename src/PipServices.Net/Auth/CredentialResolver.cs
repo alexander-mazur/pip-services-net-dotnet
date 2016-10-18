@@ -7,7 +7,7 @@ namespace PipServices.Net.Auth
     public sealed class CredentialResolver : IConfigurable, IReferenceable
     {
         private readonly IList<CredentialParams> _credentials = new List<CredentialParams>();
-        private IReferences _references;
+        private IReferences _references = new ReferenceSet();
 
         public CredentialResolver() { }
 
@@ -64,7 +64,7 @@ namespace PipServices.Net.Auth
 
         private CredentialParams LookupInStores(string correlationId, CredentialParams credential)
         {
-            if (credential.UseCredentialStore() == false)
+            if (credential.UseCredentialStore == false)
                 return null;
 
             var key = credential.StoreKey;
@@ -94,14 +94,14 @@ namespace PipServices.Net.Auth
             // Return connection that doesn't require discovery
             foreach (var credential in _credentials)
             {
-                if (!credential.UseCredentialStore())
+                if (!credential.UseCredentialStore)
                     return credential;
             }
 
             // Return connection that require discovery
             foreach (var credential in _credentials)
             {
-                if (!credential.UseCredentialStore())
+                if (!credential.UseCredentialStore)
                     continue;
 
                 var resolvedConnection = LookupInStores(correlationId, credential);

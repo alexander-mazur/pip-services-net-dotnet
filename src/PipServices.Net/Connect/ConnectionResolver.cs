@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using PipServices.Commons.Config;
 using PipServices.Commons.Errors;
 using PipServices.Commons.Refer;
-using PipServices.Net.Net.Connect;
 
 namespace PipServices.Net.Connect
 {
@@ -71,7 +70,7 @@ namespace PipServices.Net.Connect
         private async Task RegisterInDiscoveryAsync(string correlationId, ConnectionParams connection, CancellationToken token)
         {
 
-            if (connection.UseDiscovery == false) return;
+            if (!connection.UseDiscovery) return;
 
             var key = connection.DiscoveryKey;
 

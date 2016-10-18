@@ -38,7 +38,8 @@ namespace PipServices.Net.Auth
          * @return <b>true</b> if the credentials shall be resolved by credential store 
          * and <b>false</b> when all credential parameters are defined statically.
          */
-        public bool UseCredentialStore() => ContainsKey("store_key");
+
+        public bool UseCredentialStore => ContainsKey("store_key");
 
         /**
          * Gets or sets the key under which the connection shall be looked up in credential store. 

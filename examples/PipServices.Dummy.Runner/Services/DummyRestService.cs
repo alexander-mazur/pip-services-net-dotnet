@@ -1,4 +1,4 @@
-﻿using PipServices.Net.Net.Rest;
+﻿using PipServices.Net.Rest;
 
 namespace PipServices.Dummy.Runner.Services
 {

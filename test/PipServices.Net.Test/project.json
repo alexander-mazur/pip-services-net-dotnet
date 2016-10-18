@@ -1,19 +1,26 @@
-﻿{
+{
   "version": "1.0.0-*",
-  "buildOptions": {
-    "emitEntryPoint": true
-  },
 
   "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"
-    }
+    },
+    "PipServices.Commons": {
+      "target": "project",
+      "version": "1.0.0-*"
+    },
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "PipServices.Net": "1.0.0-*",
+    "System.Linq": "4.1.0"
   },
 
   "frameworks": {
     "netcoreapp1.0": {
-      "imports": "dnxcore50"
+      "imports": [ "dnxcore50", "portable-net45+win8" ]
     }
-  }
+  },
+
+  "testRunner": "xunit"
 }

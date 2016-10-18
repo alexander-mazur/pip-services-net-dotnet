@@ -10,7 +10,6 @@ using PipServices.Commons.Log;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Run;
 using PipServices.Net.Connect;
-using PipServices.Net.Net.Connect;
 
 namespace PipServices.Net.Rest
 {
