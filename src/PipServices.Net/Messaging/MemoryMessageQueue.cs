@@ -156,8 +156,9 @@ namespace PipServices.Net.Messaging
                     _messages.RemoveAt(0);
                 }
 
-                //if (message == null)
-                //{
+                if (message == null)
+                {
+                    Thread.Sleep(TimeSpan.FromTicks(waitTimeout));
                 //    try
                 //    {
                 //        _lock.wait(waitTimeout);
@@ -166,7 +167,7 @@ namespace PipServices.Net.Messaging
                 //    {
                 //        return null;
                 //    }
-                //}
+                }
 
                 // Try to get a message again
                 if (message == null && _messages.Count > 0)
