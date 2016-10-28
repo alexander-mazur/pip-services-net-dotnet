@@ -1,6 +1,8 @@
-﻿using System.Threading;
-using PipServices.Commons.Config;
+﻿using PipServices.Commons.Config;
 using PipServices.Commons.Refer;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace PipServices.Net.Test.Rest
@@ -13,30 +15,32 @@ namespace PipServices.Net.Test.Rest
             "connection.port", 3000
             );
 
-        private readonly DummyController _ctrl;
+        //private readonly DummyController _ctrl;
         private readonly DummyRestService _service;
         private readonly DummyRestClient _client;
-        private readonly ReferenceSet _references;
         private readonly DummyClientFixture _fixture;
+        private readonly CancellationTokenSource _source;
 
         public DummyRestClientTest()
         {
-            _ctrl = new DummyController();
-
             _service = new DummyRestService();
-            _service.Configure(RestConfig);
+
+            _service.Configure(new ConfigParams());
+
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Task.Run(async () => await _service.OpenAsync(null, CancellationToken.None));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
             _client = new DummyRestClient();
             _client.Configure(RestConfig);
 
-            _references = ReferenceSet.From(_ctrl, _client, _service);
-            _client.SetReferences(_references);
-            _service.SetReferences(_references);
+            var references = ReferenceSet.From(_client);
+            _client.SetReferences(references);
 
             _fixture = new DummyClientFixture(_client);
 
-            var serviceTask = _service.OpenAsync(null, CancellationToken.None);
-            serviceTask.Wait();
+            _source = new CancellationTokenSource();
+
             var clientTask = _client.OpenAsync(null, CancellationToken.None);
             clientTask.Wait();
         }
@@ -44,7 +48,14 @@ namespace PipServices.Net.Test.Rest
         [Fact]
         public void TestCrudOperations()
         {
-            _fixture.TestCrudOperations();
+            var task = _fixture.TestCrudOperations();
+            task.Wait();
+
+            task = _client.CloseAsync(null, CancellationToken.None);
+            task.Wait();
+
+            task = _service.CloseAsync(null, CancellationToken.None);
+            task.Wait();
         }
     }
 }

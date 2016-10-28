@@ -49,8 +49,8 @@ namespace PipServices.Net.Test.Controllers
             return Controller.Create(correlationId, dummy);
         }
 
-        [HttpPut("{dummyId}")]
-        public Dummy UpdateDummyAsync(string dummyId, [FromBody] Dummy dummy,
+        [HttpPut]
+        public Dummy UpdateDummyAsync([FromBody] Dummy dummy,
             [FromQuery(Name = "correlation_id")] string correlationId = null)
         {
             return Controller.Update(correlationId, dummy);

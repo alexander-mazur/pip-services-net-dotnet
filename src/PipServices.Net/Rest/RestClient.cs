@@ -34,18 +34,11 @@ namespace PipServices.Net.Rest
         protected ConnectionResolver Resolver = new ConnectionResolver();
         protected ILogger Logger = new NullLogger();
         protected ICounters Counters = new NullCounters();
-        protected string Route;
         protected string Url;
         protected HttpClient Client { get; set; }
 
         protected RestClient()
-            : this(null)
         {
-        }
-
-        protected RestClient(string route)
-        {
-            Route = route;
         }
 
         public void SetReferences(IReferences references)
@@ -138,8 +131,8 @@ namespace PipServices.Net.Rest
 
             Url = protocol + "://" + host + ":" + port;
 
-            if (!string.IsNullOrWhiteSpace(Route))
-                Url += "/" + Route;
+//            if (!string.IsNullOrWhiteSpace(Route))
+                //Url += "/" + Route;
 
             Client?.Dispose();
 
@@ -177,9 +170,13 @@ namespace PipServices.Net.Rest
 
         private Uri CreateRequestUri(string route)
         {
-            var builder = new StringBuilder(Url + "/" + route);
+            var builder = new StringBuilder(Url);
+            builder.Append("/");
+            builder.Append(route);
 
-            var result = new Uri(builder.ToString(), UriKind.Absolute);
+            var uri = builder.ToString();
+
+            var result = new Uri(uri, UriKind.Absolute);
 
             return result;
         }
@@ -223,11 +220,19 @@ namespace PipServices.Net.Rest
                     {
                         var responseContent = await result.Content.ReadAsStringAsync();
 
-                        var errorObject = JsonConvert.DeserializeObject<ErrorDescription>(responseContent);
+                        ErrorDescription errorObject;
+                        try
+                        {
+                            errorObject = JsonConvert.DeserializeObject<ErrorDescription>(responseContent);
+                        }
+                        catch (Exception ex)
+                        {
+                            errorObject = ErrorDescriptionFactory.Create(ex);
+                        }
 
-                        var ex = ApplicationExceptionFactory.Create(errorObject);
+                        var appEx = ApplicationExceptionFactory.Create(errorObject);
 
-                        throw ex;
+                        throw appEx;
                     }
                 default:
                     {

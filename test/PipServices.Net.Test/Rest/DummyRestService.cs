@@ -10,7 +10,7 @@ namespace PipServices.Net.Test.Rest
     {
         public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "service", "rest", "1.0");
 
-        private IDummyService _controller;
+        private IDummyController _controller;
 
         public DummyRestService()
         {
@@ -24,7 +24,7 @@ namespace PipServices.Net.Test.Rest
         public override void SetReferences(IReferences references)
         {
             _controller =
-                (IDummyService)
+                (IDummyController)
                     references.GetOneBefore(this, new Descriptor("pip-services-dummies", "controller", "*", "*"));
 
             base.SetReferences(references);

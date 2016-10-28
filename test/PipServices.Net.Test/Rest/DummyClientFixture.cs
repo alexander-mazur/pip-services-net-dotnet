@@ -1,4 +1,6 @@
-﻿using PipServices.Net.Messaging;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using PipServices.Net.Messaging;
 using PipServices.Commons.Config;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Errors;
@@ -19,10 +21,12 @@ namespace PipServices.Net.Test.Rest
             _client = client;
         }
 
-        public void TestCrudOperations()
+        public async Task TestCrudOperations()
         {
+            var token = CancellationToken.None;
+
             // Create one dummy
-            var dummy1 = _client.Create(null, _dummy1);
+            var dummy1 = await _client.CreateAsync(null, _dummy1, token);
 
             Assert.NotNull(dummy1);
             Assert.NotNull(dummy1.Id);
@@ -30,7 +34,7 @@ namespace PipServices.Net.Test.Rest
             Assert.Equal(_dummy1.Content, dummy1.Content);
 
             // Create another dummy
-            var dummy2 = _client.Create(null, _dummy2);
+            var dummy2 = await _client.CreateAsync(null, _dummy2, token);
 
             Assert.NotNull(dummy2);
             Assert.NotNull(dummy2.Id);
@@ -38,13 +42,13 @@ namespace PipServices.Net.Test.Rest
             Assert.Equal(_dummy2.Content, dummy2.Content);
 
             // Get all dummies
-            var dummies = _client.GetPageByFilter(null, null, null);
+            var dummies = await _client.GetPageByFilterAsync(null, null, null, token);
             Assert.NotNull(dummies);
             Assert.Equal(2, dummies.Data.Count);
 
             // Update the dummy
             dummy1.Content = "Updated Content 1";
-            var dummy = _client.Update(null, dummy1);
+            var dummy = await _client.UpdateAsync(null, dummy1, token);
 
             Assert.NotNull(dummy);
             Assert.Equal(dummy1.Id, dummy.Id);
@@ -52,10 +56,10 @@ namespace PipServices.Net.Test.Rest
             Assert.Equal("Updated Content 1", dummy.Content);
 
             // Delete the dummy
-            _client.DeleteById(null, dummy1.Id);
+            await _client.DeleteByIdAsync(null, dummy1.Id, token);
 
             // Try to get deleted dummy
-            dummy = _client.GetOneById(null, dummy1.Id);
+            dummy = await _client.GetOneByIdAsync(null, dummy1.Id, token);
             Assert.Null(dummy);
         }
     }

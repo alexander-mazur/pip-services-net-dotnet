@@ -116,36 +116,32 @@ namespace PipServices.Net.Rest
                 //        AuthenticationSchemes.AllowAnonymous;
                 //})
                 var builder = new WebHostBuilder()
-                    .UseKestrel()
+                    .UseKestrel(options =>
+                    {
+                        // options.ThreadCount = 4;
+                        options.NoDelay = true;
+                        //options.UseHttps("testCert.pfx", "testPassword");
+                        options.UseConnectionLogging();
+                    })
+                    //.UseWebListener()
                     .UseContentRoot(Directory.GetCurrentDirectory())
                     .UseUrls(address)
-                    .UseIISIntegration()
+                    //.UseIISIntegration()
                     //.UseConfiguration()
                     .UseStartup<TStartup>();
 
-                // The default listening address is http://localhost:5000 if none is specified.
-                // Replace "localhost" with "*" to listen to external requests.
-                // You can use the --urls flag to change the listening address. Ex:
-                // > dotnet run --urls http://*:8080;http://*:8081
-
-                // Uncomment the following to configure URLs programmatically.
-                // Since this is after UseConfiguraiton(config), this will clobber command line configuration.
-                //builder.UseUrls("http://*:8080", "http://*:8081");
-
-                // If this app isn't hosted by IIS, UseIISIntegration() no-ops.
-                // It isn't possible to both listen to requests directly and from IIS using the same WebHost,
-                // since this will clobber your UseUrls() configuration when hosted by IIS.
-                // If UseIISIntegration() is called before UseUrls(), IIS hosting will fail.
-                //builder.UseIISIntegration();
-
                 Server = builder.Build();
-                Server.Run(token);
 
                 Logger.Info(correlationId, "Opened REST service at %s", Url);
+
+                Server.Run(token);
             }
             catch (Exception ex)
             {
+                Server.Dispose();
+
                 Server = null;
+
                 throw new ConnectionException(correlationId, "CANNOT_CONNECT", "Opening REST service failed")
                     .WithCause(ex).WithDetails("url", Url);
             }

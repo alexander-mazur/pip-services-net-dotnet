@@ -31,8 +31,10 @@ namespace PipServices.Dummy.Runner
             services.AddSingleton<IDummyRepository, DummyRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IApplicationLifetime applicationLifetime)
         {
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
             loggerFactory.AddDebug();
@@ -66,6 +68,11 @@ namespace PipServices.Dummy.Runner
 
             //    await context.Response.WriteAsync($"Request URL: {context.Request.GetDisplayUrl()}");
             //});
+        }
+
+        private void OnShutdown()
+        {
+            
         }
     }
 }

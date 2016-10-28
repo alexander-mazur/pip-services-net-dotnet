@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using PipServices.Net.Rest;
+﻿using PipServices.Net.Rest;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Data;
 using PipServices.Net.Test;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PipServices.Net.Test.Rest
 {
@@ -13,95 +12,86 @@ namespace PipServices.Net.Test.Rest
     {
         public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "client", "rest", "1.0");
 
-        public DummyRestClient()
-            : base("dummies")
-        {
-        }
-
         public Descriptor GetDescriptor()
         {
             return Descriptor;
         }
 
-        public DataPage<Dummy> GetPageByFilter(string correlationId, FilterParams filter, PagingParams paging)
+        private string PrepareQueryString(string path, FilterParams filter)
         {
+            var param = filter.ToString();
+            return path + (string.IsNullOrWhiteSpace(param) ? "" : "&" + param);
+        }
 
-            var timing = Instrument(correlationId, "dummy.get_page_by_filter");
-            try
+        public Task<DataPage<Dummy>> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging, CancellationToken token)
+        {
+            filter = filter ?? new FilterParams();
+            paging = paging ?? new PagingParams();
+
+            using (var timing = Instrument(correlationId, "dummy.get_page_by_filter"))
             {
-                return _resource
-                    .queryParams(new RestQueryParams(correlationId, filter, paging))
-                    .type(MediaType.APPLICATION_JSON)
-                    .get(new GenericType<DataPage<Dummy>>() {});
-            }
-            finally
-            {
-                timing.EndTiming();
+
+                return ExecuteAsync<DataPage<Dummy>>(
+                    correlationId,
+                    HttpMethod.Get,
+                    PrepareQueryString($"dummies?correlation_id={correlationId}", filter),
+                    token
+                    );
             }
         }
 
-        public Dummy GetOneById(string correlationId, string id)
+        public Task<Dummy> GetOneByIdAsync(string correlationId, string id, CancellationToken token)
         {
-            var timing = Instrument(correlationId, "dummy.get_one_by_id");
-            try
+            using (var timing = Instrument(correlationId, "dummy.get_one_by_id"))
             {
-                return _resource.path(id)
-                    .queryParams(new RestQueryParams(correlationId))
-                    .type(MediaType.APPLICATION_JSON)
-                    .get(Dummy);
-            }
-            finally
-            {
-                timing.EndTiming();
+
+                return ExecuteAsync<Dummy>(
+                    correlationId,
+                    HttpMethod.Get,
+                    $"dummies/{id}?correlation_id={correlationId}",
+                    token
+                    );
             }
         }
 
-        public Dummy Create(string correlationId, Dummy entity)
+        public Task<Dummy> CreateAsync(string correlationId, Dummy entity, CancellationToken token)
         {
-            var timing = Instrument(correlationId, "dummy.create");
-            try
+            using (var timing = Instrument(correlationId, "dummy.create"))
             {
-                return _resource
-                    .queryParams(new RestQueryParams(correlationId))
-                    .type(MediaType.APPLICATION_JSON)
-                    .post(Dummy, entity);
-            }
-            finally
-            {
-                timing.EndTiming();
+                return ExecuteAsync<Dummy>(
+                    correlationId,
+                    HttpMethod.Post,
+                    $"dummies?correlation_id={correlationId}",
+                    entity,
+                    token
+                    );
             }
         }
 
-        public Dummy Update(string correlationId, Dummy entity)
+        public Task<Dummy> UpdateAsync(string correlationId, Dummy entity, CancellationToken token)
         {
-            var timing = Instrument(correlationId, "dummy.update");
-            try
+            using (var timing = Instrument(correlationId, "dummy.update"))
             {
-                return _resource.path(entity.getId())
-                    .queryParams(new RestQueryParams(correlationId))
-                    .type(MediaType.APPLICATION_JSON)
-                    .put(Dummy, entity);
-            }
-            finally
-            {
-                timing.EndTiming();
+                return ExecuteAsync<Dummy>(
+                    correlationId,
+                    HttpMethod.Put,
+                    $"dummies?correlation_id={correlationId}",
+                    entity,
+                    token
+                    );
             }
         }
 
-        public Dummy DeleteById(string correlationId, string id)
+        public Task<Dummy> DeleteByIdAsync(string correlationId, string id, CancellationToken token)
         {
-            var timing = Instrument(correlationId, "dummy.delete_by_id");
-            try
+            using (var timing = Instrument(correlationId, "dummy.delete_by_id"))
             {
-                return _resource.path(id)
-                    .queryParams(new RestQueryParams(correlationId))
-                    .type(MediaType.APPLICATION_JSON)
-                    .delete(Dummy)
-                ;
-            }
-            finally
-            {
-                timing.EndTiming();
+                return ExecuteAsync<Dummy>(
+                    correlationId,
+                    HttpMethod.Delete,
+                    $"dummies/{id}?correlation_id={correlationId}",
+                    token
+                    );
             }
         }
     }
