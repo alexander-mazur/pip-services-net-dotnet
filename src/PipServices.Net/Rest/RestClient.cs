@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PipServices.Commons.Config;
+using PipServices.Commons.Convert;
 using PipServices.Commons.Count;
 using PipServices.Commons.Errors;
 using PipServices.Commons.Log;
@@ -268,24 +269,16 @@ namespace PipServices.Net.Rest
 
         private static async Task<T> ExtractContentEntityAsync<T>(string correlationId, HttpContent content)
         {
-            // ReSharper disable RedundantAssignment
-
-            var result = default(T);
-
-            // ReSharper restore RedundantAssignment
-
             var value = await content.ReadAsStringAsync();
 
             try
             {
-                result = JsonConvert.DeserializeObject<T>(value);
+                return JsonConvert.DeserializeObject<T>(value);
             }
             catch (JsonReaderException ex)
             {
                 throw new BadRequestException(correlationId, null, "Unexpected protocol format", ex);
             }
-
-            return result;
         }
 
         protected async Task<T> ExecuteAsync<T>(string correlationId, HttpMethod method, string route, CancellationToken token)
@@ -296,6 +289,30 @@ namespace PipServices.Net.Rest
             using (var response = await ExecuteRequestAsync(correlationId, method, uri, token))
             {
                 return await ExtractContentEntityAsync<T>(correlationId, response.Content);
+            }
+        }
+
+        private static async Task<string> ExtractContentEntityAsync(string correlationId, HttpContent content)
+        {
+            var value = await content.ReadAsStringAsync();
+
+            try
+            {
+                return value;
+            }
+            catch (JsonReaderException ex)
+            {
+                throw new BadRequestException(correlationId, null, "Unexpected protocol format", ex);
+            }
+        }
+
+        protected async Task<string> ExecuteStringAsync(string correlationId, HttpMethod method, string route, CancellationToken token)
+        {
+            var uri = CreateRequestUri(route);
+
+            using (var response = await ExecuteRequestAsync(correlationId, method, uri, token))
+            {
+                return await ExtractContentEntityAsync(correlationId, response.Content);
             }
         }
 
