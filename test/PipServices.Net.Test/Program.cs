@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using PipServices.Net.Test.Rest;
-using PipServices.Net.Connect;
 using PipServices.Commons.Config;
 using PipServices.Commons.Data;
 

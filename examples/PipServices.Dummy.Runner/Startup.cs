@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PipServices.Dummy.Runner.Persistance;
-using PipServices.Net.Connect;
 
 namespace PipServices.Dummy.Runner
 {

@@ -6,13 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PipServices.Commons.Config;
+using PipServices.Commons.Connect;
 using PipServices.Commons.Convert;
 using PipServices.Commons.Count;
 using PipServices.Commons.Errors;
 using PipServices.Commons.Log;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Run;
-using PipServices.Net.Connect;
 
 namespace PipServices.Net.Rest
 {

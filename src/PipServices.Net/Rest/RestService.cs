@@ -4,12 +4,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using PipServices.Commons.Config;
+using PipServices.Commons.Connect;
 using PipServices.Commons.Count;
 using PipServices.Commons.Errors;
 using PipServices.Commons.Log;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Run;
-using PipServices.Net.Connect;
 
 namespace PipServices.Net.Rest
 {
