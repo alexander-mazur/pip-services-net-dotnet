@@ -64,12 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auth\CredentialParams.cs" />
-    <Compile Include="Auth\CredentialResolver.cs" />
-    <Compile Include="Auth\ICredentialStore.cs" />
-    <Compile Include="Connect\ConnectionParams.cs" />
-    <Compile Include="Connect\ConnectionResolver.cs" />
-    <Compile Include="Connect\IDiscovery.cs" />
     <Compile Include="Errors\GlobalExceptionHandler.cs" />
     <Compile Include="Errors\MicroserviceErrorResult.cs" />
     <Compile Include="Messaging\IMessageQueue.cs" />
