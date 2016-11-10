@@ -1,9 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using PipServices.Net.Messaging;
-using PipServices.Commons.Config;
-using PipServices.Commons.Refer;
-using PipServices.Commons.Errors;
 using Xunit;
 
 namespace PipServices.Net.Test.Rest
