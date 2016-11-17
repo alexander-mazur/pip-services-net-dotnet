@@ -298,6 +298,7 @@ namespace PipServices.Net.Rest
 
             try
             {
+                value = JsonConvert.DeserializeObject<string>(value);
                 return value;
             }
             catch (JsonReaderException ex)

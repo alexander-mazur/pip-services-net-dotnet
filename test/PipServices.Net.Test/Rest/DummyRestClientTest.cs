@@ -16,6 +16,7 @@ namespace PipServices.Net.Test.Rest
             );
 
         //private readonly DummyController _ctrl;
+        private readonly DummyController _ctrl;
         private readonly DummyRestService _service;
         private readonly DummyRestClient _client;
         private readonly DummyClientFixture _fixture;
@@ -23,6 +24,8 @@ namespace PipServices.Net.Test.Rest
 
         public DummyRestClientTest()
         {
+            _ctrl = new DummyController();
+
             _service = new DummyRestService();
 
             _service.Configure(new ConfigParams());
@@ -34,7 +37,7 @@ namespace PipServices.Net.Test.Rest
             _client = new DummyRestClient();
             _client.Configure(RestConfig);
 
-            var references = ReferenceSet.From(_client);
+            var references = ReferenceSet.FromList(_ctrl, _client, _service);
             _client.SetReferences(references);
 
             _fixture = new DummyClientFixture(_client);

@@ -107,7 +107,7 @@ namespace PipServices.Net.Messaging
             _logger.Debug(correlationId, "Sent message %s via %s", message, this);
         }
 
-        public void Send(string correlationId, string messageType, object message)
+        public void SendAsObject(string correlationId, string messageType, object message)
         {
             var envelop = new MessageEnvelop(correlationId, messageType, message);
             Send(correlationId, envelop);

@@ -10,7 +10,7 @@ namespace PipServices.Net.Messaging
         long MessageCount { get; }
 
         void Send(string correlationId, MessageEnvelop envelop);
-        void Send(string correlationId, string messageType, object message);
+        void SendAsObject(string correlationId, string messageType, object message);
         MessageEnvelop Peek(string correlationId);
         IEnumerable<MessageEnvelop> PeekBatch(string correlationId, int messageCount);
         MessageEnvelop Receive(string correlationId, long timeout);

@@ -109,12 +109,6 @@ namespace PipServices.Net.Rest
 
             try
             {
-                //.UseWebListener(options =>
-                //{
-                //    // AllowAnonymous is the default WebListner configuration
-                //    options.Listener.AuthenticationManager.AuthenticationSchemes =
-                //        AuthenticationSchemes.AllowAnonymous;
-                //})
                 var builder = new WebHostBuilder()
                     .UseKestrel(options =>
                     {
