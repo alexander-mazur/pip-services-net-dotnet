@@ -34,7 +34,7 @@ namespace PipServices.Dummy.Runner.Controllers
             //var filter = FilterParams.FromTuples("key", key);
             //var paging = new PagingParams(skip, take, total);
 
-            return await Repository.GetListByFilterAsync(correlationId, "", new SortParams(), CancellationToken.None);
+            return await Repository.GetListByQueryAsync(correlationId, "", new SortParams(), CancellationToken.None);
         }
 
         [HttpGet("{dummyId}")]

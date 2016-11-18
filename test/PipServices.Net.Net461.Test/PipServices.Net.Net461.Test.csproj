@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PipServices.Net.Test</RootNamespace>
-    <AssemblyName>PipServices.Net.Dot.Test</AssemblyName>
+    <AssemblyName>PipServices.Net.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,6 +39,10 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PipServices.Commons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PipServices.Commons.1.0.1\lib\net461\PipServices.Commons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -73,6 +77,10 @@
       <HintPath>..\..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="YamlDotNet, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\YamlDotNet.4.0.0\lib\net35\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Rest\DummyWebApiController.cs" />
@@ -94,21 +102,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\pip-services-commons-dotnet\src\PipServices.Commons.Dot\PipServices.Commons.Dot.csproj">
-      <Project>{c0dbd324-390f-4490-bf56-e778241d514d}</Project>
-      <Name>PipServices.Commons.Dot</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\pip-services-data-dotnet\src\PipServices.Data.Dot\PipServices.Data.Dot.csproj">
-      <Project>{98c2211f-5e2c-437a-b0f9-6f467ed0bdcb}</Project>
-      <Name>PipServices.Data.Dot</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\PipServices.Net.Dot\PipServices.Net.Dot.csproj">
-      <Project>{27b49cba-46c4-42b4-8940-e3c7859a7eeb}</Project>
-      <Name>PipServices.Net.Dot</Name>
-    </ProjectReference>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <ProjectReference Include="..\..\src\PipServices.Net.Net461\PipServices.Net.Net461.csproj">
+      <Project>{27b49cba-46c4-42b4-8940-e3c7859a7eeb}</Project>
+      <Name>PipServices.Net.Net461</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

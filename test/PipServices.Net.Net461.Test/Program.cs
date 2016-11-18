@@ -31,7 +31,7 @@ namespace PipServices.Net.Test
             var service = new DummyRestService();
             service.Configure(RestConfig);
 
-            var references = ReferenceSet.FromList(ctrl, service);
+            var references = ReferenceSet.From(ctrl, service);
 
             service.SetReferences(references);
 

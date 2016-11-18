@@ -37,7 +37,7 @@ namespace PipServices.Net.Test.Rest
             _client = new DummyRestClient();
             _client.Configure(RestConfig);
 
-            var references = ReferenceSet.FromList(_ctrl, _client, _service);
+            var references = ReferenceSet.From(_ctrl, _client, _service);
             _client.SetReferences(references);
 
             _fixture = new DummyClientFixture(_client);

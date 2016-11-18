@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PipServices.Net</RootNamespace>
-    <AssemblyName>PipServices.Net.Dot</AssemblyName>
+    <AssemblyName>PipServices.Net</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -34,8 +34,24 @@
     <Reference Include="Microsoft.Experimental.Collections">
       <HintPath>C:\Users\volodymyr_tkachenko\.nuget\packages\Microsoft.Experimental.Collections\1.0.3-alpha\lib\portable-net45+win8+wp8\Microsoft.Experimental.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.3.0.157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MongoDB.Bson.2.3.0\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.3.0.157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MongoDB.Driver.2.3.0\lib\net45\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.3.0.157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MongoDB.Driver.Core.2.3.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PipServices.Commons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PipServices.Commons.1.0.1\lib\net461\PipServices.Commons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -62,6 +78,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\YamlDotNet.4.0.0\lib\net35\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Errors\GlobalExceptionHandler.cs" />
@@ -81,16 +101,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\pip-services-commons-dotnet\src\PipServices.Commons.Dot\PipServices.Commons.Dot.csproj">
-      <Project>{c0dbd324-390f-4490-bf56-e778241d514d}</Project>
-      <Name>PipServices.Commons.Dot</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\pip-services-data-dotnet\src\PipServices.Data.Dot\PipServices.Data.Dot.csproj">
-      <Project>{98c2211f-5e2c-437a-b0f9-6f467ed0bdcb}</Project>
-      <Name>PipServices.Data.Dot</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
