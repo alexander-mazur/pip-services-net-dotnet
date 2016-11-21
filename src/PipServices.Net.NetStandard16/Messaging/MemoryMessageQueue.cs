@@ -62,14 +62,14 @@ namespace PipServices.Net.Messaging
             _counters.SetReferences(references);
         }
 
-        public Task OpenAsync(string correlationId, CancellationToken token)
+        public Task OpenAsync(string correlationId)
         {
             _logger.Trace(correlationId, "Opened queue %s", this);
 
-            return Task.CompletedTask;
+            return Task.Delay(0);
         }
 
-        public Task CloseAsync(string correlationId, CancellationToken token)
+        public Task CloseAsync(string correlationId)
         {
             lock(_lock) {
                 _listening = false;
@@ -77,7 +77,7 @@ namespace PipServices.Net.Messaging
 
             _logger.Trace(correlationId, "Closed queue %s", this);
 
-            return Task.CompletedTask;
+            return Task.Delay(0);
         }
 
         public string Name => _name ?? "undefined";
@@ -321,7 +321,7 @@ namespace PipServices.Net.Messaging
             _listening = false;
         }
 
-        public Task ClearAsync(string correlationId, CancellationToken token)
+        public Task ClearAsync(string correlationId)
         {
             lock (_lock)
             {
@@ -332,7 +332,7 @@ namespace PipServices.Net.Messaging
 
             _logger.Trace(correlationId, "Cleared queue %s", this);
 
-            return Task.CompletedTask;
+            return Task.Delay(0);
         }
 
         public override string ToString()

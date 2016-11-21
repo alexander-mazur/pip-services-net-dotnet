@@ -19,10 +19,10 @@ namespace PipServices.Net.Test.Messaging
             _queue = new MemoryMessageQueue("test");
             _fixture = new MessageQueueFixture(_queue);
 
-            var clearTask = _queue.ClearAsync(null, CancellationToken.None);
+            var clearTask = _queue.ClearAsync(null);
             clearTask.Wait();
 
-            var openTask = _queue.OpenAsync(null, CancellationToken.None);
+            var openTask = _queue.OpenAsync(null);
             openTask.Wait();
         }
 

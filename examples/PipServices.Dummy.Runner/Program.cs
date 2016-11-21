@@ -18,13 +18,13 @@ namespace PipServices.Dummy.Runner
 
             _service.Configure(new ConfigParams());
 
-            var task = _service.OpenAsync(null, CancellationToken.None);
+            var task = _service.OpenAsync(null);
             task.Wait();
         }
 
         private static void OnExited(object sender, EventArgs e)
         {
-            var task = _service.CloseAsync(null, CancellationToken.None);
+            var task = _service.CloseAsync(null);
             task.Wait();
         }
     }

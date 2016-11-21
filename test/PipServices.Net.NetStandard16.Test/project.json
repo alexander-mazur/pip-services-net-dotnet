@@ -28,7 +28,7 @@
     "System.Net.Http": "4.1.0",
     "moq.netcore": "4.4.0-beta8",
     "PipServices.Net.NetStandard16": "1.0.0-*",
-    "PipServices.Commons": "1.0.1"
+    "PipServices.Commons": "1.0.3"
   },
 
   "frameworks": {

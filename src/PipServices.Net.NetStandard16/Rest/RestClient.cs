@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PipServices.Commons.Config;
 using PipServices.Commons.Connect;
-using PipServices.Commons.Convert;
 using PipServices.Commons.Count;
 using PipServices.Commons.Errors;
 using PipServices.Commons.Log;
@@ -74,7 +73,7 @@ namespace PipServices.Net.Rest
 
         protected async Task<ConnectionParams> GetConnectionAsync(string correlationId, CancellationToken token)
         {
-            var connection = await Resolver.ResolveAsync(correlationId, token);
+            var connection = await Resolver.ResolveAsync(correlationId);
 
             // Check for connection
             if (connection == null)
@@ -109,9 +108,9 @@ namespace PipServices.Net.Rest
             return connection;
         }
 
-        public async Task OpenAsync(string correlationId, CancellationToken token)
+        public async Task OpenAsync(string correlationId)
         {
-            var connection = await GetConnectionAsync(correlationId, token);
+            var connection = await GetConnectionAsync(correlationId, CancellationToken.None);
 
             var protocol = connection.GetProtocol("http");
             var host = connection.Host;
@@ -149,7 +148,7 @@ namespace PipServices.Net.Rest
             Logger.Debug(correlationId, "Connected via REST to %s", Url);
         }
 
-        public Task CloseAsync(string correlationId, CancellationToken token)
+        public Task CloseAsync(string correlationId)
         {
             Client?.Dispose();
             Client = null;

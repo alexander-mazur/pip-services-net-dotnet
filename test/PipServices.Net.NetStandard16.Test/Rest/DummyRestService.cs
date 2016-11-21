@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Net.Http.Server;
-using PipServices.Net.Rest;
+﻿using PipServices.Net.Rest;
 using PipServices.Commons.Refer;
 
 namespace PipServices.Net.Test.Rest

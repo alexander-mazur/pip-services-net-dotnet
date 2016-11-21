@@ -31,20 +31,20 @@ namespace PipServices.Net.Test.Rest
             _service.Configure(new ConfigParams());
 
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            Task.Run(async () => await _service.OpenAsync(null, CancellationToken.None));
+            Task.Run(async () => await _service.OpenAsync(null));
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
             _client = new DummyRestClient();
             _client.Configure(RestConfig);
 
-            var references = ReferenceSet.From(_ctrl, _client, _service);
+            var references = ReferenceSet.FromList(_ctrl, _client, _service);
             _client.SetReferences(references);
 
             _fixture = new DummyClientFixture(_client);
 
             _source = new CancellationTokenSource();
 
-            var clientTask = _client.OpenAsync(null, CancellationToken.None);
+            var clientTask = _client.OpenAsync(null);
             clientTask.Wait();
         }
 
@@ -54,10 +54,10 @@ namespace PipServices.Net.Test.Rest
             var task = _fixture.TestCrudOperations();
             task.Wait();
 
-            task = _client.CloseAsync(null, CancellationToken.None);
+            task = _client.CloseAsync(null);
             task.Wait();
 
-            task = _service.CloseAsync(null, CancellationToken.None);
+            task = _service.CloseAsync(null);
             task.Wait();
         }
     }

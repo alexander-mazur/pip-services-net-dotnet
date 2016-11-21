@@ -11,7 +11,7 @@ namespace PipServices.Net.Test
         {
             var service = new DummyRestService();
             service.Configure(new ConfigParams());
-            var task = service.OpenAsync(null, CancellationToken.None);
+            var task = service.OpenAsync(null);
             task.Wait();
         }
     }

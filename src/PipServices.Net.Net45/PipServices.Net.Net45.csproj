@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PipServices.Net</RootNamespace>
     <AssemblyName>PipServices.Net</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -50,8 +50,8 @@
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PipServices.Commons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PipServices.Commons.1.0.1\lib\net461\PipServices.Commons.dll</HintPath>
+    <Reference Include="PipServices.Commons, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PipServices.Commons.1.0.3\lib\net45\PipServices.Commons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -84,13 +84,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\PipServices.Net.Netstandard16\Messaging\IMessageQueue.cs">
+      <Link>Messaging\IMessageQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\PipServices.Net.Netstandard16\Messaging\IMessageReceiver.cs">
+      <Link>Messaging\IMessageReceiver.cs</Link>
+    </Compile>
+    <Compile Include="..\PipServices.Net.Netstandard16\Messaging\MemoryMessageQueue.cs">
+      <Link>Messaging\MemoryMessageQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\PipServices.Net.Netstandard16\Messaging\MessageEnvelop.cs">
+      <Link>Messaging\MessageEnvelop.cs</Link>
+    </Compile>
+    <Compile Include="..\PipServices.Net.Netstandard16\Messaging\MessagingCapabilities.cs">
+      <Link>Messaging\MessagingCapabilities.cs</Link>
+    </Compile>
     <Compile Include="Errors\GlobalExceptionHandler.cs" />
     <Compile Include="Errors\MicroserviceErrorResult.cs" />
-    <Compile Include="Messaging\IMessageQueue.cs" />
-    <Compile Include="Messaging\IMessageReceiver.cs" />
-    <Compile Include="Messaging\MemoryMessageQueue.cs" />
-    <Compile Include="Messaging\MessageEnvelop.cs" />
-    <Compile Include="Messaging\MessagingCapabilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest\IHttpLogicController.cs" />
     <Compile Include="Rest\RestClient.cs" />

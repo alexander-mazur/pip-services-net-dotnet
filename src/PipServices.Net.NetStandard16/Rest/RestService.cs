@@ -63,7 +63,7 @@ namespace PipServices.Net.Rest
 
         protected async Task<ConnectionParams> GetConnectionAsync(string correlationId, CancellationToken token)
         {
-            var connection = await Resolver.ResolveAsync(correlationId, token);
+            var connection = await Resolver.ResolveAsync(correlationId);
 
             // Check for connection
             if (connection == null)
@@ -98,9 +98,9 @@ namespace PipServices.Net.Rest
             return connection;
         }
 
-        public async Task OpenAsync(string correlationId, CancellationToken token)
+        public async Task OpenAsync(string correlationId)
         {
-            var connection = await GetConnectionAsync(correlationId, token);
+            var connection = await GetConnectionAsync(correlationId, CancellationToken.None);
 
             var protocol = connection.GetProtocol("http");
             var host = connection.Host;
@@ -128,7 +128,7 @@ namespace PipServices.Net.Rest
 
                 Logger.Info(correlationId, "Opened REST service at %s", Url);
 
-                Server.Run(token);
+                Server.Run();
             }
             catch (Exception ex)
             {
@@ -141,7 +141,7 @@ namespace PipServices.Net.Rest
             }
         }
 
-        public Task CloseAsync(string correlationId, CancellationToken token)
+        public Task CloseAsync(string correlationId)
         {
             if (Server != null)
             {
@@ -160,7 +160,7 @@ namespace PipServices.Net.Rest
                 Url = null;
             }
 
-            return Task.CompletedTask;
+            return Task.Delay(0);
         }
     }
 }

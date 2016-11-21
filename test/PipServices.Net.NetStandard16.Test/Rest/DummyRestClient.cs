@@ -1,7 +1,6 @@
 ﻿using PipServices.Net.Rest;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Data;
-using PipServices.Net.Test;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
