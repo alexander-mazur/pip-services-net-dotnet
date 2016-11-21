@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using PipServices.Commons.Convert;
 using PipServices.Commons.Data;
+using System;
 
 namespace PipServices.Net.Messaging
 {
@@ -30,6 +31,9 @@ namespace PipServices.Net.Messaging
 
         [JsonProperty("message_type")]
         public string MessageType { get; set; }
+
+        [JsonProperty("message_type")]
+        public DateTime SentTimeUtc { get; set; }
 
         [JsonProperty("message")]
         public object Message { get; set; }

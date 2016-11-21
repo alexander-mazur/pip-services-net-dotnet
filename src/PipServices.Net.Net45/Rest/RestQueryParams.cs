@@ -6,8 +6,6 @@ namespace PipServices.Net.Rest
 {
     public sealed class RestQueryParams : MultiValueDictionary<string, object>
     {
-        private static long SerialVersionUid { get; } = -903917330561942092L;
-
         public RestQueryParams() { }
 
         public RestQueryParams(string correlationId)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,27 +17,24 @@ namespace PipServices.Net.Messaging
 
         private string _name;
         private readonly object _lock = new object();
-        private readonly IList<MessageEnvelop> _messages = new List<MessageEnvelop>();
+        private Queue<MessageEnvelop> _messages = new Queue<MessageEnvelop>();
         private int _lockTokenSequence;
         private readonly IDictionary<int, LockedMessage> _lockedMessages = new Dictionary<int, LockedMessage>();
-        private bool _listening;
         private readonly CompositeLogger _logger = new CompositeLogger();
         private readonly CompositeCounters _counters = new CompositeCounters();
+        private MessagingCapabilities _capabilities = new MessagingCapabilities(
+                true, true, true, true, true, true, true, false, true);
+        private ManualResetEvent _receiveEvent = new ManualResetEvent(false);
+        private CancellationTokenSource _cancel = new CancellationTokenSource();
 
         private class LockedMessage
         {
-            //public MessageEnvelop message;
-            public long LockExpiration;
+            public MessageEnvelop Message { get; set; }
+            public DateTime ExpirationTimeUtc { get; set; }
+            public TimeSpan Timeout { get; set; }
         }
 
-        public MemoryMessageQueue()
-        {
-            Capabilities = new MessagingCapabilities(
-                true, true, true, true, true, true, true, false, true);
-        }
-
-        public MemoryMessageQueue(string name)
-            : this()
+        public MemoryMessageQueue(string name = null)
         {
             _name = name;
         }
@@ -62,263 +60,276 @@ namespace PipServices.Net.Messaging
             _counters.SetReferences(references);
         }
 
-        public Task OpenAsync(string correlationId)
+        public string Name
         {
-            _logger.Trace(correlationId, "Opened queue %s", this);
-
-            return Task.Delay(0);
+            get { return _name ?? "undefined"; }
         }
-
-        public Task CloseAsync(string correlationId)
-        {
-            lock(_lock) {
-                _listening = false;
-            }
-
-            _logger.Trace(correlationId, "Closed queue %s", this);
-
-            return Task.Delay(0);
-        }
-
-        public string Name => _name ?? "undefined";
 
         public MessagingCapabilities Capabilities { get; }
+
+
+        public Task OpenAsync(string correlationId)
+        {
+            _logger.Trace(correlationId, "Opened queue {0}", this);
+
+            return Task.Delay(0);
+        }
+
+        public async Task CloseAsync(string correlationId)
+        {
+            _cancel.Cancel();
+            _receiveEvent.Set();
+
+            _logger.Trace(null, "Closed queue {0}", this);
+
+            await Task.Delay(0);
+        }
 
         public long MessageCount
         {
             get
             {
-                lock(_lock) {
+                lock (_lock)
+                {
                     return _messages.Count;
                 }
             }
         }
 
-        public void Send(string correlationId, MessageEnvelop message)
+        public async Task SendAsync(string correlationId, MessageEnvelop message)
         {
             if (message == null) return;
 
-            lock (_lock) {
+            await Task.Yield();
+            //await Task.Delay(0);
+
+            lock (_lock)
+            {
+                message.SentTimeUtc = DateTime.UtcNow;
+
                 // Add message to the queue
-                _messages.Add(message);
+                _messages.Enqueue(message);
             }
 
+            // Release threads waiting for messages
+            _receiveEvent.Set();
+
             _counters.IncrementOne("queue." + Name + ".sent_messages");
-            _logger.Debug(correlationId, "Sent message %s via %s", message, this);
+            _logger.Debug(correlationId, "Sent message {0} via {1}", message, this);
         }
 
-        public void SendAsObject(string correlationId, string messageType, object message)
+        public async Task SendAsObjectAsync(string correlationId, string messageType, object message)
         {
             var envelop = new MessageEnvelop(correlationId, messageType, message);
-            Send(correlationId, envelop);
+            await SendAsync(correlationId, envelop);
         }
 
-        public MessageEnvelop Peek(string correlationId)
+        public async Task<MessageEnvelop> PeekAsync(string correlationId)
         {
             MessageEnvelop message = null;
 
             lock(_lock) {
                 // Pick a message
                 if (_messages.Count > 0)
-                    message = _messages[0];
+                    message = _messages.Peek();
             }
 
             if (message != null)
-                _logger.Trace(correlationId, "Peeked message %s on %s", message, this);
+                _logger.Trace(correlationId, "Peeked message {0} on {1}", message, this);
 
-            return message;
+            return await Task.FromResult(message);
         }
 
-        public IEnumerable<MessageEnvelop> PeekBatch(string correlationId, int messageCount)
+        public async Task<List<MessageEnvelop>> PeekBatchAsync(string correlationId, int messageCount)
         {
-            var messages = new List<MessageEnvelop>();
+            List<MessageEnvelop> messages = null;
 
-            lock(_lock) {
-                for (var index = 0; index < _messages.Count && index < messageCount; index++)
-                    messages.Add(_messages[index]);
+            lock (_lock)
+            {
+                messages = _messages.ToArray().Take(messageCount).ToList();
             }
 
-            _logger.Trace(correlationId, "Peeked %d messages on %s", messages.Count, this);
+            _logger.Trace(null, "Peeked {0} messages on {1}", messages.Count, this);
 
-            return messages;
+            return await Task.FromResult(messages);
         }
 
 
-        public MessageEnvelop Receive(string correlationId, long waitTimeout)
+        public async Task<MessageEnvelop> ReceiveAsync(string correlationId, long waitTimeout)
         {
+            await Task.Delay(0);
+
+            lock (_lock)
+            {
+                if (_messages.Count == 0)
+                    _receiveEvent.Reset();
+                else
+                    _receiveEvent.Set();
+            }
+
+            _receiveEvent.WaitOne(TimeSpan.FromMilliseconds(waitTimeout));
+
             MessageEnvelop message = null;
 
-            lock(_lock) {
-                // Try to get a message
-                if (_messages.Count > 0)
-                {
-                    message = _messages[0];
-                    _messages.RemoveAt(0);
-                }
-
-                if (message == null)
-                {
-                    Thread.Sleep(TimeSpan.FromTicks(waitTimeout));
-                //    try
-                //    {
-                //        _lock.wait(waitTimeout);
-                //    }
-                //    catch (InterruptedException ex)
-                //    {
-                //        return null;
-                //    }
-                }
-
-                // Try to get a message again
-                if (message == null && _messages.Count > 0)
-                {
-                    message = _messages[0];
-                    _messages.RemoveAt(0);
-                }
-
-                // Exit if message was not found
-                if (message == null)
+            lock (_lock)
+            {
+                if (_messages.Count == 0)
                     return null;
 
-                // Generate and set locked token
-                var lockedToken = _lockTokenSequence++;
-                message.Reference = lockedToken;
+                // Get message the the queue
+                message = _messages.Dequeue();
 
-                // Add messages to locked messages list
-                var lockedMessage = new LockedMessage
+                if (message != null)
                 {
-                    LockExpiration = Environment.TickCount + _defaultLockTimeout
-                };
-                //lockedMessage.message = message;
+                    // Generate and set locked token
+                    var lockedToken = _lockTokenSequence++;
+                    message.Reference = lockedToken;
 
-                _lockedMessages[lockedToken] = lockedMessage;
+                    // Add messages to locked messages list
+                    var lockedMessage = new LockedMessage
+                    {
+                        ExpirationTimeUtc = DateTime.UtcNow.AddMilliseconds(waitTimeout),
+                        Message = message,
+                        Timeout = TimeSpan.FromMilliseconds(waitTimeout)
+                    };
+                    _lockedMessages.Add(lockedToken, lockedMessage);
+                }
             }
 
-            _counters.IncrementOne("queue." + Name + ".received_messages");
-            _logger.Debug(message.CorrelationId, "Received message %s via %s", message, this);
+            if (message != null)
+            {
+                _counters.IncrementOne("queue." + _name + ".received_messages");
+                _logger.Debug(message.CorrelationId, "Received message {0} via {1}", message, this);
+            }
 
             return message;
         }
 
-        public void RenewLock(MessageEnvelop message, long lockTimeout)
+        public async Task RenewLockAsync(MessageEnvelop message, long lockTimeout)
         {
-            if (message?.Reference == null)
-                return;
+            if (message.Reference == null) return;
 
-            lock(_lock) {
+            lock (_lock)
+            {
                 // Get message from locked queue
-                var lockedToken = (int)message.Reference;
-                var lockedMessage = _lockedMessages[lockedToken];
+                LockedMessage lockedMessage = null;
+                int lockedToken = (int)message.Reference;
 
                 // If lock is found, extend the lock
-                if (lockedMessage != null)
-                    lockedMessage.LockExpiration = Environment.TickCount + lockTimeout;
+                if (_lockedMessages.TryGetValue(lockedToken, out lockedMessage))
+                {
+                    // Todo: Shall we skip if the message already expired?
+                    if (lockedMessage.ExpirationTimeUtc > DateTime.UtcNow)
+                    {
+                        lockedMessage.ExpirationTimeUtc = DateTime.UtcNow.Add(lockedMessage.Timeout);
+                    }
+                }
             }
 
-            _logger.Trace(message.CorrelationId, "Renewed lock for message %s at %s", message, this);
+            _logger.Trace(message.CorrelationId, "Renewed lock for message {0} at {1}", message, this);
+
+            await Task.Delay(0);
         }
 
-        public void Abandon(MessageEnvelop message)
+        public async Task AbandonAsync(MessageEnvelop message)
         {
-            if (message?.Reference == null)
-                return;
+            if (message.Reference == null) return;
 
-            lock(_lock) {
+            lock (_lock)
+            {
                 // Get message from locked queue
-                var lockedToken = (int)message.Reference;
-                var lockedMessage = _lockedMessages[lockedToken];
-                if (lockedMessage != null)
+                int lockedToken = (int)message.Reference;
+                LockedMessage lockedMessage = null;
+                if (_lockedMessages.TryGetValue(lockedToken, out lockedMessage))
                 {
                     // Remove from locked messages
                     _lockedMessages.Remove(lockedToken);
                     message.Reference = null;
 
                     // Skip if it is already expired
-                    if (lockedMessage.LockExpiration <= Environment.TickCount)
+                    if (lockedMessage.ExpirationTimeUtc <= DateTime.UtcNow)
                         return;
                 }
                 // Skip if it absent
                 else return;
             }
 
-            _logger.Trace(message.CorrelationId, "Abandoned message %s at %s", message, this);
+            _logger.Trace(message.CorrelationId, "Abandoned message {0} at {1}", message, this);
 
             // Add back to the queue
-            Send(message.CorrelationId, message);
+            await SendAsync(message.CorrelationId, message);
         }
 
-        public void Complete(MessageEnvelop message)
+        public async Task CompleteAsync(MessageEnvelop message)
         {
-            if (message?.Reference == null)
-                return;
+            if (message.Reference == null) return;
 
-            lock(_lock) {
-                var lockKey = (int)message.Reference;
+            lock (_lock)
+            {
+                int lockKey = (int)message.Reference;
                 _lockedMessages.Remove(lockKey);
                 message.Reference = null;
             }
 
-            _logger.Trace(message.CorrelationId, "Completed message %s at %s", message, this);
+            _logger.Trace(message.CorrelationId, "Completed message {0} at {1}", message, this);
+
+            await Task.Delay(0);
         }
 
-        public void MoveToDeadLetter(MessageEnvelop message)
+        public async Task MoveToDeadLetterAsync(MessageEnvelop message)
         {
-            if (message?.Reference == null)
-                return;
+            if (message.Reference == null) return;
 
-            lock(_lock) {
-                var lockKey = (int)message.Reference;
+            lock (_lock)
+            {
+                int lockKey = (int)message.Reference;
                 _lockedMessages.Remove(lockKey);
                 message.Reference = null;
             }
 
-            _counters.IncrementOne("queue." + Name + ".dead_messages");
-            _logger.Trace(message.CorrelationId, "Moved to dead message %s at %s", message, this);
+            _counters.IncrementOne("Queue." + _name + ".DeadMessages");
+            _logger.Trace(message.CorrelationId, "Moved to dead message {0} at {1}", message, this);
+
+            await Task.Delay(0);
         }
 
-        public void Listen(string correlationId, IMessageReceiver receiver)
+        public async Task ListenAsync(string correlationId, IMessageReceiver receiver)
         {
-            if (_listening)
+            _logger.Trace(null, "Started listening messages at {0}", this);
+
+            // Create new token source
+            _cancel = new CancellationTokenSource();
+
+            while (!_cancel.Token.IsCancellationRequested)
             {
-                _logger.Error(correlationId, "Already listening queue %s", this);
-                return;
-            }
+                var message = await ReceiveAsync(correlationId, 1000);
 
-            _logger.Trace(correlationId, "Started listening messages at %s", this);
-
-            _listening = true;
-
-            while (_listening)
-            {
-                var message = Receive(correlationId, _defaultWaitTimeout);
-
-                if (_listening && message != null)
+                if (message != null)
                 {
                     try
                     {
-                        receiver.ReceiveMessage(message, this);
+                        if (!_cancel.IsCancellationRequested)
+                            await receiver.ReceiveMessageAsync(message, this);
                     }
                     catch (Exception ex)
                     {
-                        _logger.Error(correlationId, ex, "Failed to process the message");
+                        _logger.Error(null, ex, "Failed to process the message");
                         //await AbandonAsync(message);
                     }
                 }
             }
-
-            _logger.Trace(correlationId, "Stopped listening messages at %s", this);
         }
 
         public void BeginListen(string correlationId, IMessageReceiver receiver)
         {
-            // Start listening on a parallel tread
-            var thread = new Thread(() => Listen(correlationId, receiver));
-            thread.Start();
+            ThreadPool.QueueUserWorkItem(async delegate {
+                await ListenAsync(correlationId, receiver);
+            });
         }
 
         public void EndListen(string correlationId)
         {
-            _listening = false;
+            _cancel.Cancel();
         }
 
         public Task ClearAsync(string correlationId)
@@ -330,7 +341,7 @@ namespace PipServices.Net.Messaging
                 _lockedMessages.Clear();
             }
 
-            _logger.Trace(correlationId, "Cleared queue %s", this);
+            _logger.Trace(correlationId, "Cleared queue {0}", this);
 
             return Task.Delay(0);
         }
