@@ -47,10 +47,10 @@
   </metadata>
 
   <files>
-    <file src="src\PipServices.Net.Netstandard16\bin\Release\netstandard1.6\PipServices.Net.deps.json" target="lib\netstandard1.6" />
-    <file src="src\PipServices.Net.Netstandard16\bin\Release\netstandard1.6\PipServices.Net.dll" target="lib\netstandard1.6" />
-    <file src="src\PipServices.Net.Netstandard16\bin\Release\netstandard1.6\PipServices.Net.pdb" target="lib\netstandard1.6" />
-    <file src="src\PipServices.Net.Net461\bin\Release\PipServices.Net.dll" target="lib\net461" />
-    <file src="src\PipServices.Net.Net461\bin\Release\PipServices.Net.pdb" target="lib\net461" />
+    <file src="src\PipServices.Net.NetStandard16\bin\Release\netstandard1.6\PipServices.Net.deps.json" target="lib\netstandard1.6" />
+    <file src="src\PipServices.Net.NetStandard16\bin\Release\netstandard1.6\PipServices.Net.dll" target="lib\netstandard1.6" />
+    <file src="src\PipServices.Net.NetStandard16\bin\Release\netstandard1.6\PipServices.Net.pdb" target="lib\netstandard1.6" />
+    <file src="src\PipServices.Net.Net45\bin\Release\PipServices.Net.dll" target="lib\net45" />
+    <file src="src\PipServices.Net.Net45\bin\Release\PipServices.Net.pdb" target="lib\net45" />
   </files>
 </package>
