@@ -50,8 +50,8 @@
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PipServices.Commons, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PipServices.Commons.1.0.3\lib\net45\PipServices.Commons.dll</HintPath>
+    <Reference Include="PipServices.Commons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PipServices.Commons.1.0.9\lib\net45\PipServices.Commons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

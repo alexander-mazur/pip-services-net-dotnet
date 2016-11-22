@@ -1,29 +1,34 @@
 {
-  "version": "1.0.0-*",
+  "version": "1.0.2-*",
+
+  "copyright": "Copyright � Digital Living Software Corp. 2009-2016",
+  "title": "Pip.Services Net Library",
+  "authors": [ "Sergey Seroukhov", "Volodymyr Tkachenko" ],
+  "description": "Communication components for Pip.Services in .NET",
 
   "buildOptions": {
-    "debugType": "portable",
-    "outputName": "PipServices.Net"
+    "outputName": "PipServices.Net",
+    "define": [ "CORE_NET" ]
   },
 
   "dependencies": {
-    "Microsoft.AspNetCore.Diagnostics": "1.0.0",
-    "Microsoft.AspNetCore.Mvc": "1.0.1",
-    "Microsoft.AspNetCore.Routing": "1.0.1",
-    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
-    "Microsoft.AspNetCore.Server.Kestrel.Https": "1.0.1",
-    "Microsoft.AspNetCore.Server.WebListener": "1.0.0",
-    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Microsoft.AspNetCore.Diagnostics": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.AspNetCore.Routing": "1.1.0",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.AspNetCore.Server.Kestrel.Https": "1.1.0",
+    "Microsoft.AspNetCore.Server.WebListener": "1.1.0",
+    "Microsoft.AspNetCore.StaticFiles": "1.1.0",
     "Microsoft.Experimental.Collections": "1.0.3-alpha",
-    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0",
-    "Microsoft.Extensions.Logging.Console": "1.0.0",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.1.0",
+    "Microsoft.Extensions.Logging.Console": "1.1.0",
+    "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "MongoDB.Driver": "2.3.0",
-    "NETStandard.Library": "1.6.0",
+    "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
-    "PipServices.Commons": "1.0.3"
+    "PipServices.Commons": "1.0.9"
   },
 
   "frameworks": {

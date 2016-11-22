@@ -2,11 +2,15 @@
 <package >
   <metadata>
     <id>PipServices.Net</id>
-    <version>1.0.1-alpha</version>
+    <version>1.0.2</version>
     <title>PipServices.Net</title>
     <authors>Sergey Seroukhov, Volodymyr Tkachenko</authors>
-    <owners>seroukhov</owners>
+
+    <projectUrl>https://github.com/pip-services/pip-services-net-dotnet</projectUrl>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/pip-services/pip-services/master/design/Icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
     <description>Communication components for Pip.Services in .NET</description>
     <releaseNotes>Pre release</releaseNotes>
     <copyright>Digital Living Software Corp. 2016</copyright>
@@ -17,31 +21,30 @@
         <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
         <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
         <dependency id="Microsoft.AspNet.WebApi.SelfHost" version="5.2.3" />
-        <dependency id="Newtonsoft.Json" version="9.0" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
         <dependency id="MongoDB.Bson" version="2.3.0" />
         <dependency id="MongoDB.Driver" version="2.3.0" />
         <dependency id="MongoDB.Driver.Core" version="2.3.0" />
-        <dependency id="System.Collections.Immutable" version="1.2.0" />
-        <dependency id="PipServices.Commons" version="1.0.3" />
+        <dependency id="PipServices.Commons" version="1.0.9" />
       </group>
       <group targetFramework="netstandard">
-        <dependency id="Microsoft.AspNetCore.Diagnostics" version="1.0.0" />
-        <dependency id="Microsoft.AspNetCore.Mvc" version="1.0.1" />
-        <dependency id="Microsoft.AspNetCore.Routing" version="1.0.1" />
-        <dependency id="Microsoft.AspNetCore.Server.IISIntegration" version="1.0.0" />
-        <dependency id="Microsoft.AspNetCore.Server.Kestrel" version="1.0.1" />
-        <dependency id="Microsoft.AspNetCore.Server.Kestrel.Https" version="1.0.1" />
-        <dependency id="Microsoft.AspNetCore.Server.WebListener" version="1.0.0" />
-        <dependency id="Microsoft.AspNetCore.StaticFiles" version="1.0.0" />
+        <dependency id="Microsoft.AspNetCore.Diagnostics" version="1.1.0" />
+        <dependency id="Microsoft.AspNetCore.Mvc" version="1.1.0" />
+        <dependency id="Microsoft.AspNetCore.Routing" version="1.1.0" />
+        <dependency id="Microsoft.AspNetCore.Server.IISIntegration" version="1.1.0" />
+        <dependency id="Microsoft.AspNetCore.Server.Kestrel" version="1.1.0" />
+        <dependency id="Microsoft.AspNetCore.Server.Kestrel.Https" version="1.1.0" />
+        <dependency id="Microsoft.AspNetCore.Server.WebListener" version="1.1.0" />
+        <dependency id="Microsoft.AspNetCore.StaticFiles" version="1.1.0" />
         <dependency id="Microsoft.Experimental.Collections" version="1.0.3-alpha" />
-        <dependency id="Microsoft.Extensions.Configuration.FileExtensions" version="1.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="1.0.0" />
-        <dependency id="Microsoft.Extensions.Logging.Console" version="1.0.0" />
-        <dependency id="Microsoft.Extensions.Logging.Debug" version="1.0.0" />
-        <dependency id="NETStandard.Library" version="1.6.0" />
-        <dependency id="Newtonsoft.Json" version="9.0" />
+        <dependency id="Microsoft.Extensions.Configuration.FileExtensions" version="1.1.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="1.1.0" />
+        <dependency id="Microsoft.Extensions.Logging.Console" version="1.1.0" />
+        <dependency id="Microsoft.Extensions.Logging.Debug" version="1.1.0" />
+        <dependency id="NETStandard.Library" version="1.6.1" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
         <dependency id="MongoDB.Driver" version="2.3.0" />
-        <dependency id="PipServices.Commons" version="1.0.3" />
+        <dependency id="PipServices.Commons" version="1.0.9" />
       </group>
     </dependencies>
   </metadata>
