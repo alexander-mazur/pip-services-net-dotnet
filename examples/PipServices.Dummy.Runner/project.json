@@ -23,9 +23,9 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Newtonsoft.Json": "9.0.1",
     "MongoDB.Driver": "2.3.0",
-    "PipServices.Commons": "1.0.1",
     "PipServices.Data": "1.0.0",
-    "PipServices.Net.Netstandard16": "1.0.0-*"
+    "PipServices.Net.Netstandard16": "1.0.0-*",
+    "PipServices.Commons": "1.0.4"
   },
 
   "frameworks": {
