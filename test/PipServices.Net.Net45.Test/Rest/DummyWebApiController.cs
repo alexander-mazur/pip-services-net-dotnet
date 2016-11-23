@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using PipServices.Commons.Data;
-using PipServices.Net.Rest;
+using PipServices.Net.Test;
 
-namespace PipServices.Net.Test.Rest
+namespace PipServices.Net.Rest
 {
     [RoutePrefix("dummies")]
     //[MicroserviceExceptionFilterAttribute]

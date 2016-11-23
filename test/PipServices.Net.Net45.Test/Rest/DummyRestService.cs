@@ -1,8 +1,8 @@
 ﻿using System;
-using PipServices.Net.Rest;
 using PipServices.Commons.Refer;
+using PipServices.Net.Test;
 
-namespace PipServices.Net.Test.Rest
+namespace PipServices.Net.Rest
 {
     public sealed class DummyRestService : RestService<DummyWebApiController, IDummyController>, IDescriptable
     {

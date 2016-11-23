@@ -1,10 +1,6 @@
 ﻿using PipServices.Commons.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PipServices.Net.Test
+namespace PipServices.Net
 {
     public interface IDummyController
     {

@@ -1,8 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using PipServices.Net.Test;
 using Xunit;
 
-namespace PipServices.Net.Test.Rest
+namespace PipServices.Net.Rest
 {
     public sealed class DummyClientFixture
     {

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PipServices.Commons.Data;
+using PipServices.Net.Test;
 
-namespace PipServices.Net.Test.Controllers
+namespace PipServices.Net.Controllers
 {
     [Route("dummies")]
     //[MicroserviceExceptionFilterAttribute]

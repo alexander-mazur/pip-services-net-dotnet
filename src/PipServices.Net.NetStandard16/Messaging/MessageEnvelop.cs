@@ -32,7 +32,7 @@ namespace PipServices.Net.Messaging
         [JsonProperty("message_type")]
         public string MessageType { get; set; }
 
-        [JsonProperty("message_type")]
+        [JsonProperty("sent_time")]
         public DateTime SentTimeUtc { get; set; }
 
         [JsonProperty("message")]

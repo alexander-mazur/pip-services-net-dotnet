@@ -2,7 +2,7 @@
 using PipServices.Commons.Data;
 using PipServices.Commons.Refer;
 
-namespace PipServices.Net.Test
+namespace PipServices.Net
 {
     public sealed class DummyController : IDummyController, IDescriptable
     {

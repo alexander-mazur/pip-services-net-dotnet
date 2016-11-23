@@ -1,14 +1,8 @@
-﻿using System;
-using PipServices.Net.Messaging;
-using PipServices.Commons.Config;
-using PipServices.Commons.Refer;
-using PipServices.Commons.Errors;
-using Xunit;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Xunit;
 
-namespace PipServices.Net.Test.Messaging
+namespace PipServices.Net.Messaging
 {
     public sealed class MessageQueueFixture
     {
@@ -19,27 +13,27 @@ namespace PipServices.Net.Test.Messaging
             _queue = queue;
         }
 
-        public void TestSendReceiveMessage()
+        public async Task TestSendReceiveMessage()
         {
             var envelop1 = new MessageEnvelop("123", "Test", "Test message");
-            _queue.Send(null, envelop1);
+            await _queue.SendAsync(null, envelop1);
 
             var count = _queue.MessageCount;
             Assert.True(count > 0);
 
-            var envelop2 = _queue.Receive(null, 10000);
+            var envelop2 = await _queue.ReceiveAsync(null, 10000);
             Assert.NotNull(envelop2);
             Assert.Equal(envelop1.MessageType, envelop2.MessageType);
             Assert.Equal(envelop1.Message, envelop2.Message);
             Assert.Equal(envelop1.CorrelationId, envelop2.CorrelationId);
         }
 
-        private void Run(MessageEnvelop envelop)
+        private async Task Run(MessageEnvelop envelop)
         {
             //try
             //{
             Thread.Sleep(200);
-            _queue.Send(null, envelop);
+            await _queue.SendAsync(null, envelop);
             //}
             //catch (InterruptedException ex)
             //{
@@ -47,74 +41,73 @@ namespace PipServices.Net.Test.Messaging
             //}
         }
 
-        public void TestReceiveSendMessage()
+        public async Task TestReceiveSendMessage()
         {
             var envelop1 = new MessageEnvelop("123", "Test", "Test message");
 
-            var task = Task.Run(() => Run(envelop1));
-            task.Wait();
+            await Task.Run(() => Run(envelop1));
 
-            var envelop2 = _queue.Receive(null, 10000);
+            var envelop2 = await _queue.ReceiveAsync(null, 10000);
             Assert.NotNull(envelop2);
             Assert.Equal(envelop1.MessageType, envelop2.MessageType);
             Assert.Equal(envelop1.Message, envelop2.Message);
             Assert.Equal(envelop1.CorrelationId, envelop2.CorrelationId);
         }
 
-        public void TestMoveToDeadMessage()
+        public async Task TestMoveToDeadMessage()
         {
-            MessageEnvelop envelop1 = new MessageEnvelop("123", "Test", "Test message");
-            _queue.Send(null, envelop1);
+            var envelop1 = new MessageEnvelop("123", "Test", "Test message");
+            await _queue.SendAsync(null, envelop1);
 
-            var envelop2 = _queue.Receive(null, 10000);
+            var envelop2 = await _queue.ReceiveAsync(null, 10000);
             Assert.NotNull(envelop2);
             Assert.Equal(envelop1.MessageType, envelop2.MessageType);
             Assert.Equal(envelop1.Message, envelop2.Message);
             Assert.Equal(envelop1.CorrelationId, envelop2.CorrelationId);
 
-            _queue.MoveToDeadLetter(envelop2);
+            await _queue.MoveToDeadLetterAsync(envelop2);
         }
 
-        public void TestReceiveAndCompleteMessage()
+        public async Task TestReceiveAndCompleteMessage()
         {
-            MessageEnvelop envelop1 = new MessageEnvelop("123", "Test", "Test message");
-            _queue.Send(null, envelop1);
+            var envelop1 = new MessageEnvelop("123", "Test", "Test message");
+            await _queue.SendAsync(null, envelop1);
 
-            var envelop2 = _queue.Receive(null, 10000);
+            var envelop2 = await _queue.ReceiveAsync(null, 10000);
             Assert.NotNull(envelop2);
             Assert.Equal(envelop1.MessageType, envelop2.MessageType);
             Assert.Equal(envelop1.Message, envelop2.Message);
             Assert.Equal(envelop1.CorrelationId, envelop2.CorrelationId);
 
-            _queue.Complete(envelop2);
+            await _queue.CompleteAsync(envelop2);
             //envelop2 = _queue.peek(null);
             //assertNull(envelop2);
         }
 
-        public void TestReceiveAndAbandonMessage()
+        public async Task TestReceiveAndAbandonMessage()
         {
             var envelop1 = new MessageEnvelop("123", "Test", "Test message");
-            _queue.Send(null, envelop1);
+            await _queue.SendAsync(null, envelop1);
 
-            var envelop2 = _queue.Receive(null, 10000);
+            var envelop2 = await _queue.ReceiveAsync(null, 10000);
             Assert.NotNull(envelop2);
             Assert.Equal(envelop1.MessageType, envelop2.MessageType);
             Assert.Equal(envelop1.Message, envelop2.Message);
             Assert.Equal(envelop1.CorrelationId, envelop2.CorrelationId);
 
-            _queue.Abandon(envelop2);
+            await _queue.AbandonAsync(envelop2);
 
-            envelop2 = _queue.Receive(null, 10000);
+            envelop2 = await _queue.ReceiveAsync(null, 10000);
             Assert.NotNull(envelop2);
             Assert.Equal(envelop1.MessageType, envelop2.MessageType);
             Assert.Equal(envelop1.Message, envelop2.Message);
             Assert.Equal(envelop1.CorrelationId, envelop2.CorrelationId);
         }
 
-        public void TestSendPeekMessage()
+        public async Task TestSendPeekMessage()
         {
             var envelop1 = new MessageEnvelop("123", "Test", "Test message");
-            _queue.Send(null, envelop1);
+            await _queue.SendAsync(null, envelop1);
 
             //try
             //{
@@ -125,16 +118,16 @@ namespace PipServices.Net.Test.Messaging
             //    // Ignore...
             //}
 
-            var envelop2 = _queue.Peek(null);
+            var envelop2 = await _queue.PeekAsync(null);
             Assert.NotNull(envelop2);
             Assert.Equal(envelop1.MessageType, envelop2.MessageType);
             Assert.Equal(envelop1.Message, envelop2.Message);
             Assert.Equal(envelop1.CorrelationId, envelop2.CorrelationId);
         }
 
-        public void TestPeekNoMessage()
+        public async Task TestPeekNoMessage()
         {
-            var envelop = _queue.Peek(null);
+            var envelop = await _queue.PeekAsync(null);
             Assert.Null(envelop);
         }
 
@@ -147,23 +140,25 @@ namespace PipServices.Net.Test.Messaging
                 _envelop = envelop;
             }
 
-            public void ReceiveMessage(MessageEnvelop envelop, IMessageQueue queue)
+            public Task ReceiveMessageAsync(MessageEnvelop envelop, IMessageQueue queue)
             {
                 _envelop.MessageId = envelop.MessageId;
                 _envelop.CorrelationId = envelop.CorrelationId;
                 _envelop.MessageType = envelop.MessageType;
                 _envelop.Message = envelop.Message;
+
+                return Task.Delay(0);
             }
         }
 
-        public void TestListen()
+        public async Task TestListen()
         {
             var envelop1 = new MessageEnvelop("123", "Test", "Test message");
             var envelop2 = new MessageEnvelop();
 
             _queue.BeginListen(null, new TestMessageReceiver(envelop2));
 
-            _queue.Send(null, envelop1);
+            await _queue.SendAsync(null, envelop1);
 
             //try
             //{

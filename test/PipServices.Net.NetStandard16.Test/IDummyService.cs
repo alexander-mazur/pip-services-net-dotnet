@@ -1,9 +1,8 @@
 ﻿using System.Threading;
 using PipServices.Commons.Data;
-using PipServices.Commons.Errors;
 using System.Threading.Tasks;
 
-namespace PipServices.Net.Test
+namespace PipServices.Net
 {
     public interface IDummyService
     {

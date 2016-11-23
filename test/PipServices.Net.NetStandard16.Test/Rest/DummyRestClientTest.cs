@@ -1,13 +1,14 @@
-﻿using PipServices.Commons.Config;
-using PipServices.Commons.Refer;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using PipServices.Commons.Config;
+using PipServices.Commons.Refer;
+using PipServices.Net.Test;
 using Xunit;
 
-namespace PipServices.Net.Test.Rest
+namespace PipServices.Net.Rest
 {
-    public sealed class DummyRestClientTest
+    public sealed class DummyRestClientTest : IDisposable
     {
         private static readonly ConfigParams RestConfig = ConfigParams.FromTuples(
             "connection.protocol", "http",
@@ -28,17 +29,22 @@ namespace PipServices.Net.Test.Rest
 
             _service = new DummyRestService();
 
-            _service.Configure(new ConfigParams());
-
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            Task.Run(async () => await _service.OpenAsync(null));
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            _service.Configure(RestConfig);
 
             _client = new DummyRestClient();
             _client.Configure(RestConfig);
 
             var references = ReferenceSet.FromList(_ctrl, _client, _service);
             _client.SetReferences(references);
+            _service.SetReferences(references);
+
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            var serviceTask = Task.Run(async () => await _service.OpenAsync(null));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+
+#if !CORE_NET
+            serviceTask.Wait();
+#endif
 
             _fixture = new DummyClientFixture(_client);
 
@@ -53,8 +59,11 @@ namespace PipServices.Net.Test.Rest
         {
             var task = _fixture.TestCrudOperations();
             task.Wait();
+        }
 
-            task = _client.CloseAsync(null);
+        public void Dispose()
+        {
+            var task = _client.CloseAsync(null);
             task.Wait();
 
             task = _service.CloseAsync(null);

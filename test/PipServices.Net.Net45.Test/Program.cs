@@ -2,7 +2,7 @@
 using System.Threading;
 using PipServices.Commons.Config;
 using PipServices.Commons.Refer;
-using PipServices.Net.Test.Rest;
+using PipServices.Net.Rest;
 
 namespace PipServices.Net.Test
 {

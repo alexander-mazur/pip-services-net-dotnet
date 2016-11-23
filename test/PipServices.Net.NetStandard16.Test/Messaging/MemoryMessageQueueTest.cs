@@ -1,13 +1,6 @@
-﻿using System;
-using PipServices.Net.Messaging;
-using PipServices.Commons.Config;
-using PipServices.Commons.Refer;
-using PipServices.Commons.Errors;
-using Xunit;
-using System.Linq;
-using System.Threading;
+﻿using Xunit;
 
-namespace PipServices.Net.Test.Messaging
+namespace PipServices.Net.Messaging
 {
     public sealed class MemoryMessageQueueTest
     {
@@ -29,49 +22,57 @@ namespace PipServices.Net.Test.Messaging
         [Fact]
         public void TestSendReceiveMessage()
         {
-            _fixture.TestSendReceiveMessage();
+            var task = _fixture.TestSendReceiveMessage();
+            task.Wait();
         }
 
         [Fact]
         public void TestReceiveSendMessage()
         {
-            _fixture.TestReceiveSendMessage();
+            var task = _fixture.TestReceiveSendMessage();
+            task.Wait();
         }
 
         [Fact]
         public void TestMoveToDeadMessage()
         {
-            _fixture.TestMoveToDeadMessage();
+            var task = _fixture.TestMoveToDeadMessage();
+            task.Wait();
         }
 
         [Fact]
         public void TestReceiveAndCompleteMessage()
         {
-            _fixture.TestReceiveAndCompleteMessage();
+            var task = _fixture.TestReceiveAndCompleteMessage();
+            task.Wait();
         }
 
         [Fact]
         public void TestReceiveAndAbandonMessage()
         {
-            _fixture.TestReceiveAndAbandonMessage();
+            var task = _fixture.TestReceiveAndAbandonMessage();
+            task.Wait();
         }
 
         [Fact]
         public void TestSendPeekMessage()
         {
-            _fixture.TestSendPeekMessage();
+            var task = _fixture.TestSendPeekMessage();
+            task.Wait();
         }
 
         [Fact]
         public void TestPeekNoMessage()
         {
-            _fixture.TestPeekNoMessage();
+            var task = _fixture.TestPeekNoMessage();
+            task.Wait();
         }
 
         [Fact]
         public void TestListen()
         {
-            _fixture.TestListen();
+            var task = _fixture.TestListen();
+            task.Wait();
         }
     }
 }

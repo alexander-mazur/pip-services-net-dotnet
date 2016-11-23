@@ -1,7 +1,5 @@
-﻿using System.Threading;
-using PipServices.Net.Test.Rest;
-using PipServices.Commons.Config;
-using PipServices.Commons.Data;
+﻿using PipServices.Commons.Config;
+using PipServices.Net.Rest;
 
 namespace PipServices.Net.Test
 {

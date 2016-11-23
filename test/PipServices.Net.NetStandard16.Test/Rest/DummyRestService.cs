@@ -1,17 +1,13 @@
-﻿using PipServices.Net.Rest;
-using PipServices.Commons.Refer;
+﻿using PipServices.Commons.Refer;
+using PipServices.Net.Test;
 
-namespace PipServices.Net.Test.Rest
+namespace PipServices.Net.Rest
 {
     public sealed class DummyRestService : RestService<Startup>, IDescriptable
     {
         public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "service", "rest", "1.0");
 
         private IDummyController _controller;
-
-        public DummyRestService()
-        {
-        }
 
         public Descriptor GetDescriptor()
         {

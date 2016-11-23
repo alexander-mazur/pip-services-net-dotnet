@@ -1,8 +1,7 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PipServices.Commons.Data;
 
-namespace PipServices.Net.Test
+namespace PipServices.Net
 {
     public class Dummy : IStringIdentifiable
     {

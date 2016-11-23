@@ -1,11 +1,11 @@
-﻿using PipServices.Net.Rest;
-using PipServices.Commons.Refer;
-using PipServices.Commons.Data;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using PipServices.Commons.Data;
+using PipServices.Commons.Refer;
+using PipServices.Net.Test;
 
-namespace PipServices.Net.Test.Rest
+namespace PipServices.Net.Rest
 {
     public sealed class DummyRestClient : RestClient, IDummyService, IDescriptable
     {
