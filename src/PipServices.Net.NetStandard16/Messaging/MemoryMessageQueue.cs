@@ -50,7 +50,7 @@ namespace PipServices.Net.Messaging
             {
                 var descriptorStr = config.GetAsNullableString("descriptor");
                 var descriptor = Descriptor.FromString(descriptorStr);
-                _name = descriptor.Id;
+                _name = descriptor.Name;
             }
         }
 

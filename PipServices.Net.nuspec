@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PipServices.Net</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <title>PipServices.Net</title>
     <authors>Sergey Seroukhov, Volodymyr Tkachenko</authors>
 
@@ -25,7 +25,7 @@
         <dependency id="MongoDB.Bson" version="2.3.0" />
         <dependency id="MongoDB.Driver" version="2.3.0" />
         <dependency id="MongoDB.Driver.Core" version="2.3.0" />
-        <dependency id="PipServices.Commons" version="1.0.12" />
+        <dependency id="PipServices.Commons" version="1.0.26" />
       </group>
       <group targetFramework="netstandard">
         <dependency id="Microsoft.AspNetCore.Diagnostics" version="1.1.0" />
@@ -44,7 +44,7 @@
         <dependency id="NETStandard.Library" version="1.6.1" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
         <dependency id="MongoDB.Driver" version="2.3.0" />
-        <dependency id="PipServices.Commons" version="1.0.12" />
+        <dependency id="PipServices.Commons" version="1.0.26" />
       </group>
     </dependencies>
   </metadata>

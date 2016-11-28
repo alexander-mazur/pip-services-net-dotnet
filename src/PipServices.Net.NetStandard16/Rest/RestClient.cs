@@ -45,10 +45,10 @@ namespace PipServices.Net.Rest
         {
             Resolver.SetReferences(references);
 
-            var logger = (ILogger) references.GetOneOptional(new Descriptor("*", "logger", "*", "*"));
+            var logger = (ILogger) references.GetOneOptional(new Descriptor("*", "logger", "*", "*", "*"));
             Logger = logger ?? Logger;
 
-            var counters = (ICounters) references.GetOneOptional(new Descriptor("*", "counters", "*", "*"));
+            var counters = (ICounters) references.GetOneOptional(new Descriptor("*", "counters", "*", "*", "*"));
             Counters = counters ?? Counters;
         }
 

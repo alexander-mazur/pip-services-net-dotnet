@@ -5,7 +5,7 @@ namespace PipServices.Net.Rest
 {
     public sealed class DummyRestService : RestService<Startup>, IDescriptable
     {
-        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "service", "rest", "1.0");
+        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "service", "rest", "", "1.0");
 
         private IDummyController _controller;
 
@@ -17,8 +17,8 @@ namespace PipServices.Net.Rest
         public override void SetReferences(IReferences references)
         {
             _controller =
-                (IDummyController)
-                    references.GetOneBefore(this, new Descriptor("pip-services-dummies", "controller", "*", "*"));
+                references.GetOneRequired<IDummyController>(new Descriptor("pip-services-dummies", "controller", "*",
+                    "*", "*"));
 
             base.SetReferences(references);
         }

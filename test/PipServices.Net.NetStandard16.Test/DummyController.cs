@@ -6,7 +6,7 @@ namespace PipServices.Net
 {
     public sealed class DummyController : IDummyController, IDescriptable
     {
-        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "controller", "*", "1.0");
+        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "controller", "*", "*", "1.0");
 
         private readonly object _lock = new object();
         private readonly IList<Dummy> _entities = new List<Dummy>();

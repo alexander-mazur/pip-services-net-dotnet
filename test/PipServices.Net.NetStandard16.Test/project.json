@@ -27,9 +27,9 @@
     "System.Linq": "4.3.0",
     "System.Net.Http": "4.3.0",
     "PipServices.Net.NetStandard16": "1.0.2-*",
-    "PipServices.Commons": "1.0.12",
     "xunit": "2.2.0-beta2-build3300",
-    "dotnet-test-xunit": "2.2.0-preview2-build1029"
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "PipServices.Commons": "1.0.26"
   },
   "frameworks": {
     "netcoreapp1.0": {

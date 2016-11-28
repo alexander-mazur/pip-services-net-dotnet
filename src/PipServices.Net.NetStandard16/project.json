@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2-*",
+  "version": "1.0.3-*",
 
   "copyright": "Copyright � Digital Living Software Corp. 2009-2016",
   "title": "Pip.Services Net Library",
@@ -28,7 +28,7 @@
     "MongoDB.Driver": "2.3.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
-    "PipServices.Commons": "1.0.12"
+    "PipServices.Commons": "1.0.26"
   },
 
   "frameworks": {

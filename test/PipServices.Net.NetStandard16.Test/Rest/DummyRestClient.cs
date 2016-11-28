@@ -9,7 +9,7 @@ namespace PipServices.Net.Rest
 {
     public sealed class DummyRestClient : RestClient, IDummyService, IDescriptable
     {
-        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "client", "rest", "1.0");
+        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "client", "rest", "*", "1.0");
 
         public Descriptor GetDescriptor()
         {
