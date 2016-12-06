@@ -22,10 +22,7 @@
         <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
         <dependency id="Microsoft.AspNet.WebApi.SelfHost" version="5.2.3" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="MongoDB.Bson" version="2.3.0" />
-        <dependency id="MongoDB.Driver" version="2.3.0" />
-        <dependency id="MongoDB.Driver.Core" version="2.3.0" />
-        <dependency id="PipServices.Commons" version="1.0.26" />
+        <dependency id="PipServices.Commons" version="1.0.27" />
       </group>
       <group targetFramework="netstandard">
         <dependency id="Microsoft.AspNetCore.Diagnostics" version="1.1.0" />
@@ -43,8 +40,7 @@
         <dependency id="Microsoft.Extensions.Logging.Debug" version="1.1.0" />
         <dependency id="NETStandard.Library" version="1.6.1" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="MongoDB.Driver" version="2.3.0" />
-        <dependency id="PipServices.Commons" version="1.0.26" />
+        <dependency id="PipServices.Commons" version="1.0.27" />
       </group>
     </dependencies>
   </metadata>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PipServices.Commons.Data;
@@ -11,7 +10,7 @@ namespace PipServices.Dummy.Runner.Controllers
 {
     [Route("dummies")]
     //[MicroserviceExceptionFilterAttribute]
-    public class DummyWebApiController : Controller//, IHttpLogicController<IDummyBusinessLogic>
+    public class DummyWebApiController : Controller
     {
         public DummyWebApiController(IDummyRepository repository)
         {
@@ -34,35 +33,35 @@ namespace PipServices.Dummy.Runner.Controllers
             //var filter = FilterParams.FromTuples("key", key);
             //var paging = new PagingParams(skip, take, total);
 
-            return await Repository.GetListByQueryAsync(correlationId, "", new SortParams(), CancellationToken.None);
+            return await Repository.GetListByQueryAsync(correlationId, "", new SortParams());
         }
 
         [HttpGet("{dummyId}")]
         public async Task<DummyObject> GetDummyByIdAsync(string dummyId,
             [FromQuery(Name = "correlation_id")] string correlationId = null)
         {
-            return await Repository.GetOneByIdAsync(correlationId, dummyId, CancellationToken.None);
+            return await Repository.GetOneByIdAsync(correlationId, dummyId);
         }
 
         [HttpPost]
         public async Task<DummyObject> CreateDummyAsync([FromBody] DummyObject dummy,
             [FromQuery(Name = "correlation_id")] string correlationId = null)
         {
-            return await Repository.CreateAsync(correlationId, dummy, CancellationToken.None);
+            return await Repository.CreateAsync(correlationId, dummy);
         }
 
         [HttpPut("{dummyId}")]
         public async Task<DummyObject> UpdateDummyAsync(string dummyId, [FromBody] DummyObject dummy,
             [FromQuery(Name = "correlation_id")] string correlationId = null)
         {
-            return await Repository.UpdateAsync(correlationId, dummy, CancellationToken.None);
+            return await Repository.UpdateAsync(correlationId, dummy);
         }
 
         [HttpDelete("{dummyId}")]
         public async Task DeleteDummyAsync(string dummyId,
             [FromQuery(Name = "correlation_id")] string correlationId = null)
         {
-            await Repository.DeleteByIdAsync(correlationId, dummyId, CancellationToken.None);
+            await Repository.DeleteByIdAsync(correlationId, dummyId);
         }
     }
 }

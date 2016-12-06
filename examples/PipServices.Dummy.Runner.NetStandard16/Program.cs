@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
 using PipServices.Commons.Config;
 using PipServices.Dummy.Runner.Services;
 

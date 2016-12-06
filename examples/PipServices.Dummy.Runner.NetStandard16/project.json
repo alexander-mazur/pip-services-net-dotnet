@@ -1,16 +1,7 @@
 {
-  "version": "1.0.3-*",
-
-  "copyright": "Copyright � Digital Living Software Corp. 2009-2016",
-  "title": "Pip.Services Net Library",
-  "authors": [ "Sergey Seroukhov", "Volodymyr Tkachenko" ],
-  "description": "Communication components for Pip.Services in .NET",
-
   "buildOptions": {
-    "outputName": "PipServices.Net",
-    "define": [ "CORE_NET" ]
+    "emitEntryPoint": true
   },
-
   "dependencies": {
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
@@ -28,12 +19,17 @@
     "MongoDB.Driver": "2.4.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
-    "PipServices.Commons": "1.0.28"
-  },
-
+    "PipServices.Commons": "1.0.27",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.1.0"
+    },
+    "PipServices.Net.NetStandard16": "1.0.3-*",
+    "PipServices.Data": "1.0.3" },
   "frameworks": {
-    "netstandard1.6": {
+    "netcoreapp1.0": {
       "imports": [ "dnxcore50", "portable-net45+win8" ]
     }
-  }
+  },
+  "version": "1.0.0-*"
 }

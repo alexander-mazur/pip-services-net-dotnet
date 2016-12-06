@@ -1,9 +1,11 @@
 ﻿using System;
 using PipServices.Commons.Refer;
+using PipServices.Dummy.Runner.Persistance;
+using PipServices.Net.Rest;
 
-namespace PipServices.Net.Rest
+namespace PipServices.Dummy.Runner.Services
 {
-    public sealed class DummyRestService : RestService<DummyWebApiController, IDummyController>, IDescriptable
+    public sealed class DummyRestService : RestService<DummyWebApiController, IDummyRepository>, IDescriptable
     {
         public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "service", "rest", "default", "1.0");
 
@@ -11,7 +13,7 @@ namespace PipServices.Net.Rest
         {
         }
 
-        public DummyRestService(IDummyController logic)
+        public DummyRestService(IDummyRepository logic)
         {
             if (logic == null)
                 throw new ArgumentNullException(nameof(logic));
@@ -27,7 +29,7 @@ namespace PipServices.Net.Rest
         public override void SetReferences(IReferences references)
         {
             Logic =
-                    references.GetOneRequired<IDummyController>(new Descriptor("pip-services-dummies", "controller", "*", "*", "*"));
+                    references.GetOneRequired<IDummyRepository>(new Descriptor("pip-services-dummies", "controller", "*", "*", "*"));
 
             base.SetReferences(references);
         }

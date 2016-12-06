@@ -1,0 +1,9 @@
+﻿- descriptor: "pip-services-commons:logger:console:*:*"
+  type: "PipServices.Commons,PipServices.Commons.Log.ConsoleLogger"
+  level: "trace"
+
+- descriptor: "pip-services-dummies:controller:*:*:*"
+  type: "PipServices.Net.NetStandard16.Test,PipServices.Net.DummyController"
+
+  - descriptor: "pip-services-dummies:controller:*:*:*"
+  type: "PipServices.Net.NetStandard16.Test,PipServices.Net.Rest.DummyRestService"
