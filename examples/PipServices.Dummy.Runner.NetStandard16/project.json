@@ -19,13 +19,14 @@
     "MongoDB.Driver": "2.4.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
-    "PipServices.Commons": "1.0.27",
     "Microsoft.NETCore.App": {
       "type": "platform",
-      "version": "1.1.0"
+      "version": "1.0.1"
     },
-    "PipServices.Net.NetStandard16": "1.0.3-*",
-    "PipServices.Data": "1.0.3" },
+    "PipServices.Data": "1.0.3",
+    "PipServices.Commons": "1.0.29",
+    "PipServices.Net.NetStandard16": "1.0.5-*"
+  },
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [ "dnxcore50", "portable-net45+win8" ]
