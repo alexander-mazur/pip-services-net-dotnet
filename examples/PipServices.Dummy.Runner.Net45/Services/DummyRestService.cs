@@ -29,7 +29,7 @@ namespace PipServices.Dummy.Runner.Services
         public override void SetReferences(IReferences references)
         {
             Logic =
-                    references.GetOneRequired<IDummyRepository>(new Descriptor("pip-services-dummies", "controller", "*", "*", "*"));
+                    references.GetOneRequired<IDummyRepository>(new Descriptor("pip-services-dummies", "repository", "*", "*", "*"));
 
             base.SetReferences(references);
         }
