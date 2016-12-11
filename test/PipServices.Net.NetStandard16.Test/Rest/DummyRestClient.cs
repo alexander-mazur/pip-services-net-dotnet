@@ -22,7 +22,7 @@ namespace PipServices.Net.Rest
             return path + (string.IsNullOrWhiteSpace(param) ? "" : "&" + param);
         }
 
-        public Task<DataPage<Dummy>> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging, CancellationToken token)
+        public Task<DataPage<Dummy>> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging)
         {
             filter = filter ?? new FilterParams();
             paging = paging ?? new PagingParams();
@@ -33,13 +33,12 @@ namespace PipServices.Net.Rest
                 return ExecuteAsync<DataPage<Dummy>>(
                     correlationId,
                     HttpMethod.Get,
-                    PrepareQueryString($"dummies?correlation_id={correlationId}", filter),
-                    token
-                    );
+                    PrepareQueryString($"dummies?correlation_id={correlationId}", filter)
+                );
             }
         }
 
-        public Task<Dummy> GetOneByIdAsync(string correlationId, string id, CancellationToken token)
+        public Task<Dummy> GetOneByIdAsync(string correlationId, string id)
         {
             using (var timing = Instrument(correlationId, "dummy.get_one_by_id"))
             {
@@ -47,13 +46,12 @@ namespace PipServices.Net.Rest
                 return ExecuteAsync<Dummy>(
                     correlationId,
                     HttpMethod.Get,
-                    $"dummies/{id}?correlation_id={correlationId}",
-                    token
-                    );
+                    $"dummies/{id}?correlation_id={correlationId}"
+                );
             }
         }
 
-        public Task<Dummy> CreateAsync(string correlationId, Dummy entity, CancellationToken token)
+        public Task<Dummy> CreateAsync(string correlationId, Dummy entity)
         {
             using (var timing = Instrument(correlationId, "dummy.create"))
             {
@@ -61,13 +59,12 @@ namespace PipServices.Net.Rest
                     correlationId,
                     HttpMethod.Post,
                     $"dummies?correlation_id={correlationId}",
-                    entity,
-                    token
-                    );
+                    entity
+                );
             }
         }
 
-        public Task<Dummy> UpdateAsync(string correlationId, Dummy entity, CancellationToken token)
+        public Task<Dummy> UpdateAsync(string correlationId, Dummy entity)
         {
             using (var timing = Instrument(correlationId, "dummy.update"))
             {
@@ -75,22 +72,20 @@ namespace PipServices.Net.Rest
                     correlationId,
                     HttpMethod.Put,
                     $"dummies?correlation_id={correlationId}",
-                    entity,
-                    token
-                    );
+                    entity
+                );
             }
         }
 
-        public Task<Dummy> DeleteByIdAsync(string correlationId, string id, CancellationToken token)
+        public Task<Dummy> DeleteByIdAsync(string correlationId, string id)
         {
             using (var timing = Instrument(correlationId, "dummy.delete_by_id"))
             {
                 return ExecuteAsync<Dummy>(
                     correlationId,
                     HttpMethod.Delete,
-                    $"dummies/{id}?correlation_id={correlationId}",
-                    token
-                    );
+                    $"dummies/{id}?correlation_id={correlationId}"
+                );
             }
         }
     }

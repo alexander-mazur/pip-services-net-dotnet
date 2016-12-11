@@ -20,10 +20,8 @@ namespace PipServices.Net.Rest
 
         public async Task TestCrudOperations()
         {
-            var token = CancellationToken.None;
-
             // Create one dummy
-            var dummy1 = await _client.CreateAsync(null, _dummy1, token);
+            var dummy1 = await _client.CreateAsync(null, _dummy1);
 
             Assert.NotNull(dummy1);
             Assert.NotNull(dummy1.Id);
@@ -31,7 +29,7 @@ namespace PipServices.Net.Rest
             Assert.Equal(_dummy1.Content, dummy1.Content);
 
             // Create another dummy
-            var dummy2 = await _client.CreateAsync(null, _dummy2, token);
+            var dummy2 = await _client.CreateAsync(null, _dummy2);
 
             Assert.NotNull(dummy2);
             Assert.NotNull(dummy2.Id);
@@ -39,13 +37,13 @@ namespace PipServices.Net.Rest
             Assert.Equal(_dummy2.Content, dummy2.Content);
 
             // Get all dummies
-            var dummies = await _client.GetPageByFilterAsync(null, null, null, token);
+            var dummies = await _client.GetPageByFilterAsync(null, null, null);
             Assert.NotNull(dummies);
             Assert.Equal(2, dummies.Data.Count);
 
             // Update the dummy
             dummy1.Content = "Updated Content 1";
-            var dummy = await _client.UpdateAsync(null, dummy1, token);
+            var dummy = await _client.UpdateAsync(null, dummy1);
 
             Assert.NotNull(dummy);
             Assert.Equal(dummy1.Id, dummy.Id);
@@ -53,10 +51,10 @@ namespace PipServices.Net.Rest
             Assert.Equal("Updated Content 1", dummy.Content);
 
             // Delete the dummy
-            await _client.DeleteByIdAsync(null, dummy1.Id, token);
+            await _client.DeleteByIdAsync(null, dummy1.Id);
 
             // Try to get deleted dummy
-            dummy = await _client.GetOneByIdAsync(null, dummy1.Id, token);
+            dummy = await _client.GetOneByIdAsync(null, dummy1.Id);
             Assert.Null(dummy);
         }
     }

@@ -2,77 +2,66 @@
 
 namespace PipServices.Net.Messaging
 {
-    public sealed class MemoryMessageQueueTest
+    public class MemoryMessageQueueTest
     {
-        private readonly MemoryMessageQueue _queue;
-        private readonly MessageQueueFixture _fixture;
+        MemoryMessageQueue Queue { get; set; }
+        MessageQueueFixture Fixture { get; set; }
 
         public MemoryMessageQueueTest()
         {
-            _queue = new MemoryMessageQueue("test");
-            _fixture = new MessageQueueFixture(_queue);
+            Queue = new MemoryMessageQueue("TestQueue");
+            //Queue.SetReferences(new MockReferences());
+            Queue.OpenAsync(null).Wait();
 
-            var clearTask = _queue.ClearAsync(null);
-            clearTask.Wait();
-
-            var openTask = _queue.OpenAsync(null);
-            openTask.Wait();
+            Fixture = new MessageQueueFixture(Queue);
         }
 
         [Fact]
-        public void TestSendReceiveMessage()
+        public void TestMockSendReceiveMessage()
         {
-            var task = _fixture.TestSendReceiveMessage();
-            task.Wait();
+            Fixture.TestSendReceiveMessageAsync().Wait();
         }
 
         [Fact]
-        public void TestReceiveSendMessage()
+        public void TestMockReceiveSendMessage()
         {
-            var task = _fixture.TestReceiveSendMessage();
-            task.Wait();
+            Fixture.TestReceiveSendMessageAsync().Wait();
         }
 
         [Fact]
-        public void TestMoveToDeadMessage()
+        public void TestMockReceiveAndComplete()
         {
-            var task = _fixture.TestMoveToDeadMessage();
-            task.Wait();
+            Fixture.TestReceiveAndCompleteMessageAsync().Wait();
         }
 
         [Fact]
-        public void TestReceiveAndCompleteMessage()
+        public void TestMockReceiveAndAbandon()
         {
-            var task = _fixture.TestReceiveAndCompleteMessage();
-            task.Wait();
+            Fixture.TestReceiveAndAbandonMessageAsync().Wait();
         }
 
         [Fact]
-        public void TestReceiveAndAbandonMessage()
+        public void TestMockSendPeekMessage()
         {
-            var task = _fixture.TestReceiveAndAbandonMessage();
-            task.Wait();
+            Fixture.TestSendPeekMessageAsync().Wait();
         }
 
         [Fact]
-        public void TestSendPeekMessage()
+        public void TestMockPeekNoMessage()
         {
-            var task = _fixture.TestSendPeekMessage();
-            task.Wait();
+            Fixture.TestPeekNoMessageAsync().Wait();
         }
 
         [Fact]
-        public void TestPeekNoMessage()
+        public void TestMockOnMessage()
         {
-            var task = _fixture.TestPeekNoMessage();
-            task.Wait();
+            Fixture.TestOnMessageAsync().Wait();
         }
 
         [Fact]
-        public void TestListen()
+        public void TestMockMoveToDeadMessage()
         {
-            var task = _fixture.TestListen();
-            task.Wait();
+            Fixture.TestMoveToDeadMessageAsync().Wait();
         }
     }
 }

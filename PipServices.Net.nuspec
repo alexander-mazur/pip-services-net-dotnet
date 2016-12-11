@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PipServices.Net</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>PipServices.Net</title>
     <authors>Sergey Seroukhov, Volodymyr Tkachenko</authors>
 
@@ -33,7 +33,6 @@
         <dependency id="Microsoft.AspNetCore.Server.Kestrel.Https" version="1.1.0" />
         <dependency id="Microsoft.AspNetCore.Server.WebListener" version="1.1.0" />
         <dependency id="Microsoft.AspNetCore.StaticFiles" version="1.1.0" />
-        <dependency id="Microsoft.Experimental.Collections" version="1.0.3-alpha" />
         <dependency id="Microsoft.Extensions.Configuration.FileExtensions" version="1.1.0" />
         <dependency id="Microsoft.Extensions.Configuration.Json" version="1.1.0" />
         <dependency id="Microsoft.Extensions.Logging.Console" version="1.1.0" />

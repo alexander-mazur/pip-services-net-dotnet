@@ -4,6 +4,6 @@ namespace PipServices.Net.Messaging
 {
     public interface IMessageReceiver
     {
-        Task ReceiveMessageAsync(MessageEnvelop message, IMessageQueue queue);
+        Task ReceiveMessageAsync(MessageEnvelop envelop, IMessageQueue queue);
     }
 }

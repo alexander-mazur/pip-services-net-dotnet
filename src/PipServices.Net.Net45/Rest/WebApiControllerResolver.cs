@@ -64,7 +64,7 @@ namespace PipServices.Net.Rest
                     new HttpConfiguration(),
                     "", // All routes
                     typeof(T)
-                    );
+                );
                 res[""] = desc;
                 return res;
             }
@@ -75,7 +75,7 @@ namespace PipServices.Net.Rest
                     request.GetConfiguration(),
                     "", // Default controller name
                     typeof(T)
-                    );
+                );
                 return desc;
             }
         }

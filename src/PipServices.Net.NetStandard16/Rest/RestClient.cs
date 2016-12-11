@@ -1,61 +1,52 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PipServices.Commons.Config;
+﻿using PipServices.Commons.Config;
 using PipServices.Commons.Connect;
+using PipServices.Commons.Convert;
 using PipServices.Commons.Count;
 using PipServices.Commons.Errors;
 using PipServices.Commons.Log;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Run;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PipServices.Net.Rest
 {
     public class RestClient : IOpenable, IClosable, IConfigurable, IReferenceable
     {
-        private static readonly ConfigParams DefaultConfig = ConfigParams.FromTuples(
+        private static readonly ConfigParams _defaultConfig = ConfigParams.FromTuples(
             "connection.protocol", "http",
             //"connection.host", "localhost",
             //"connection.port", 3000,
-            "connection.request_max_size", 1024*1024,
-            "connection.connect_timeout", 60000,
-            "connection.debug", true
-            );
 
-        private static readonly JsonSerializerSettings TransportSettings = new JsonSerializerSettings
-        {
-            DefaultValueHandling = DefaultValueHandling.Ignore
-        };
+            "options.request_max_size", 1024*1024,
+            "options.connect_timeout", 60000,
+            "options.debug", true
+        );
 
-        protected ConnectionResolver Resolver = new ConnectionResolver();
-        protected ILogger Logger = new NullLogger();
-        protected ICounters Counters = new NullCounters();
-        protected string Url;
-        protected HttpClient Client { get; set; }
+        protected ConnectionResolver _connectionResolver = new ConnectionResolver();
+        protected CompositeLogger _logger = new CompositeLogger();
+        protected CompositeCounters _counters = new CompositeCounters();
+        protected ConfigParams _options = new ConfigParams();
 
-        protected RestClient()
-        {
-        }
+        protected HttpClient _client;
+        protected string _address;
+
 
         public void SetReferences(IReferences references)
         {
-            Resolver.SetReferences(references);
-
-            var logger = (ILogger) references.GetOneOptional(new Descriptor("*", "logger", "*", "*", "*"));
-            Logger = logger ?? Logger;
-
-            var counters = (ICounters) references.GetOneOptional(new Descriptor("*", "counters", "*", "*", "*"));
-            Counters = counters ?? Counters;
+            _connectionResolver.SetReferences(references);
+            _logger.SetReferences(references);
+            _counters.SetReferences(references);
         }
 
         public void Configure(ConfigParams config)
         {
-            config = config.SetDefaults(DefaultConfig);
-            Resolver.Configure(config);
+            config = config.SetDefaults(_defaultConfig);
+            _connectionResolver.Configure(config);
+            _options = _options.Override(config.GetSection("options"));
         }
 
         /**
@@ -67,13 +58,13 @@ namespace PipServices.Net.Rest
 
         protected Timing Instrument(string correlationId, string name)
         {
-            Logger.Trace(correlationId, "Calling %s method", name);
-            return Counters.BeginTiming(name + ".call_time");
+            _logger.Trace(correlationId, "Calling {0} method", name);
+            return _counters.BeginTiming(name + ".call_time");
         }
 
-        protected async Task<ConnectionParams> GetConnectionAsync(string correlationId, CancellationToken token)
+        protected async Task<ConnectionParams> GetConnectionAsync(string correlationId)
         {
-            var connection = await Resolver.ResolveAsync(correlationId);
+            var connection = await _connectionResolver.ResolveAsync(correlationId);
 
             // Check for connection
             if (connection == null)
@@ -110,59 +101,46 @@ namespace PipServices.Net.Rest
 
         public async Task OpenAsync(string correlationId)
         {
-            var connection = await GetConnectionAsync(correlationId, CancellationToken.None);
+            var connection = await GetConnectionAsync(correlationId);
 
             var protocol = connection.GetProtocol("http");
             var host = connection.Host;
             var port = connection.Port;
 
-            // Check for type
-            if (!"http".Equals(protocol.ToLower()))
-                throw new ConfigException(correlationId, "SupportedProtocol", "Protocol type is not supported by REST transport")
-                    .WithDetails(protocol, protocol);
-
-            // Check for host
-            if (string.IsNullOrWhiteSpace(host))
-                throw new ConfigException(correlationId, "NoHost", "No host is configured in REST transport");
-
-            // Check for port
-            if (port == 0)
-                throw new ConfigException(correlationId, "NoPort", "No port is configured in REST transport");
-
-            Url = protocol + "://" + host + ":" + port;
+            _address = protocol + "://" + host + ":" + port;
 
 //            if (!string.IsNullOrWhiteSpace(Route))
                 //Url += "/" + Route;
 
-            Client?.Dispose();
+            _client?.Dispose();
 
-            Client = new HttpClient(new HttpClientHandler
+            _client = new HttpClient(new HttpClientHandler
             {
                 CookieContainer = new CookieContainer(),
                 AllowAutoRedirect = true,
                 UseCookies = true
             });
 
-            Client.DefaultRequestHeaders.ConnectionClose = true;
+            _client.DefaultRequestHeaders.ConnectionClose = true;
 
-            Logger.Debug(correlationId, "Connected via REST to %s", Url);
+            _logger.Debug(correlationId, "Connected via REST to {0}", _address);
         }
 
         public Task CloseAsync(string correlationId)
         {
-            Client?.Dispose();
-            Client = null;
+            _client?.Dispose();
+            _client = null;
 
-            Url = null;
+            _address = null;
 
-            Logger.Debug(correlationId, "Disconnected from %s", Url);
+            _logger.Debug(correlationId, "Disconnected from {0}", _address);
 
             return Task.CompletedTask;
         }
 
         private static HttpContent CreateEntityContent(object value)
         {
-            var content = JsonConvert.SerializeObject(value, TransportSettings);
+            var content = JsonConverter.ToJson(value);
             var result = new StringContent(content, Encoding.UTF8, "application/json");
 
             return result;
@@ -170,7 +148,7 @@ namespace PipServices.Net.Rest
 
         private Uri CreateRequestUri(string route)
         {
-            var builder = new StringBuilder(Url);
+            var builder = new StringBuilder(_address);
             builder.Append("/");
             builder.Append(route);
 
@@ -181,10 +159,10 @@ namespace PipServices.Net.Rest
             return result;
         }
 
-        private async Task<HttpResponseMessage> ExecuteRequestAsync(string correlationId, HttpMethod method, Uri uri, CancellationToken token,
-            HttpContent content = null)
+        private async Task<HttpResponseMessage> ExecuteRequestAsync(
+            string correlationId, HttpMethod method, Uri uri, HttpContent content = null)
         {
-            if (Client == null)
+            if (_client == null)
                 throw new InvalidOperationException("REST client is not configured");
 
             HttpResponseMessage result;
@@ -192,13 +170,13 @@ namespace PipServices.Net.Rest
             try
             {
                 if (method == HttpMethod.Get)
-                    result = await Client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, token);
+                    result = await _client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead);
                 else if (method == HttpMethod.Post)
-                    result = await Client.PostAsync(uri, content, token);
+                    result = await _client.PostAsync(uri, content);
                 else if (method == HttpMethod.Put)
-                    result = await Client.PutAsync(uri, content, token);
+                    result = await _client.PutAsync(uri, content);
                 else if (method == HttpMethod.Delete)
-                    result = await Client.DeleteAsync(uri, token);
+                    result = await _client.DeleteAsync(uri);
                 else
                     throw new InvalidOperationException("Invalid request type");
             }
@@ -223,7 +201,7 @@ namespace PipServices.Net.Rest
                         ErrorDescription errorObject;
                         try
                         {
-                            errorObject = JsonConvert.DeserializeObject<ErrorDescription>(responseContent);
+                            errorObject = JsonConverter.FromJson<ErrorDescription>(responseContent);
                         }
                         catch (Exception ex)
                         {
@@ -245,22 +223,22 @@ namespace PipServices.Net.Rest
             return result;
         }
 
-        protected async Task ExecuteAsync(string correlationId, HttpMethod method, string route, CancellationToken token)
+        protected async Task ExecuteAsync(string correlationId, HttpMethod method, string route)
         {
             var uri = CreateRequestUri(route);
 
-            using (await ExecuteRequestAsync(correlationId, method, uri, token))
+            using (await ExecuteRequestAsync(correlationId, method, uri))
             {
             }
         }
 
-        protected async Task ExecuteAsync(string correlationId, HttpMethod method, string route, object requestEntity, CancellationToken token)
+        protected async Task ExecuteAsync(string correlationId, HttpMethod method, string route, object requestEntity)
         {
             var uri = CreateRequestUri(route);
 
             using (var requestContent = CreateEntityContent(requestEntity))
             {
-                using (await ExecuteRequestAsync(correlationId, method, uri, token, requestContent))
+                using (await ExecuteRequestAsync(correlationId, method, uri, requestContent))
                 {
                 }
             }
@@ -272,20 +250,20 @@ namespace PipServices.Net.Rest
 
             try
             {
-                return JsonConvert.DeserializeObject<T>(value);
+                return JsonConverter.FromJson<T>(value);
             }
-            catch (JsonReaderException ex)
+            catch (Exception ex)
             {
                 throw new BadRequestException(correlationId, null, "Unexpected protocol format", ex);
             }
         }
 
-        protected async Task<T> ExecuteAsync<T>(string correlationId, HttpMethod method, string route, CancellationToken token)
+        protected async Task<T> ExecuteAsync<T>(string correlationId, HttpMethod method, string route)
             where T : class
         {
             var uri = CreateRequestUri(route);
 
-            using (var response = await ExecuteRequestAsync(correlationId, method, uri, token))
+            using (var response = await ExecuteRequestAsync(correlationId, method, uri))
             {
                 return await ExtractContentEntityAsync<T>(correlationId, response.Content);
             }
@@ -299,31 +277,32 @@ namespace PipServices.Net.Rest
             {
                 return value;
             }
-            catch (JsonReaderException ex)
+            catch (Exception ex)
             {
                 throw new BadRequestException(correlationId, null, "Unexpected protocol format", ex);
             }
         }
 
-        protected async Task<string> ExecuteStringAsync(string correlationId, HttpMethod method, string route, CancellationToken token)
+        protected async Task<string> ExecuteStringAsync(
+            string correlationId, HttpMethod method, string route)
         {
             var uri = CreateRequestUri(route);
 
-            using (var response = await ExecuteRequestAsync(correlationId, method, uri, token))
+            using (var response = await ExecuteRequestAsync(correlationId, method, uri))
             {
                 return await ExtractContentEntityAsync(correlationId, response.Content);
             }
         }
 
-        protected async Task<T> ExecuteAsync<T>(string correlationId, HttpMethod method, string route, object requestEntity,
-            CancellationToken token)
+        protected async Task<T> ExecuteAsync<T>(
+            string correlationId, HttpMethod method, string route, object requestEntity)
             where T : class
         {
             var uri = CreateRequestUri(route);
 
             using (var requestContent = CreateEntityContent(requestEntity))
             {
-                using (var response = await ExecuteRequestAsync(correlationId, method, uri, token, requestContent))
+                using (var response = await ExecuteRequestAsync(correlationId, method, uri, requestContent))
                 {
                     return await ExtractContentEntityAsync<T>(correlationId, response.Content);
                 }

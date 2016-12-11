@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using PipServices.Commons.Config;
 using PipServices.Commons.Connect;
 using PipServices.Commons.Count;
@@ -10,60 +6,56 @@ using PipServices.Commons.Errors;
 using PipServices.Commons.Log;
 using PipServices.Commons.Refer;
 using PipServices.Commons.Run;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace PipServices.Net.Rest
 {
     public abstract class RestService<TStartup> : IOpenable, IClosable, IConfigurable, IReferenceable
         where TStartup : class
     {
-        private static readonly ConfigParams DefaultConfig = ConfigParams.FromTuples(
+        private static readonly ConfigParams _defaultConfig = ConfigParams.FromTuples(
             "connection.protocol", "http",
             "connection.host", "0.0.0.0",
             "connection.port", 3000,
-            "connection.request_max_size", 1024*1024,
-            "connection.connect_timeout", 60000,
-            "connection.debug", true
-            );
 
-        protected IWebHost Server { get; private set; }
-        protected ConnectionResolver Resolver = new ConnectionResolver();
-        protected ILogger Logger = new NullLogger();
-        protected ICounters Counters = new NullCounters();
-        protected string Url;
+            "options.request_max_size", 1024*1024,
+            "options.connect_timeout", 60000,
+            "options.debug", true
+        );
+
+        protected ConnectionResolver _connectionResolver = new ConnectionResolver();
+        protected CompositeLogger _logger = new CompositeLogger();
+        protected CompositeCounters _counters = new CompositeCounters();
+        protected ConfigParams _options = new ConfigParams();
+
+        protected IWebHost _server;
+        protected string _address;
 
         public virtual void SetReferences(IReferences references)
         {
-            Resolver.SetReferences(references);
-
-            var logger = references.GetOneOptional(new Descriptor("*", "logger", "*", "*", "*")) as ILogger;
-            Logger = logger ?? Logger;
-
-            var counters = references.GetOneOptional(new Descriptor("*", "counters", "*", "*", "*")) as ICounters;
-            Counters = counters ?? Counters;
+            _logger.SetReferences(references);
+            _counters.SetReferences(references);
+            _connectionResolver.SetReferences(references);
         }
 
         public void Configure(ConfigParams config)
         {
-            config = config.SetDefaults(DefaultConfig);
-            Resolver.Configure(config);
+            config = config.SetDefaults(_defaultConfig);
+            _connectionResolver.Configure(config);
+            _options = _options.Override(config.GetSection("options"));
         }
-
-        /**
-	     * Does instrumentation of performed business method by counting elapsed time.
-	     * @param correlationId the unique id to identify distributed transaction
-	     * @param name the name of called business method
-	     * @return ITiming instance to be called at the end of execution of the method.
-	     */
 
         protected Timing Instrument(string correlationId, string name)
         {
-            Logger.Trace(correlationId, "Executing %s method", name);
-            return Counters.BeginTiming(name + ".exec_time");
+            _logger.Trace(correlationId, "Executing {0} method", name);
+            return _counters.BeginTiming(name + ".exec_time");
         }
 
-        protected async Task<ConnectionParams> GetConnectionAsync(string correlationId, CancellationToken token)
+        protected async Task<ConnectionParams> GetConnectionAsync(string correlationId)
         {
-            var connection = await Resolver.ResolveAsync(correlationId);
+            var connection = await _connectionResolver.ResolveAsync(correlationId);
 
             // Check for connection
             if (connection == null)
@@ -100,12 +92,12 @@ namespace PipServices.Net.Rest
 
         public async Task OpenAsync(string correlationId)
         {
-            var connection = await GetConnectionAsync(correlationId, CancellationToken.None);
+            var connection = await GetConnectionAsync(correlationId);
 
             var protocol = connection.GetProtocol("http");
             var host = connection.Host;
             var port = connection.Port;
-            var address = protocol + "://" + host + ":" + port;
+            _address = protocol + "://" + host + ":" + port;
 
             try
             {
@@ -119,45 +111,45 @@ namespace PipServices.Net.Rest
                     })
                     //.UseWebListener()
                     .UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseUrls(address)
+                    .UseUrls(_address)
                     //.UseIISIntegration()
                     //.UseConfiguration()
                     .UseStartup<TStartup>();
 
-                Server = builder.Build();
+                _server = builder.Build();
 
-                Logger.Info(correlationId, "Opened REST service at %s", Url);
+                _logger.Info(correlationId, "Opened REST service at {0}", _address);
 
-                Server.Run();
+                _server.Run();
             }
             catch (Exception ex)
             {
-                Server.Dispose();
+                _server.Dispose();
 
-                Server = null;
+                _server = null;
 
                 throw new ConnectionException(correlationId, "CANNOT_CONNECT", "Opening REST service failed")
-                    .WithCause(ex).WithDetails("url", Url);
+                    .WithCause(ex).WithDetails("url", _address);
             }
         }
 
         public Task CloseAsync(string correlationId)
         {
-            if (Server != null)
+            if (_server != null)
             {
                 // Eat exceptions
                 try
                 {
-                    Server.Dispose();
-                    Logger.Info(correlationId, "Closed REST service at %s", Url);
+                    _server.Dispose();
+                    _logger.Info(correlationId, "Closed REST service at {0}", _address);
                 }
                 catch (Exception ex)
                 {
-                    Logger.Warn(correlationId, "Failed while closing REST service: %s", ex);
+                    _logger.Warn(correlationId, "Failed while closing REST service: {0}", ex);
                 }
 
-                Server = null;
-                Url = null;
+                _server = null;
+                _address = null;
             }
 
             return Task.Delay(0);

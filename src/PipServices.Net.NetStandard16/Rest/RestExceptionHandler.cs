@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PipServices.Commons.Errors;
 
-namespace PipServices.Net.Errors
+namespace PipServices.Net.Rest
 {
-    public class GlobalExceptionHandler : IExceptionFilter, IDisposable
+    public class RestExceptionHandler : IExceptionFilter, IDisposable
     {
         public void OnException(ExceptionContext context)
         {

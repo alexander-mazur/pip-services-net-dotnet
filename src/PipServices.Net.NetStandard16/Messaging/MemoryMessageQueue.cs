@@ -1,30 +1,22 @@
-﻿using System;
-using System.Linq;
+﻿using PipServices.Commons.Auth;
+using PipServices.Commons.Connect;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using PipServices.Commons.Config;
-using PipServices.Commons.Count;
-using PipServices.Commons.Log;
-using PipServices.Commons.Refer;
 
 namespace PipServices.Net.Messaging
 {
-    public sealed class MemoryMessageQueue : IMessageQueue, IReferenceable
+    /// <summary>
+    /// Local message queue to be used in automated tests
+    /// </summary>
+    public class MemoryMessageQueue : MessageQueue
     {
-        private readonly long _defaultLockTimeout = 30000;
-        private readonly long _defaultWaitTimeout = 5000;
-
-        private string _name;
-        private readonly object _lock = new object();
-        private Queue<MessageEnvelop> _messages = new Queue<MessageEnvelop>();
-        private int _lockTokenSequence;
-        private readonly IDictionary<int, LockedMessage> _lockedMessages = new Dictionary<int, LockedMessage>();
-        private readonly CompositeLogger _logger = new CompositeLogger();
-        private readonly CompositeCounters _counters = new CompositeCounters();
-        private MessagingCapabilities _capabilities = new MessagingCapabilities(
-                true, true, true, true, true, true, true, false, true);
         private ManualResetEvent _receiveEvent = new ManualResetEvent(false);
+        private Queue<MessageEnvelop> _messages = new Queue<MessageEnvelop>();
+        private int _lockTokenSequence = 0;
+        private Dictionary<int, LockedMessage> _lockedMessages = new Dictionary<int, LockedMessage>();
         private CancellationTokenSource _cancel = new CancellationTokenSource();
 
         private class LockedMessage
@@ -35,57 +27,30 @@ namespace PipServices.Net.Messaging
         }
 
         public MemoryMessageQueue(string name = null)
+            : base(name)
         {
-            _name = name;
+            Name = name;
+            Kind = "memory";
+            Capabilities = new MessagingCapabilities(true, true, true, true, true, true, true, false, true);
         }
 
-        public void Configure(ConfigParams config)
+        public async override Task OpenAsync(string correlationId, ConnectionParams connection, CredentialParams credential)
         {
-            // If name is not defined get is from name property
-            if (_name == null)
-                _name = config.GetAsNullableString("name");
-
-            // Or get name from descriptor
-            if (_name == null)
-            {
-                var descriptorStr = config.GetAsNullableString("descriptor");
-                var descriptor = Descriptor.FromString(descriptorStr);
-                _name = descriptor.Name;
-            }
+            // Do nothing
+            await Task.Delay(0);
         }
 
-        public void SetReferences(IReferences references)
-        {
-            _logger.SetReferences(references);
-            _counters.SetReferences(references);
-        }
-
-        public string Name
-        {
-            get { return _name ?? "undefined"; }
-        }
-
-        public MessagingCapabilities Capabilities { get; }
-
-
-        public Task OpenAsync(string correlationId)
-        {
-            _logger.Trace(correlationId, "Opened queue {0}", this);
-
-            return Task.Delay(0);
-        }
-
-        public async Task CloseAsync(string correlationId)
+        public override async Task CloseAsync(string correlationId)
         {
             _cancel.Cancel();
             _receiveEvent.Set();
 
-            _logger.Trace(null, "Closed queue {0}", this);
+            _logger.Trace(correlationId, "Closed queue {0}", this);
 
             await Task.Delay(0);
         }
 
-        public long MessageCount
+        public override long? MessageCount
         {
             get
             {
@@ -96,10 +61,8 @@ namespace PipServices.Net.Messaging
             }
         }
 
-        public async Task SendAsync(string correlationId, MessageEnvelop message)
+        public override async Task SendAsync(string correlationId, MessageEnvelop message)
         {
-            if (message == null) return;
-
             await Task.Yield();
             //await Task.Delay(0);
 
@@ -115,32 +78,29 @@ namespace PipServices.Net.Messaging
             _receiveEvent.Set();
 
             _counters.IncrementOne("queue." + Name + ".sent_messages");
-            _logger.Debug(correlationId, "Sent message {0} via {1}", message, this);
+            _logger.Debug(message.CorrelationId, "Sent message {0} via {1}", message, this);
         }
 
-        public async Task SendAsObjectAsync(string correlationId, string messageType, object message)
-        {
-            var envelop = new MessageEnvelop(correlationId, messageType, message);
-            await SendAsync(correlationId, envelop);
-        }
-
-        public async Task<MessageEnvelop> PeekAsync(string correlationId)
+        public override async Task<MessageEnvelop> PeekAsync(string correlationId)
         {
             MessageEnvelop message = null;
 
-            lock(_lock) {
+            lock (_lock)
+            {
                 // Pick a message
                 if (_messages.Count > 0)
                     message = _messages.Peek();
             }
 
             if (message != null)
-                _logger.Trace(correlationId, "Peeked message {0} on {1}", message, this);
+            {
+                _logger.Trace(message.CorrelationId, "Peeked message {0} on {1}", message, this);
+            }
 
             return await Task.FromResult(message);
         }
 
-        public async Task<List<MessageEnvelop>> PeekBatchAsync(string correlationId, int messageCount)
+        public override async Task<List<MessageEnvelop>> PeekBatchAsync(string correlationId, int messageCount)
         {
             List<MessageEnvelop> messages = null;
 
@@ -149,13 +109,13 @@ namespace PipServices.Net.Messaging
                 messages = _messages.ToArray().Take(messageCount).ToList();
             }
 
-            _logger.Trace(null, "Peeked {0} messages on {1}", messages.Count, this);
+            _logger.Trace(correlationId, "Peeked {0} messages on {1}", messages.Count, this);
 
             return await Task.FromResult(messages);
         }
 
 
-        public async Task<MessageEnvelop> ReceiveAsync(string correlationId, long waitTimeout)
+        public override async Task<MessageEnvelop> ReceiveAsync(string correlationId, long waitTimeout)
         {
             await Task.Delay(0);
 
@@ -198,14 +158,14 @@ namespace PipServices.Net.Messaging
 
             if (message != null)
             {
-                _counters.IncrementOne("queue." + _name + ".received_messages");
+                _counters.IncrementOne("queue." + Name + ".received_messages");
                 _logger.Debug(message.CorrelationId, "Received message {0} via {1}", message, this);
             }
 
             return message;
         }
 
-        public async Task RenewLockAsync(MessageEnvelop message, long lockTimeout)
+        public override async Task RenewLockAsync(MessageEnvelop message, long lockTimeout)
         {
             if (message.Reference == null) return;
 
@@ -231,7 +191,7 @@ namespace PipServices.Net.Messaging
             await Task.Delay(0);
         }
 
-        public async Task AbandonAsync(MessageEnvelop message)
+        public override async Task AbandonAsync(MessageEnvelop message)
         {
             if (message.Reference == null) return;
 
@@ -260,7 +220,7 @@ namespace PipServices.Net.Messaging
             await SendAsync(message.CorrelationId, message);
         }
 
-        public async Task CompleteAsync(MessageEnvelop message)
+        public override async Task CompleteAsync(MessageEnvelop message)
         {
             if (message.Reference == null) return;
 
@@ -276,7 +236,7 @@ namespace PipServices.Net.Messaging
             await Task.Delay(0);
         }
 
-        public async Task MoveToDeadLetterAsync(MessageEnvelop message)
+        public override async Task MoveToDeadLetterAsync(MessageEnvelop message)
         {
             if (message.Reference == null) return;
 
@@ -287,13 +247,13 @@ namespace PipServices.Net.Messaging
                 message.Reference = null;
             }
 
-            _counters.IncrementOne("Queue." + _name + ".DeadMessages");
+            _counters.IncrementOne("queue." + Name + ".dead_messages");
             _logger.Trace(message.CorrelationId, "Moved to dead message {0} at {1}", message, this);
 
             await Task.Delay(0);
         }
 
-        public async Task ListenAsync(string correlationId, IMessageReceiver receiver)
+        public override async Task ListenAsync(string correlationId, Func<MessageEnvelop, IMessageQueue, Task> callback)
         {
             _logger.Trace(null, "Started listening messages at {0}", this);
 
@@ -309,30 +269,23 @@ namespace PipServices.Net.Messaging
                     try
                     {
                         if (!_cancel.IsCancellationRequested)
-                            await receiver.ReceiveMessageAsync(message, this);
+                            await callback(message, this);
                     }
                     catch (Exception ex)
                     {
-                        _logger.Error(null, ex, "Failed to process the message");
+                        _logger.Error(correlationId, ex, "Failed to process the message");
                         //await AbandonAsync(message);
                     }
                 }
             }
         }
 
-        public void BeginListen(string correlationId, IMessageReceiver receiver)
-        {
-            ThreadPool.QueueUserWorkItem(async delegate {
-                await ListenAsync(correlationId, receiver);
-            });
-        }
-
-        public void EndListen(string correlationId)
+        public override void EndListen(string correlationId)
         {
             _cancel.Cancel();
         }
 
-        public Task ClearAsync(string correlationId)
+        public override async Task ClearAsync(string correlationId)
         {
             lock (_lock)
             {
@@ -343,12 +296,7 @@ namespace PipServices.Net.Messaging
 
             _logger.Trace(correlationId, "Cleared queue {0}", this);
 
-            return Task.Delay(0);
-        }
-
-        public override string ToString()
-        {
-            return "[" + Name + "]";
+            await Task.Delay(0);
         }
     }
 }

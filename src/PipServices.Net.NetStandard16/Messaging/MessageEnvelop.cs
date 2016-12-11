@@ -1,53 +1,71 @@
-﻿using System.Text;
-using Newtonsoft.Json;
-using PipServices.Commons.Convert;
-using PipServices.Commons.Data;
+﻿using PipServices.Commons.Convert;
 using System;
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace PipServices.Net.Messaging
 {
-    public sealed class MessageEnvelop
+    [DataContract]
+    public class MessageEnvelop
     {
-        public MessageEnvelop()
+        public MessageEnvelop() { }
+
+        public MessageEnvelop(string correlationId, string messageType, string message)
         {
+            CorrelationId = correlationId;
+            MessageType = messageType;
+            Message = message;
+            MessageId = Guid.NewGuid().ToString("N");
         }
 
         public MessageEnvelop(string correlationId, string messageType, object message)
         {
             CorrelationId = correlationId;
             MessageType = messageType;
-            Message = message;
-            MessageId = IdGenerator.NextLong();
+            SetMessage(message);
+            MessageId = Guid.NewGuid().ToString("N");
         }
 
-        [JsonIgnore]
+        [IgnoreDataMember]
         public object Reference { get; set; }
 
-        [JsonProperty("correlation_id")]
+        [DataMember]
         public string CorrelationId { get; set; }
 
-        [JsonProperty("message_id")]
+        [DataMember]
         public string MessageId { get; set; }
 
-        [JsonProperty("message_type")]
+        [DataMember]
         public string MessageType { get; set; }
 
-        [JsonProperty("sent_time")]
+        [DataMember]
         public DateTime SentTimeUtc { get; set; }
 
-        [JsonProperty("message")]
-        public object Message { get; set; }
+        [DataMember]
+        public string Message { get; set; }
+
+        public void SetMessage(object message)
+        {
+            Message = JsonConverter.ToJson(message);
+        }
+
+        public T GetMessage<T>()
+        {
+            return JsonConverter.FromJson<T>(Message);
+        }
 
         public override string ToString()
         {
-            var builder = new StringBuilder()
-                .Append("[")
-                .Append(string.IsNullOrWhiteSpace(CorrelationId) ? "---" : CorrelationId)
-                .Append(",")
-                .Append(string.IsNullOrWhiteSpace(MessageType) ? "---" : MessageType)
-                .Append(",")
-                .Append(Message != null ? StringConverter.ToString(Message) : "--")
-                .Append("]");
+            var builder = new StringBuilder();
+            builder.Append('[');
+            builder.Append(CorrelationId ?? "---");
+            builder.Append(',');
+            builder.Append(MessageType ?? "---");
+            builder.Append(',');
+            var sample = Message ?? "---";
+            sample = sample.Length > 150 ? sample.Substring(0, 150) : sample;
+            builder.Append(sample);
+            builder.Append(']');
             return builder.ToString();
         }
     }

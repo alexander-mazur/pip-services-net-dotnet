@@ -1,20 +1,21 @@
 ﻿namespace PipServices.Net.Messaging
 {
-    public sealed class MessagingCapabilities
+    public class MessagingCapabilities
     {
-        public MessagingCapabilities(bool messageCount, bool send, bool receive,
-            bool peek, bool peekBatch, bool renewLock, bool abandon,
-            bool deadLetter, bool clear)
+        public MessagingCapabilities(
+            bool canMessageCount, bool canSend, bool canReceive, bool canPeek, bool canPeekBatch,
+            bool canRenewLock, bool canAbandon, bool canDeadLetter, bool canClear
+        )
         {
-            CanMessageCount = messageCount;
-            CanSend = send;
-            CanReceive = receive;
-            CanPeek = peek;
-            CanPeekBatch = peekBatch;
-            CanRenewLock = renewLock;
-            CanAbandon = abandon;
-            CanDeadLetter = deadLetter;
-            CanClear = clear;
+            CanMessageCount = canMessageCount;
+            CanSend = canSend;
+            CanReceive = canReceive;
+            CanPeek = canPeek;
+            CanPeekBatch = canPeekBatch;
+            CanRenewLock = canRenewLock;
+            CanAbandon = canAbandon;
+            CanDeadLetter = canDeadLetter;
+            CanClear = canClear;
         }
 
         public bool CanMessageCount { get; private set; }

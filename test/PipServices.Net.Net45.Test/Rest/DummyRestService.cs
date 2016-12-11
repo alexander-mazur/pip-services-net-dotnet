@@ -16,7 +16,7 @@ namespace PipServices.Net.Rest
             if (logic == null)
                 throw new ArgumentNullException(nameof(logic));
 
-            Logic = logic;
+            _logic = logic;
         }
 
         public Descriptor GetDescriptor()
@@ -26,7 +26,7 @@ namespace PipServices.Net.Rest
 
         public override void SetReferences(IReferences references)
         {
-            Logic =
+            _logic =
                     references.GetOneRequired<IDummyController>(new Descriptor("pip-services-dummies", "controller", "*", "*", "*"));
 
             base.SetReferences(references);

@@ -1,8 +1,0 @@
-﻿- descriptor: "pip-services-commons:logger:console:*:*"
-  level: "trace"
-
-- descriptor: "pip-services-dummies:service:rest:*:*"
-  message: "Hello from dummy rest service"
-
-- descriptor: "pip-services-dummies:repository:*:*:*"
-  message: "Hello from dummy repository"
