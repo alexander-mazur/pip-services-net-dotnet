@@ -1,6 +1,6 @@
 {
   "title": "Unit Tests for Pip.Services Commons Library",
-  "copyright": "Copyright � Digital Living Software Corp. 2009-2016",
+  "copyright": "Copyright © Conceptual Vision Consulting LLC.  2016",
   "description": "Performs unit testing for Pip.Services Net",
   "version": "1.0.0-*",
 
@@ -29,7 +29,7 @@
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "PipServices.Net.NetStandard16": "1.0.5-*",
-    "PipServices.Commons": "1.0.32" },
+    "PipServices.Commons": "1.0.33"},
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [ "dnxcore50", "portable-net45+win8" ]

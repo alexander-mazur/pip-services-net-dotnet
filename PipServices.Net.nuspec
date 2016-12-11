@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PipServices.Net</id>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <title>PipServices.Net</title>
     <authors>Sergey Seroukhov, Volodymyr Tkachenko</authors>
 
@@ -13,7 +13,7 @@
 
     <description>Communication components for Pip.Services in .NET</description>
     <releaseNotes>Pre release</releaseNotes>
-    <copyright>Digital Living Software Corp. 2016</copyright>
+    <copyright>Conceptual Vision Consulting LLC. 2016</copyright>
     <tags>pip-services microservices framework</tags>
 
     <dependencies>
@@ -22,7 +22,7 @@
         <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
         <dependency id="Microsoft.AspNet.WebApi.SelfHost" version="5.2.3" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="PipServices.Commons" version="1.0.32" />
+        <dependency id="PipServices.Commons" version="1.0.33" />
       </group>
       <group targetFramework="netstandard">
         <dependency id="Microsoft.AspNetCore.Diagnostics" version="1.1.0" />
@@ -39,7 +39,7 @@
         <dependency id="Microsoft.Extensions.Logging.Debug" version="1.1.0" />
         <dependency id="NETStandard.Library" version="1.6.1" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="PipServices.Commons" version="1.0.31" />
+        <dependency id="PipServices.Commons" version="1.0.33" />
       </group>
     </dependencies>
   </metadata>

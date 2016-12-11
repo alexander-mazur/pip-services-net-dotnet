@@ -1,9 +1,7 @@
-# <img src="https://github.com/pip-services/pip-services/raw/master/design/Logo.png" alt="Pip.Services Logo" style="max-width:30%"> <br/> Basic portable abstractions for .NET
+# <img src="https://github.com/pip-services/pip-services/raw/master/design/Logo.png" alt="Pip.Services Logo" style="max-width:30%"> <br/> Communication framework for .NET
 
 This framework is a part of [Pip.Services](https://github.com/pip-services/pip-services) project.
 It provides synchronous and asynchronous communication components 
-
-Functionality is divided into few packahes:
 
 - **Messaging** - asynchronous message queues
 - **Rest** - RESTful services and clients

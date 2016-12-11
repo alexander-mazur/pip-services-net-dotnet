@@ -1,10 +1,10 @@
 {
-  "version": "1.0.5-*",
+  "version": "1.0.0-*",
 
-  "copyright": "Copyright � Digital Living Software Corp. 2009-2016",
-  "title": "Pip.Services Net Library",
+  "copyright": "Copyright (c) Conceptual Vision Consulting LLC. 2016",
+  "title": "Pip.Services Net Framework",
   "authors": [ "Sergey Seroukhov", "Volodymyr Tkachenko" ],
-  "description": "Communication components for Pip.Services in .NET",
+  "description": "Synchronous and asynchronous communication components for Pip.Services in .NET",
 
   "buildOptions": {
     "outputName": "PipServices.Net",
@@ -27,7 +27,7 @@
     "MongoDB.Driver": "2.4.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
-    "PipServices.Commons": "1.0.32"
+    "PipServices.Commons": "1.0.33"
   },
 
   "frameworks": {
