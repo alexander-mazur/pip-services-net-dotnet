@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PipServices.Net</id>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <title>PipServices.Net</title>
     <authors>Sergey Seroukhov, Volodymyr Tkachenko</authors>
 
@@ -22,7 +22,7 @@
         <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
         <dependency id="Microsoft.AspNet.WebApi.SelfHost" version="5.2.3" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="PipServices.Commons" version="1.0.31" />
+        <dependency id="PipServices.Commons" version="1.0.32" />
       </group>
       <group targetFramework="netstandard">
         <dependency id="Microsoft.AspNetCore.Diagnostics" version="1.1.0" />
