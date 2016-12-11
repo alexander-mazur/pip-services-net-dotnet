@@ -29,8 +29,7 @@
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "PipServices.Net.NetStandard16": "1.0.5-*",
-    "PipServices.Commons": "1.0.30"
-  },
+    "PipServices.Commons": "1.0.31"  },
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [ "dnxcore50", "portable-net45+win8" ]

@@ -1,9 +1,10 @@
 # Communication components for Pip.Services in .NET Changelog
 
-## <a name="1.0.1-1.0.4"></a> 1.0.1-1.0.4 (2016-12-10)
+## <a name="1.0.1-1.0.6"></a> 1.0.1-1.0.6 (2016-12-10)
 
 ### Features
 * **rest** Implemented connection parameters and credentials
+* **messaging** MsmqMessageQueue
 
 ## <a name="1.0.0"></a> 1.0.0 (2016-11-21)
 

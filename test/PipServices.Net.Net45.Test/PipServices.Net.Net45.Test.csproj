@@ -42,11 +42,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PipServices.Commons, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PipServices.Commons.1.0.30\lib\net45\PipServices.Commons.dll</HintPath>
+      <HintPath>..\..\packages\PipServices.Commons.1.0.31\lib\net45\PipServices.Commons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -110,6 +111,7 @@
     <Compile Include="..\PipServices.Net.Netstandard16.Test\Rest\DummyRestClientTest.cs">
       <Link>Rest\DummyRestClientTest.cs</Link>
     </Compile>
+    <Compile Include="Messaging\MsmqMessageQueueTest.cs" />
     <Compile Include="Rest\DummyWebApiController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
