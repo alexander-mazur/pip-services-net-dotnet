@@ -116,9 +116,9 @@ namespace PipServices.Net.Rest
             {
                 _server = new HttpSelfHostServer(config);
 
-                _logger.Info(correlationId, "Opened REST service at {0}", _address);
+                _server.OpenAsync().Wait();
 
-                await _server.OpenAsync();
+                _logger.Info(correlationId, "Opened REST service at {0}", _address);
             }
             catch (Exception ex)
             {
