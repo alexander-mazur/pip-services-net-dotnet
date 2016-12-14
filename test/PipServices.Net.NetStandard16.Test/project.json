@@ -26,15 +26,18 @@
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "System.Linq": "4.3.0",
     "System.Net.Http": "4.3.0",
-    "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "PipServices.Net.NetStandard16": "1.0.5-*",
-    "PipServices.Commons": "1.0.33"},
+    "PipServices.Net.NetStandard16": "1.0.9-*",
+    "PipServices.Commons": "1.0.33",
+    "xunit": "2.2.0-beta4-build3444"
+  },
+
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [ "dnxcore50", "portable-net45+win8" ]
     }
   },
+
   "buildOptions": {
     "define": [ "CORE_NET" ],
     "emitEntryPoint": true
