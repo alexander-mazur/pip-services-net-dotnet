@@ -16,7 +16,6 @@ namespace PipServices.Net.Rest
             "connection.port", 3000
             );
 
-        //private readonly DummyController _ctrl;
         private readonly DummyController _ctrl;
         private readonly DummyRestService _service;
         private readonly DummyRestClient _client;
