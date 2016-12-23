@@ -28,8 +28,8 @@
     "System.Net.Http": "4.3.0",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "PipServices.Net.NetStandard16": "1.0.9-*",
-    "PipServices.Commons": "1.0.33",
-    "xunit": "2.2.0-beta4-build3444"
+    "xunit": "2.2.0-beta4-build3444",
+    "PipServices.Commons": "1.0.37"
   },
 
   "frameworks": {

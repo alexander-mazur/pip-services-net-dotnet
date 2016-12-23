@@ -1,5 +1,5 @@
 {
-  "version": "1.0.9-*",
+  "version": "1.0.10-*",
 
   "copyright": "Copyright (c) Conceptual Vision Consulting LLC. 2016",
   "title": "Pip.Services Net Framework",
@@ -27,7 +27,7 @@
     "MongoDB.Driver": "2.4.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
-    "PipServices.Commons": "1.0.33"
+    "PipServices.Commons": "1.0.37"
   },
 
   "frameworks": {
