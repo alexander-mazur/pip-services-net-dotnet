@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PipServices.Net.Rest
 {
-    public abstract class RestService<TStartup> : IOpenable, IClosable, IConfigurable, IReferenceable
+    public abstract class RestService<TStartup> : IOpenable, IConfigurable, IReferenceable
         where TStartup : class
     {
         private static readonly ConfigParams _defaultConfig = ConfigParams.FromTuples(
@@ -88,6 +88,11 @@ namespace PipServices.Net.Rest
             }
 
             return connection;
+        }
+
+        public bool IsOpened()
+        {
+            return _server != null;
         }
 
         public async Task OpenAsync(string correlationId)

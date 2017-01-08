@@ -1,6 +1,6 @@
 # Communication components for Pip.Services in .NET Changelog
 
-## <a name="1.0.1-1.0.7"></a> 1.0.1-1.0.7 (2016-12-10)
+## <a name="1.0.1-1.0.12"></a> 1.0.1-1.0.12 (2017-01-07)
 
 ### Features
 * **rest** Implemented connection parameters and credentials

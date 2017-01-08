@@ -15,7 +15,7 @@ namespace PipServices.Net.Messaging
     /// <summary>
     /// Local message queue to be used in automated tests
     /// </summary>
-    public abstract class MessageQueue : IMessageQueue, IDescriptable, IReferenceable, IConfigurable, IOpenable, IClosable
+    public abstract class MessageQueue : IMessageQueue, IDescriptable, IReferenceable, IConfigurable, IOpenable
     {
         protected CompositeLogger _logger = new CompositeLogger();
         protected CompositeCounters _counters = new CompositeCounters();
@@ -58,6 +58,7 @@ namespace PipServices.Net.Messaging
             await OpenAsync(correlationId, connection, credential);
         }
 
+        public abstract bool IsOpened();
         public abstract Task OpenAsync(string correlationId, ConnectionParams connection, CredentialParams credential);
 
         public abstract Task CloseAsync(string correlationId);

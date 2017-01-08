@@ -13,7 +13,7 @@ using System.Web.Http.SelfHost;
 
 namespace PipServices.Net.Rest
 {
-    public abstract class RestService<TC, TL> : IOpenable, IClosable, IConfigurable, IReferenceable
+    public abstract class RestService<TC, TL> : IOpenable, IConfigurable, IReferenceable
         where TC : class, IHttpLogicController<TL>, new()
         where TL : class
     {
@@ -91,6 +91,11 @@ namespace PipServices.Net.Rest
             }
 
             return connection;
+        }
+
+        public bool IsOpened()
+        {
+            return _server != null;
         }
 
         public async Task OpenAsync(string correlationId)

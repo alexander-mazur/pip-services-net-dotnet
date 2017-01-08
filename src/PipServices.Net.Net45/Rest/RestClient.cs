@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace PipServices.Net.Rest
 {
-    public class RestClient : IOpenable, IClosable, IConfigurable, IReferenceable
+    public class RestClient : IOpenable, IConfigurable, IReferenceable
     {
         private static readonly ConfigParams _defaultConfig = ConfigParams.FromTuples(
             "connection.protocol", "http",
@@ -94,6 +94,11 @@ namespace PipServices.Net.Rest
             }
 
             return connection;
+        }
+
+        public bool IsOpened()
+        {
+            return _client != null;
         }
 
         public async Task OpenAsync(string correlationId)

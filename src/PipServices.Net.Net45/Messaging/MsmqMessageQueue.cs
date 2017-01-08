@@ -47,6 +47,11 @@ namespace PipServices.Net.Messaging
             Interval = config.GetAsLongWithDefault("interval", Interval);
         }
 
+        public override bool IsOpened()
+        {
+            return InnerQueue != null;
+        }
+
         public async override Task OpenAsync(string correlationId, ConnectionParams connection, CredentialParams credential)
         {
             var queuePath = connection.GetAsNullableString("path")

@@ -18,6 +18,7 @@ namespace PipServices.Net.Messaging
         private int _lockTokenSequence = 0;
         private Dictionary<int, LockedMessage> _lockedMessages = new Dictionary<int, LockedMessage>();
         private CancellationTokenSource _cancel = new CancellationTokenSource();
+        private bool _opened = false;
 
         private class LockedMessage
         {
@@ -34,14 +35,21 @@ namespace PipServices.Net.Messaging
             Capabilities = new MessagingCapabilities(true, true, true, true, true, true, true, false, true);
         }
 
+        public override bool IsOpened()
+        {
+            return _opened;
+        }
+
         public async override Task OpenAsync(string correlationId, ConnectionParams connection, CredentialParams credential)
         {
-            // Do nothing
+            _opened = true;
             await Task.Delay(0);
         }
 
         public override async Task CloseAsync(string correlationId)
         {
+            _opened = false;
+
             _cancel.Cancel();
             _receiveEvent.Set();
 
