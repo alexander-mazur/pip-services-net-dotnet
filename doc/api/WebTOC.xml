@@ -2,25 +2,25 @@
 <HelpTOC>
 
   <HelpTOCNode Title="Welcome to the PipServices.Net" Url="html/a045e492-38ad-456a-a71e-4761bb70b8e9.htm" />
-  <HelpTOCNode Id="ef3e05c5-578d-4d68-974c-c139610f23ce" Title="Version History" Url="html/98182115-1006-4c6f-a2e3-f0f1719d1a8d.htm">
+  <HelpTOCNode Id="49bd53f0-d4f5-4c59-b4fc-20b43678dc91" Title="Version History" Url="html/98182115-1006-4c6f-a2e3-f0f1719d1a8d.htm">
     <HelpTOCNode Title="Version 1.0.9" Url="html/bf415b10-4890-4e13-8c1b-1df61a334389.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="d2e58ed8-1d43-474d-81a4-01b95a961eb2" Title="PipServices.Net.Messaging" Url="html/N_PipServices_Net_Messaging.htm">
-    <HelpTOCNode Id="a5234343-2305-4989-84be-4ce11864f2be" Title="IMessageQueue Interface" Url="html/T_PipServices_Net_Messaging_IMessageQueue.htm">
-      <HelpTOCNode Id="dfdbb806-b843-4f63-9deb-3c3e28b93096" Title="IMessageQueue Properties" Url="html/Properties_T_PipServices_Net_Messaging_IMessageQueue.htm">
+  <HelpTOCNode Id="78fd3903-b5d2-4d49-9b38-9def6727f294" Title="PipServices.Net.Messaging" Url="html/N_PipServices_Net_Messaging.htm">
+    <HelpTOCNode Id="0f28fd7f-4cc4-48d6-8357-6d6b85c906a7" Title="IMessageQueue Interface" Url="html/T_PipServices_Net_Messaging_IMessageQueue.htm">
+      <HelpTOCNode Id="0f36d168-859a-4393-8e06-72a89f1123b6" Title="IMessageQueue Properties" Url="html/Properties_T_PipServices_Net_Messaging_IMessageQueue.htm">
         <HelpTOCNode Title="Capabilities Property " Url="html/P_PipServices_Net_Messaging_IMessageQueue_Capabilities.htm" />
         <HelpTOCNode Title="MessageCount Property " Url="html/P_PipServices_Net_Messaging_IMessageQueue_MessageCount.htm" />
         <HelpTOCNode Title="Name Property " Url="html/P_PipServices_Net_Messaging_IMessageQueue_Name.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f91ff752-850e-4e71-bbb5-1b92db2f76ae" Title="IMessageQueue Methods" Url="html/Methods_T_PipServices_Net_Messaging_IMessageQueue.htm">
+      <HelpTOCNode Id="84557758-b54f-47fa-b4bf-9bc6418ef931" Title="IMessageQueue Methods" Url="html/Methods_T_PipServices_Net_Messaging_IMessageQueue.htm">
         <HelpTOCNode Title="AbandonAsync Method " Url="html/M_PipServices_Net_Messaging_IMessageQueue_AbandonAsync.htm" />
-        <HelpTOCNode Id="3f31d9d1-3588-467b-9e37-ade34d0dc5c1" Title="BeginListen Method " Url="html/Overload_PipServices_Net_Messaging_IMessageQueue_BeginListen.htm">
+        <HelpTOCNode Id="5f93928e-3625-4957-801b-12b437be262b" Title="BeginListen Method " Url="html/Overload_PipServices_Net_Messaging_IMessageQueue_BeginListen.htm">
           <HelpTOCNode Title="BeginListen Method (String, IMessageReceiver)" Url="html/M_PipServices_Net_Messaging_IMessageQueue_BeginListen.htm" />
           <HelpTOCNode Title="BeginListen Method (String, Func(MessageEnvelop, IMessageQueue, Task))" Url="html/M_PipServices_Net_Messaging_IMessageQueue_BeginListen_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="CompleteAsync Method " Url="html/M_PipServices_Net_Messaging_IMessageQueue_CompleteAsync.htm" />
         <HelpTOCNode Title="EndListen Method " Url="html/M_PipServices_Net_Messaging_IMessageQueue_EndListen.htm" />
-        <HelpTOCNode Id="6959fc83-f87e-46e2-9bb4-467c4f238bd9" Title="ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_IMessageQueue_ListenAsync.htm">
+        <HelpTOCNode Id="32c396f8-ea5c-48b0-82aa-58175a29d26a" Title="ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_IMessageQueue_ListenAsync.htm">
           <HelpTOCNode Title="ListenAsync Method (String, IMessageReceiver)" Url="html/M_PipServices_Net_Messaging_IMessageQueue_ListenAsync.htm" />
           <HelpTOCNode Title="ListenAsync Method (String, Func(MessageEnvelop, IMessageQueue, Task))" Url="html/M_PipServices_Net_Messaging_IMessageQueue_ListenAsync_1.htm" />
         </HelpTOCNode>
@@ -30,64 +30,65 @@
         <HelpTOCNode Title="ReceiveAsync Method " Url="html/M_PipServices_Net_Messaging_IMessageQueue_ReceiveAsync.htm" />
         <HelpTOCNode Title="RenewLockAsync Method " Url="html/M_PipServices_Net_Messaging_IMessageQueue_RenewLockAsync.htm" />
         <HelpTOCNode Title="SendAsObjectAsync Method " Url="html/M_PipServices_Net_Messaging_IMessageQueue_SendAsObjectAsync.htm" />
-        <HelpTOCNode Id="216240f5-19a1-4ec3-a307-074ee291f856" Title="SendAsync Method " Url="html/Overload_PipServices_Net_Messaging_IMessageQueue_SendAsync.htm">
+        <HelpTOCNode Id="0eb788a9-15d7-43ca-b31c-b518997824c8" Title="SendAsync Method " Url="html/Overload_PipServices_Net_Messaging_IMessageQueue_SendAsync.htm">
           <HelpTOCNode Title="SendAsync Method (String, MessageEnvelop)" Url="html/M_PipServices_Net_Messaging_IMessageQueue_SendAsync.htm" />
           <HelpTOCNode Title="SendAsync Method (String, String, String)" Url="html/M_PipServices_Net_Messaging_IMessageQueue_SendAsync_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="a3c3e4cd-e08a-4011-8ff6-7ca0fb8f192f" Title="IMessageReceiver Interface" Url="html/T_PipServices_Net_Messaging_IMessageReceiver.htm">
-      <HelpTOCNode Id="f9f3663d-8a07-41c6-a7fa-1a2ebf1b90b7" Title="IMessageReceiver Methods" Url="html/Methods_T_PipServices_Net_Messaging_IMessageReceiver.htm">
+    <HelpTOCNode Id="6e9a99fc-a362-4784-98fb-26c2ddb1692f" Title="IMessageReceiver Interface" Url="html/T_PipServices_Net_Messaging_IMessageReceiver.htm">
+      <HelpTOCNode Id="79fa67e7-a97d-4061-aaf6-c01e715c8aba" Title="IMessageReceiver Methods" Url="html/Methods_T_PipServices_Net_Messaging_IMessageReceiver.htm">
         <HelpTOCNode Title="ReceiveMessageAsync Method " Url="html/M_PipServices_Net_Messaging_IMessageReceiver_ReceiveMessageAsync.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="4c14e94f-964a-484c-a75d-741e5e20c9a3" Title="MemoryMessageQueue Class" Url="html/T_PipServices_Net_Messaging_MemoryMessageQueue.htm">
+    <HelpTOCNode Id="8b9d0b83-cd41-4e31-84a2-6239a5dcc232" Title="MemoryMessageQueue Class" Url="html/T_PipServices_Net_Messaging_MemoryMessageQueue.htm">
       <HelpTOCNode Title="MemoryMessageQueue Constructor " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue__ctor.htm" />
-      <HelpTOCNode Id="c8242482-e913-4415-9d9a-e018eded28eb" Title="MemoryMessageQueue Properties" Url="html/Properties_T_PipServices_Net_Messaging_MemoryMessageQueue.htm">
+      <HelpTOCNode Id="8996fedb-64b7-4d6f-a47c-988dda18de44" Title="MemoryMessageQueue Properties" Url="html/Properties_T_PipServices_Net_Messaging_MemoryMessageQueue.htm">
         <HelpTOCNode Title="MessageCount Property " Url="html/P_PipServices_Net_Messaging_MemoryMessageQueue_MessageCount.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="fddf690c-dd91-4152-867a-4fe0a0bf0ee5" Title="MemoryMessageQueue Methods" Url="html/Methods_T_PipServices_Net_Messaging_MemoryMessageQueue.htm">
+      <HelpTOCNode Id="da56c572-d5b3-419c-8f71-7ed10fbe9f44" Title="MemoryMessageQueue Methods" Url="html/Methods_T_PipServices_Net_Messaging_MemoryMessageQueue.htm">
         <HelpTOCNode Title="AbandonAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_AbandonAsync.htm" />
         <HelpTOCNode Title="ClearAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_ClearAsync.htm" />
         <HelpTOCNode Title="CloseAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_CloseAsync.htm" />
         <HelpTOCNode Title="CompleteAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_CompleteAsync.htm" />
         <HelpTOCNode Title="EndListen Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_EndListen.htm" />
-        <HelpTOCNode Id="29d04876-e9b2-406a-bf11-9eb1a29b06fe" Title="ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MemoryMessageQueue_ListenAsync.htm">
+        <HelpTOCNode Title="IsOpened Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_IsOpened.htm" />
+        <HelpTOCNode Id="49e25bde-a33e-4d11-9218-422defac167f" Title="ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MemoryMessageQueue_ListenAsync.htm">
           <HelpTOCNode Title="ListenAsync Method (String, Func(MessageEnvelop, IMessageQueue, Task))" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_ListenAsync.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="MoveToDeadLetterAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_MoveToDeadLetterAsync.htm" />
-        <HelpTOCNode Id="cfec8c0f-3388-4a6b-ada7-f3ae47c6990b" Title="OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MemoryMessageQueue_OpenAsync.htm">
+        <HelpTOCNode Id="6fdf5a2d-d04c-46a2-8823-91003457fdfe" Title="OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MemoryMessageQueue_OpenAsync.htm">
           <HelpTOCNode Title="OpenAsync Method (String, ConnectionParams, CredentialParams)" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_OpenAsync.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="PeekAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_PeekAsync.htm" />
         <HelpTOCNode Title="PeekBatchAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_PeekBatchAsync.htm" />
         <HelpTOCNode Title="ReceiveAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_ReceiveAsync.htm" />
         <HelpTOCNode Title="RenewLockAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_RenewLockAsync.htm" />
-        <HelpTOCNode Id="6c13364f-68f8-41f9-98d0-217beeeae5a3" Title="SendAsync Method " Url="html/Overload_PipServices_Net_Messaging_MemoryMessageQueue_SendAsync.htm">
+        <HelpTOCNode Id="2f8c46e4-0296-4847-b21f-42b18a12cda2" Title="SendAsync Method " Url="html/Overload_PipServices_Net_Messaging_MemoryMessageQueue_SendAsync.htm">
           <HelpTOCNode Title="SendAsync Method (String, MessageEnvelop)" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_SendAsync.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="MemoryMessageQueue Fields" Url="html/Fields_T_PipServices_Net_Messaging_MemoryMessageQueue.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="4b1fcec6-4a6f-4e41-bf0a-e7cba42998f4" Title="MemoryMessageQueueFactory Class" Url="html/T_PipServices_Net_Messaging_MemoryMessageQueueFactory.htm">
+    <HelpTOCNode Id="4dc8d774-e594-402d-aff7-7b98ac56c8a8" Title="MemoryMessageQueueFactory Class" Url="html/T_PipServices_Net_Messaging_MemoryMessageQueueFactory.htm">
       <HelpTOCNode Title="MemoryMessageQueueFactory Constructor " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueueFactory__ctor.htm" />
-      <HelpTOCNode Id="852d815d-dd39-4c11-ad36-846531e90b95" Title="MemoryMessageQueueFactory Methods" Url="html/Methods_T_PipServices_Net_Messaging_MemoryMessageQueueFactory.htm">
+      <HelpTOCNode Id="0d72ccd0-eb94-4e32-9fde-a0bde73daaad" Title="MemoryMessageQueueFactory Methods" Url="html/Methods_T_PipServices_Net_Messaging_MemoryMessageQueueFactory.htm">
         <HelpTOCNode Title="CanCreate Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueueFactory_CanCreate.htm" />
         <HelpTOCNode Title="Create Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueueFactory_Create.htm" />
         <HelpTOCNode Title="GetDescriptor Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueueFactory_GetDescriptor.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="80bde8fa-165d-4f4c-81b7-1927e29958d6" Title="MemoryMessageQueueFactory Fields" Url="html/Fields_T_PipServices_Net_Messaging_MemoryMessageQueueFactory.htm">
+      <HelpTOCNode Id="e0af70fa-c599-473f-975d-8736ffa79845" Title="MemoryMessageQueueFactory Fields" Url="html/Fields_T_PipServices_Net_Messaging_MemoryMessageQueueFactory.htm">
         <HelpTOCNode Title="Descriptor Field" Url="html/F_PipServices_Net_Messaging_MemoryMessageQueueFactory_Descriptor.htm" />
         <HelpTOCNode Title="QueueDescriptor Field" Url="html/F_PipServices_Net_Messaging_MemoryMessageQueueFactory_QueueDescriptor.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="f16f6e32-c642-447b-8437-ade12f330b64" Title="MessageEnvelop Class" Url="html/T_PipServices_Net_Messaging_MessageEnvelop.htm">
-      <HelpTOCNode Id="598d7654-01ba-467e-aae7-b9f66e5cb191" Title="MessageEnvelop Constructor " Url="html/Overload_PipServices_Net_Messaging_MessageEnvelop__ctor.htm">
+    <HelpTOCNode Id="48c36502-58b6-4b08-a0dd-ef49deb7a754" Title="MessageEnvelop Class" Url="html/T_PipServices_Net_Messaging_MessageEnvelop.htm">
+      <HelpTOCNode Id="d622853a-f2db-4e06-bee8-6c09bc559ea0" Title="MessageEnvelop Constructor " Url="html/Overload_PipServices_Net_Messaging_MessageEnvelop__ctor.htm">
         <HelpTOCNode Title="MessageEnvelop Constructor " Url="html/M_PipServices_Net_Messaging_MessageEnvelop__ctor.htm" />
         <HelpTOCNode Title="MessageEnvelop Constructor (String, String, Object)" Url="html/M_PipServices_Net_Messaging_MessageEnvelop__ctor_1.htm" />
         <HelpTOCNode Title="MessageEnvelop Constructor (String, String, String)" Url="html/M_PipServices_Net_Messaging_MessageEnvelop__ctor_2.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="38a23bcd-b499-467e-9782-78fa47f12037" Title="MessageEnvelop Properties" Url="html/Properties_T_PipServices_Net_Messaging_MessageEnvelop.htm">
+      <HelpTOCNode Id="da077758-ebcb-4d50-8002-68e92e66978e" Title="MessageEnvelop Properties" Url="html/Properties_T_PipServices_Net_Messaging_MessageEnvelop.htm">
         <HelpTOCNode Title="CorrelationId Property " Url="html/P_PipServices_Net_Messaging_MessageEnvelop_CorrelationId.htm" />
         <HelpTOCNode Title="Message Property " Url="html/P_PipServices_Net_Messaging_MessageEnvelop_Message.htm" />
         <HelpTOCNode Title="MessageId Property " Url="html/P_PipServices_Net_Messaging_MessageEnvelop_MessageId.htm" />
@@ -95,23 +96,23 @@
         <HelpTOCNode Title="Reference Property " Url="html/P_PipServices_Net_Messaging_MessageEnvelop_Reference.htm" />
         <HelpTOCNode Title="SentTimeUtc Property " Url="html/P_PipServices_Net_Messaging_MessageEnvelop_SentTimeUtc.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="c97c2ce1-9e2b-4a29-a22c-4e4f65324a34" Title="MessageEnvelop Methods" Url="html/Methods_T_PipServices_Net_Messaging_MessageEnvelop.htm">
+      <HelpTOCNode Id="e3c06407-ca8c-4c23-8067-723e767354de" Title="MessageEnvelop Methods" Url="html/Methods_T_PipServices_Net_Messaging_MessageEnvelop.htm">
         <HelpTOCNode Title="GetMessage(T) Method " Url="html/M_PipServices_Net_Messaging_MessageEnvelop_GetMessage__1.htm" />
         <HelpTOCNode Title="SetMessage Method " Url="html/M_PipServices_Net_Messaging_MessageEnvelop_SetMessage.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/M_PipServices_Net_Messaging_MessageEnvelop_ToString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="78f8aa7b-8376-424d-a9a6-52de23396fe6" Title="MessageQueue Class" Url="html/T_PipServices_Net_Messaging_MessageQueue.htm">
+    <HelpTOCNode Id="d4d32f60-781b-499a-99ad-02c3da68d757" Title="MessageQueue Class" Url="html/T_PipServices_Net_Messaging_MessageQueue.htm">
       <HelpTOCNode Title="MessageQueue Constructor " Url="html/M_PipServices_Net_Messaging_MessageQueue__ctor.htm" />
-      <HelpTOCNode Id="2dd49196-8eb1-4769-82c9-c4a379995202" Title="MessageQueue Properties" Url="html/Properties_T_PipServices_Net_Messaging_MessageQueue.htm">
+      <HelpTOCNode Id="3b649b7d-7265-4d30-9aa3-f23f7468869a" Title="MessageQueue Properties" Url="html/Properties_T_PipServices_Net_Messaging_MessageQueue.htm">
         <HelpTOCNode Title="Capabilities Property " Url="html/P_PipServices_Net_Messaging_MessageQueue_Capabilities.htm" />
         <HelpTOCNode Title="Kind Property " Url="html/P_PipServices_Net_Messaging_MessageQueue_Kind.htm" />
         <HelpTOCNode Title="MessageCount Property " Url="html/P_PipServices_Net_Messaging_MessageQueue_MessageCount.htm" />
         <HelpTOCNode Title="Name Property " Url="html/P_PipServices_Net_Messaging_MessageQueue_Name.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="6ae3b26e-662d-43e8-833b-7c2a3b0503aa" Title="MessageQueue Methods" Url="html/Methods_T_PipServices_Net_Messaging_MessageQueue.htm">
+      <HelpTOCNode Id="0e61a811-015d-4ab7-b2ff-a6b7203d8caa" Title="MessageQueue Methods" Url="html/Methods_T_PipServices_Net_Messaging_MessageQueue.htm">
         <HelpTOCNode Title="AbandonAsync Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_AbandonAsync.htm" />
-        <HelpTOCNode Id="1d48f239-8d8b-44d6-bf1c-4a4f5f5719a2" Title="BeginListen Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_BeginListen.htm">
+        <HelpTOCNode Id="19972d43-5838-4c28-8fc4-97e529c61740" Title="BeginListen Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_BeginListen.htm">
           <HelpTOCNode Title="BeginListen Method (String, IMessageReceiver)" Url="html/M_PipServices_Net_Messaging_MessageQueue_BeginListen.htm" />
           <HelpTOCNode Title="BeginListen Method (String, Func(MessageEnvelop, IMessageQueue, Task))" Url="html/M_PipServices_Net_Messaging_MessageQueue_BeginListen_1.htm" />
         </HelpTOCNode>
@@ -121,12 +122,13 @@
         <HelpTOCNode Title="Configure Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_Configure.htm" />
         <HelpTOCNode Title="EndListen Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_EndListen.htm" />
         <HelpTOCNode Title="GetDescriptor Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_GetDescriptor.htm" />
-        <HelpTOCNode Id="7db1d888-fae4-4037-ae7d-ac7bd7ee7f22" Title="ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_ListenAsync.htm">
+        <HelpTOCNode Title="IsOpened Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_IsOpened.htm" />
+        <HelpTOCNode Id="2dc29969-c6d6-45b4-82c5-88309ea8a518" Title="ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_ListenAsync.htm">
           <HelpTOCNode Title="ListenAsync Method (String, IMessageReceiver)" Url="html/M_PipServices_Net_Messaging_MessageQueue_ListenAsync.htm" />
           <HelpTOCNode Title="ListenAsync Method (String, Func(MessageEnvelop, IMessageQueue, Task))" Url="html/M_PipServices_Net_Messaging_MessageQueue_ListenAsync_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="MoveToDeadLetterAsync Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_MoveToDeadLetterAsync.htm" />
-        <HelpTOCNode Id="c0efbaa2-97c8-4a08-9714-245def93b5e5" Title="OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_OpenAsync.htm">
+        <HelpTOCNode Id="307897ab-1b11-416f-9a7e-884f761b2ad6" Title="OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_OpenAsync.htm">
           <HelpTOCNode Title="OpenAsync Method (String)" Url="html/M_PipServices_Net_Messaging_MessageQueue_OpenAsync.htm" />
           <HelpTOCNode Title="OpenAsync Method (String, ConnectionParams, CredentialParams)" Url="html/M_PipServices_Net_Messaging_MessageQueue_OpenAsync_1.htm" />
         </HelpTOCNode>
@@ -135,14 +137,14 @@
         <HelpTOCNode Title="ReceiveAsync Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_ReceiveAsync.htm" />
         <HelpTOCNode Title="RenewLockAsync Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_RenewLockAsync.htm" />
         <HelpTOCNode Title="SendAsObjectAsync Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_SendAsObjectAsync.htm" />
-        <HelpTOCNode Id="c038642b-2c8e-497e-8722-879d81d9f01b" Title="SendAsync Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_SendAsync.htm">
+        <HelpTOCNode Id="c278bd25-bbb2-4f50-839a-3404e62e940c" Title="SendAsync Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_SendAsync.htm">
           <HelpTOCNode Title="SendAsync Method (String, MessageEnvelop)" Url="html/M_PipServices_Net_Messaging_MessageQueue_SendAsync.htm" />
           <HelpTOCNode Title="SendAsync Method (String, String, String)" Url="html/M_PipServices_Net_Messaging_MessageQueue_SendAsync_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="SetReferences Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_SetReferences.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_ToString.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="0accf66c-b1af-4dce-8367-618ca856d6b0" Title="MessageQueue Fields" Url="html/Fields_T_PipServices_Net_Messaging_MessageQueue.htm">
+      <HelpTOCNode Id="102bd0a7-0bc1-412b-9705-0f4bece8776a" Title="MessageQueue Fields" Url="html/Fields_T_PipServices_Net_Messaging_MessageQueue.htm">
         <HelpTOCNode Title="_connectionResolver Field" Url="html/F_PipServices_Net_Messaging_MessageQueue__connectionResolver.htm" />
         <HelpTOCNode Title="_counters Field" Url="html/F_PipServices_Net_Messaging_MessageQueue__counters.htm" />
         <HelpTOCNode Title="_credentialResolver Field" Url="html/F_PipServices_Net_Messaging_MessageQueue__credentialResolver.htm" />
@@ -150,9 +152,9 @@
         <HelpTOCNode Title="_logger Field" Url="html/F_PipServices_Net_Messaging_MessageQueue__logger.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="8da8b51e-d712-4207-a40d-302119fff85c" Title="MessagingCapabilities Class" Url="html/T_PipServices_Net_Messaging_MessagingCapabilities.htm">
+    <HelpTOCNode Id="84fd2004-d818-4add-84dd-72d9f6635349" Title="MessagingCapabilities Class" Url="html/T_PipServices_Net_Messaging_MessagingCapabilities.htm">
       <HelpTOCNode Title="MessagingCapabilities Constructor " Url="html/M_PipServices_Net_Messaging_MessagingCapabilities__ctor.htm" />
-      <HelpTOCNode Id="5a48ad33-5d9e-4c24-a55e-5188e83c9d71" Title="MessagingCapabilities Properties" Url="html/Properties_T_PipServices_Net_Messaging_MessagingCapabilities.htm">
+      <HelpTOCNode Id="d1c476ae-a7d1-46bb-8e06-e9646bd682f8" Title="MessagingCapabilities Properties" Url="html/Properties_T_PipServices_Net_Messaging_MessagingCapabilities.htm">
         <HelpTOCNode Title="CanAbandon Property " Url="html/P_PipServices_Net_Messaging_MessagingCapabilities_CanAbandon.htm" />
         <HelpTOCNode Title="CanClear Property " Url="html/P_PipServices_Net_Messaging_MessagingCapabilities_CanClear.htm" />
         <HelpTOCNode Title="CanDeadLetter Property " Url="html/P_PipServices_Net_Messaging_MessagingCapabilities_CanDeadLetter.htm" />
@@ -165,58 +167,59 @@
       </HelpTOCNode>
       <HelpTOCNode Title="MessagingCapabilities Methods" Url="html/Methods_T_PipServices_Net_Messaging_MessagingCapabilities.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="2024c319-bf1d-4f63-8223-888432411fda" Title="MsmqMessageQueue Class" Url="html/T_PipServices_Net_Messaging_MsmqMessageQueue.htm">
-      <HelpTOCNode Id="9c94c79a-7b20-49ff-959c-a388d59a8549" Title="MsmqMessageQueue Constructor " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue__ctor.htm">
+    <HelpTOCNode Id="66e017bf-4646-44a3-8e45-1b08caf61a20" Title="MsmqMessageQueue Class" Url="html/T_PipServices_Net_Messaging_MsmqMessageQueue.htm">
+      <HelpTOCNode Id="a8d89055-5cef-4305-95f1-ebf8462aa89a" Title="MsmqMessageQueue Constructor " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue__ctor.htm">
         <HelpTOCNode Title="MsmqMessageQueue Constructor (String)" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue__ctor.htm" />
         <HelpTOCNode Title="MsmqMessageQueue Constructor (String, ConfigParams)" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue__ctor_1.htm" />
         <HelpTOCNode Title="MsmqMessageQueue Constructor (String, MessageQueue)" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue__ctor_2.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f1bd8c79-a80f-43d2-90b7-680ed463d5f3" Title="MsmqMessageQueue Properties" Url="html/Properties_T_PipServices_Net_Messaging_MsmqMessageQueue.htm">
+      <HelpTOCNode Id="d563dfd8-f1f4-4e19-8ba8-780a6a2afa2b" Title="MsmqMessageQueue Properties" Url="html/Properties_T_PipServices_Net_Messaging_MsmqMessageQueue.htm">
         <HelpTOCNode Title="InnerQueue Property " Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_InnerQueue.htm" />
         <HelpTOCNode Title="Interval Property " Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_Interval.htm" />
         <HelpTOCNode Title="MessageCount Property " Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_MessageCount.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="181ec519-ae96-4630-afee-60e9a7326734" Title="MsmqMessageQueue Methods" Url="html/Methods_T_PipServices_Net_Messaging_MsmqMessageQueue.htm">
+      <HelpTOCNode Id="bb2d8dda-ff99-43fd-a946-ba3160d78141" Title="MsmqMessageQueue Methods" Url="html/Methods_T_PipServices_Net_Messaging_MsmqMessageQueue.htm">
         <HelpTOCNode Title="AbandonAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_AbandonAsync.htm" />
         <HelpTOCNode Title="ClearAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_ClearAsync.htm" />
         <HelpTOCNode Title="CloseAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_CloseAsync.htm" />
         <HelpTOCNode Title="CompleteAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_CompleteAsync.htm" />
         <HelpTOCNode Title="Configure Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_Configure.htm" />
         <HelpTOCNode Title="EndListen Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_EndListen.htm" />
-        <HelpTOCNode Id="3cb9eebb-9fa0-40b9-8f8e-94968992f6f8" Title="ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue_ListenAsync.htm">
+        <HelpTOCNode Title="IsOpened Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_IsOpened.htm" />
+        <HelpTOCNode Id="90026417-33c8-4607-84d8-b3e5d06ab9bf" Title="ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue_ListenAsync.htm">
           <HelpTOCNode Title="ListenAsync Method (String, Func(MessageEnvelop, IMessageQueue, Task))" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_ListenAsync.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="MoveToDeadLetterAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_MoveToDeadLetterAsync.htm" />
-        <HelpTOCNode Id="eaf78a46-10f7-440c-9af7-b6f2dcfc2212" Title="OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue_OpenAsync.htm">
+        <HelpTOCNode Id="4e915b5f-d5ce-4c5e-9cfd-f2a261e4966a" Title="OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue_OpenAsync.htm">
           <HelpTOCNode Title="OpenAsync Method (String, ConnectionParams, CredentialParams)" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_OpenAsync.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="PeekAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_PeekAsync.htm" />
         <HelpTOCNode Title="PeekBatchAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_PeekBatchAsync.htm" />
         <HelpTOCNode Title="ReceiveAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_ReceiveAsync.htm" />
         <HelpTOCNode Title="RenewLockAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_RenewLockAsync.htm" />
-        <HelpTOCNode Id="0c8fb025-85a0-4f47-a06c-add8fc31001c" Title="SendAsync Method " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue_SendAsync.htm">
+        <HelpTOCNode Id="6b469937-614c-4332-b5f0-afe8bfb52cad" Title="SendAsync Method " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue_SendAsync.htm">
           <HelpTOCNode Title="SendAsync Method (String, MessageEnvelop)" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_SendAsync.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="MsmqMessageQueue Fields" Url="html/Fields_T_PipServices_Net_Messaging_MsmqMessageQueue.htm" />
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="39e1f305-ef91-4b54-874a-45b989a87c64" Title="PipServices.Net.Rest" Url="html/N_PipServices_Net_Rest.htm">
-    <HelpTOCNode Id="0afb61ad-0ad4-4a7e-acff-79d9f18e06ea" Title="IHttpLogicController(T) Interface" Url="html/T_PipServices_Net_Rest_IHttpLogicController_1.htm">
-      <HelpTOCNode Id="95bd4cd2-1435-49bb-a705-4e49b032ad89" Title="IHttpLogicController(T) Properties" Url="html/Properties_T_PipServices_Net_Rest_IHttpLogicController_1.htm">
+  <HelpTOCNode Id="948d374d-b979-4775-a8c7-0e54a5b6c473" Title="PipServices.Net.Rest" Url="html/N_PipServices_Net_Rest.htm">
+    <HelpTOCNode Id="2f89bf61-7745-4ae5-b207-26d754f620a3" Title="IHttpLogicController(T) Interface" Url="html/T_PipServices_Net_Rest_IHttpLogicController_1.htm">
+      <HelpTOCNode Id="0c8593ce-02e4-4579-aba8-ed8e1c351605" Title="IHttpLogicController(T) Properties" Url="html/Properties_T_PipServices_Net_Rest_IHttpLogicController_1.htm">
         <HelpTOCNode Title="Logic Property " Url="html/P_PipServices_Net_Rest_IHttpLogicController_1_Logic.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="IHttpLogicController(T) Methods" Url="html/Methods_T_PipServices_Net_Rest_IHttpLogicController_1.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="7d227922-c5e7-4b76-b9be-20e5b9cc6cf0" Title="RestClient Class" Url="html/T_PipServices_Net_Rest_RestClient.htm">
+    <HelpTOCNode Id="ff82000f-3c47-4676-9e9b-67ce5cf17478" Title="RestClient Class" Url="html/T_PipServices_Net_Rest_RestClient.htm">
       <HelpTOCNode Title="RestClient Constructor " Url="html/M_PipServices_Net_Rest_RestClient__ctor.htm" />
-      <HelpTOCNode Id="f2a62c37-3798-4ec3-90df-d0b73617b476" Title="RestClient Properties" Url="html/Properties_T_PipServices_Net_Rest_RestClient.htm">
+      <HelpTOCNode Id="4e648a17-44b9-40b2-93d4-190a180c0e79" Title="RestClient Properties" Url="html/Properties_T_PipServices_Net_Rest_RestClient.htm">
         <HelpTOCNode Title="_client Property " Url="html/P_PipServices_Net_Rest_RestClient__client.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="58316dd6-c785-4dee-bea8-3a976ab69d76" Title="RestClient Methods" Url="html/Methods_T_PipServices_Net_Rest_RestClient.htm">
+      <HelpTOCNode Id="646f5ade-c26c-4754-9137-ee54907790a5" Title="RestClient Methods" Url="html/Methods_T_PipServices_Net_Rest_RestClient.htm">
         <HelpTOCNode Title="CloseAsync Method " Url="html/M_PipServices_Net_Rest_RestClient_CloseAsync.htm" />
         <HelpTOCNode Title="Configure Method " Url="html/M_PipServices_Net_Rest_RestClient_Configure.htm" />
-        <HelpTOCNode Id="5f75c6f6-22a3-4eb9-b32c-c80828ba1af5" Title="ExecuteAsync Method " Url="html/Overload_PipServices_Net_Rest_RestClient_ExecuteAsync.htm">
+        <HelpTOCNode Id="a388dfb6-956f-4150-a666-8078b37a4616" Title="ExecuteAsync Method " Url="html/Overload_PipServices_Net_Rest_RestClient_ExecuteAsync.htm">
           <HelpTOCNode Title="ExecuteAsync Method (String, HttpMethod, String)" Url="html/M_PipServices_Net_Rest_RestClient_ExecuteAsync.htm" />
           <HelpTOCNode Title="ExecuteAsync(T) Method (String, HttpMethod, String)" Url="html/M_PipServices_Net_Rest_RestClient_ExecuteAsync__1.htm" />
           <HelpTOCNode Title="ExecuteAsync Method (String, HttpMethod, String, Object)" Url="html/M_PipServices_Net_Rest_RestClient_ExecuteAsync_1.htm" />
@@ -225,10 +228,11 @@
         <HelpTOCNode Title="ExecuteStringAsync Method " Url="html/M_PipServices_Net_Rest_RestClient_ExecuteStringAsync.htm" />
         <HelpTOCNode Title="GetConnectionAsync Method " Url="html/M_PipServices_Net_Rest_RestClient_GetConnectionAsync.htm" />
         <HelpTOCNode Title="Instrument Method " Url="html/M_PipServices_Net_Rest_RestClient_Instrument.htm" />
+        <HelpTOCNode Title="IsOpened Method " Url="html/M_PipServices_Net_Rest_RestClient_IsOpened.htm" />
         <HelpTOCNode Title="OpenAsync Method " Url="html/M_PipServices_Net_Rest_RestClient_OpenAsync.htm" />
         <HelpTOCNode Title="SetReferences Method " Url="html/M_PipServices_Net_Rest_RestClient_SetReferences.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="c103c1ce-0e6f-4c78-b7a2-3713bb19d1fe" Title="RestClient Fields" Url="html/Fields_T_PipServices_Net_Rest_RestClient.htm">
+      <HelpTOCNode Id="a3473437-6cf3-49fb-98d2-8ac54df9821b" Title="RestClient Fields" Url="html/Fields_T_PipServices_Net_Rest_RestClient.htm">
         <HelpTOCNode Title="_address Field" Url="html/F_PipServices_Net_Rest_RestClient__address.htm" />
         <HelpTOCNode Title="_connectionResolver Field" Url="html/F_PipServices_Net_Rest_RestClient__connectionResolver.htm" />
         <HelpTOCNode Title="_counters Field" Url="html/F_PipServices_Net_Rest_RestClient__counters.htm" />
@@ -236,27 +240,28 @@
         <HelpTOCNode Title="_options Field" Url="html/F_PipServices_Net_Rest_RestClient__options.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="5c48cb54-dc57-4c88-b09e-4d8fab8fe7d0" Title="RestExceptionHandler Class" Url="html/T_PipServices_Net_Rest_RestExceptionHandler.htm">
+    <HelpTOCNode Id="92becb52-f7a5-4051-b914-a1e8a579b8df" Title="RestExceptionHandler Class" Url="html/T_PipServices_Net_Rest_RestExceptionHandler.htm">
       <HelpTOCNode Title="RestExceptionHandler Constructor " Url="html/M_PipServices_Net_Rest_RestExceptionHandler__ctor.htm" />
-      <HelpTOCNode Id="9f4e39c4-df38-400e-8a43-65c23d510d5e" Title="RestExceptionHandler Methods" Url="html/Methods_T_PipServices_Net_Rest_RestExceptionHandler.htm">
+      <HelpTOCNode Id="5b097724-ecc8-4146-9d62-6b66c09836f9" Title="RestExceptionHandler Methods" Url="html/Methods_T_PipServices_Net_Rest_RestExceptionHandler.htm">
         <HelpTOCNode Title="Handle Method " Url="html/M_PipServices_Net_Rest_RestExceptionHandler_Handle.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="1b6c3571-5b19-4125-ba79-2861cf148b9f" Title="RestExceptionHandler.MicroserviceErrorResult Class" Url="html/T_PipServices_Net_Rest_RestExceptionHandler_MicroserviceErrorResult.htm">
+    <HelpTOCNode Id="da6663bb-de19-418e-bc79-391f14ae2197" Title="RestExceptionHandler.MicroserviceErrorResult Class" Url="html/T_PipServices_Net_Rest_RestExceptionHandler_MicroserviceErrorResult.htm">
       <HelpTOCNode Title="RestExceptionHandler.MicroserviceErrorResult Constructor " Url="html/M_PipServices_Net_Rest_RestExceptionHandler_MicroserviceErrorResult__ctor.htm" />
       <HelpTOCNode Title="MicroserviceErrorResult Methods" Url="html/Methods_T_PipServices_Net_Rest_RestExceptionHandler_MicroserviceErrorResult.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="a0fb34dd-9392-4461-8a59-f9b094abf952" Title="RestService(TC, TL) Class" Url="html/T_PipServices_Net_Rest_RestService_2.htm">
+    <HelpTOCNode Id="6f4cda84-817b-425b-8a52-7013eb1a5930" Title="RestService(TC, TL) Class" Url="html/T_PipServices_Net_Rest_RestService_2.htm">
       <HelpTOCNode Title="RestService(TC, TL) Constructor " Url="html/M_PipServices_Net_Rest_RestService_2__ctor.htm" />
-      <HelpTOCNode Id="24343dc6-c7b8-416e-be52-ab1540b3344a" Title="RestService(TC, TL) Methods" Url="html/Methods_T_PipServices_Net_Rest_RestService_2.htm">
+      <HelpTOCNode Id="eab89707-6822-4343-96c7-2ec75855d720" Title="RestService(TC, TL) Methods" Url="html/Methods_T_PipServices_Net_Rest_RestService_2.htm">
         <HelpTOCNode Title="CloseAsync Method " Url="html/M_PipServices_Net_Rest_RestService_2_CloseAsync.htm" />
         <HelpTOCNode Title="Configure Method " Url="html/M_PipServices_Net_Rest_RestService_2_Configure.htm" />
         <HelpTOCNode Title="GetConnectionAsync Method " Url="html/M_PipServices_Net_Rest_RestService_2_GetConnectionAsync.htm" />
         <HelpTOCNode Title="Instrument Method " Url="html/M_PipServices_Net_Rest_RestService_2_Instrument.htm" />
+        <HelpTOCNode Title="IsOpened Method " Url="html/M_PipServices_Net_Rest_RestService_2_IsOpened.htm" />
         <HelpTOCNode Title="OpenAsync Method " Url="html/M_PipServices_Net_Rest_RestService_2_OpenAsync.htm" />
         <HelpTOCNode Title="SetReferences Method " Url="html/M_PipServices_Net_Rest_RestService_2_SetReferences.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="d29845cb-c7ec-4cf2-bcab-1a843558ee06" Title="RestService(TC, TL) Fields" Url="html/Fields_T_PipServices_Net_Rest_RestService_2.htm">
+      <HelpTOCNode Id="8b89f3b7-11cd-488a-805d-5ccd0336fc82" Title="RestService(TC, TL) Fields" Url="html/Fields_T_PipServices_Net_Rest_RestService_2.htm">
         <HelpTOCNode Title="_address Field" Url="html/F_PipServices_Net_Rest_RestService_2__address.htm" />
         <HelpTOCNode Title="_connectionResolver Field" Url="html/F_PipServices_Net_Rest_RestService_2__connectionResolver.htm" />
         <HelpTOCNode Title="_counters Field" Url="html/F_PipServices_Net_Rest_RestService_2__counters.htm" />

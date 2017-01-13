@@ -117,6 +117,13 @@
     <HelpKINode Title="RestService(TC, TL).Instrument Method " Url="html/M_PipServices_Net_Rest_RestService_2_Instrument.htm" />
   </HelpKINode>
   <HelpKINode Title="Interval property" Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_Interval.htm" />
+  <HelpKINode Title="IsOpened method">
+    <HelpKINode Title="MemoryMessageQueue.IsOpened Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_IsOpened.htm" />
+    <HelpKINode Title="MessageQueue.IsOpened Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_IsOpened.htm" />
+    <HelpKINode Title="MsmqMessageQueue.IsOpened Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_IsOpened.htm" />
+    <HelpKINode Title="RestClient.IsOpened Method " Url="html/M_PipServices_Net_Rest_RestClient_IsOpened.htm" />
+    <HelpKINode Title="RestService(TC, TL).IsOpened Method " Url="html/M_PipServices_Net_Rest_RestService_2_IsOpened.htm" />
+  </HelpKINode>
   <HelpKINode Title="Kind property" Url="html/P_PipServices_Net_Messaging_MessageQueue_Kind.htm" />
   <HelpKINode Title="ListenAsync method">
     <HelpKINode Title="IMessageQueue.ListenAsync Method " Url="html/Overload_PipServices_Net_Messaging_IMessageQueue_ListenAsync.htm" />
@@ -138,6 +145,7 @@
   <HelpKINode Title="MemoryMessageQueue.CloseAsync method" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_CloseAsync.htm" />
   <HelpKINode Title="MemoryMessageQueue.CompleteAsync method" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_CompleteAsync.htm" />
   <HelpKINode Title="MemoryMessageQueue.EndListen method" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_EndListen.htm" />
+  <HelpKINode Title="MemoryMessageQueue.IsOpened method" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_IsOpened.htm" />
   <HelpKINode Title="MemoryMessageQueue.ListenAsync method" Url="html/Overload_PipServices_Net_Messaging_MemoryMessageQueue_ListenAsync.htm" />
   <HelpKINode Title="MemoryMessageQueue.MemoryMessageQueue constructor" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue__ctor.htm" />
   <HelpKINode Title="MemoryMessageQueue.MessageCount property" Url="html/P_PipServices_Net_Messaging_MemoryMessageQueue_MessageCount.htm" />
@@ -204,6 +212,7 @@
   <HelpKINode Title="MessageQueue.Configure method" Url="html/M_PipServices_Net_Messaging_MessageQueue_Configure.htm" />
   <HelpKINode Title="MessageQueue.EndListen method" Url="html/M_PipServices_Net_Messaging_MessageQueue_EndListen.htm" />
   <HelpKINode Title="MessageQueue.GetDescriptor method" Url="html/M_PipServices_Net_Messaging_MessageQueue_GetDescriptor.htm" />
+  <HelpKINode Title="MessageQueue.IsOpened method" Url="html/M_PipServices_Net_Messaging_MessageQueue_IsOpened.htm" />
   <HelpKINode Title="MessageQueue.Kind property" Url="html/P_PipServices_Net_Messaging_MessageQueue_Kind.htm" />
   <HelpKINode Title="MessageQueue.ListenAsync method" Url="html/Overload_PipServices_Net_Messaging_MessageQueue_ListenAsync.htm" />
   <HelpKINode Title="MessageQueue.MessageCount property" Url="html/P_PipServices_Net_Messaging_MessageQueue_MessageCount.htm" />
@@ -267,6 +276,7 @@
   <HelpKINode Title="MsmqMessageQueue.EndListen method" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_EndListen.htm" />
   <HelpKINode Title="MsmqMessageQueue.InnerQueue property" Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_InnerQueue.htm" />
   <HelpKINode Title="MsmqMessageQueue.Interval property" Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_Interval.htm" />
+  <HelpKINode Title="MsmqMessageQueue.IsOpened method" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_IsOpened.htm" />
   <HelpKINode Title="MsmqMessageQueue.ListenAsync method" Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue_ListenAsync.htm" />
   <HelpKINode Title="MsmqMessageQueue.MessageCount property" Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_MessageCount.htm" />
   <HelpKINode Title="MsmqMessageQueue.MoveToDeadLetterAsync method" Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_MoveToDeadLetterAsync.htm" />
@@ -346,6 +356,7 @@
   <HelpKINode Title="RestClient.ExecuteStringAsync method" Url="html/M_PipServices_Net_Rest_RestClient_ExecuteStringAsync.htm" />
   <HelpKINode Title="RestClient.GetConnectionAsync method" Url="html/M_PipServices_Net_Rest_RestClient_GetConnectionAsync.htm" />
   <HelpKINode Title="RestClient.Instrument method" Url="html/M_PipServices_Net_Rest_RestClient_Instrument.htm" />
+  <HelpKINode Title="RestClient.IsOpened method" Url="html/M_PipServices_Net_Rest_RestClient_IsOpened.htm" />
   <HelpKINode Title="RestClient.OpenAsync method" Url="html/M_PipServices_Net_Rest_RestClient_OpenAsync.htm" />
   <HelpKINode Title="RestClient.RestClient constructor" Url="html/M_PipServices_Net_Rest_RestClient__ctor.htm" />
   <HelpKINode Title="RestClient.SetReferences method" Url="html/M_PipServices_Net_Rest_RestClient_SetReferences.htm" />
@@ -380,6 +391,7 @@
   <HelpKINode Title="RestService(Of TC, TL).Configure method" Url="html/M_PipServices_Net_Rest_RestService_2_Configure.htm" />
   <HelpKINode Title="RestService(Of TC, TL).GetConnectionAsync method" Url="html/M_PipServices_Net_Rest_RestService_2_GetConnectionAsync.htm" />
   <HelpKINode Title="RestService(Of TC, TL).Instrument method" Url="html/M_PipServices_Net_Rest_RestService_2_Instrument.htm" />
+  <HelpKINode Title="RestService(Of TC, TL).IsOpened method" Url="html/M_PipServices_Net_Rest_RestService_2_IsOpened.htm" />
   <HelpKINode Title="RestService(Of TC, TL).OpenAsync method" Url="html/M_PipServices_Net_Rest_RestService_2_OpenAsync.htm" />
   <HelpKINode Title="RestService(Of TC, TL).RestService constructor" Url="html/M_PipServices_Net_Rest_RestService_2__ctor.htm" />
   <HelpKINode Title="RestService(Of TC, TL).SetReferences method" Url="html/M_PipServices_Net_Rest_RestService_2_SetReferences.htm" />
@@ -401,6 +413,7 @@
   <HelpKINode Title="RestService&lt;TC, TL&gt;.Configure method" Url="html/M_PipServices_Net_Rest_RestService_2_Configure.htm" />
   <HelpKINode Title="RestService&lt;TC, TL&gt;.GetConnectionAsync method" Url="html/M_PipServices_Net_Rest_RestService_2_GetConnectionAsync.htm" />
   <HelpKINode Title="RestService&lt;TC, TL&gt;.Instrument method" Url="html/M_PipServices_Net_Rest_RestService_2_Instrument.htm" />
+  <HelpKINode Title="RestService&lt;TC, TL&gt;.IsOpened method" Url="html/M_PipServices_Net_Rest_RestService_2_IsOpened.htm" />
   <HelpKINode Title="RestService&lt;TC, TL&gt;.OpenAsync method" Url="html/M_PipServices_Net_Rest_RestService_2_OpenAsync.htm" />
   <HelpKINode Title="RestService&lt;TC, TL&gt;.RestService constructor" Url="html/M_PipServices_Net_Rest_RestService_2__ctor.htm" />
   <HelpKINode Title="RestService&lt;TC, TL&gt;.SetReferences method" Url="html/M_PipServices_Net_Rest_RestService_2_SetReferences.htm" />

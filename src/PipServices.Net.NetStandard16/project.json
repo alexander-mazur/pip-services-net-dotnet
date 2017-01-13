@@ -1,5 +1,5 @@
 {
-  "version": "1.0.10-*",
+  "version": "1.0.13",
 
   "copyright": "Copyright (c) Conceptual Vision Consulting LLC. 2016",
   "title": "Pip.Services Net Framework",
@@ -24,7 +24,6 @@
     "Microsoft.Extensions.Configuration.Json": "1.1.0",
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
-    "MongoDB.Driver": "2.4.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
     "PipServices.Commons": "1.0.40"
