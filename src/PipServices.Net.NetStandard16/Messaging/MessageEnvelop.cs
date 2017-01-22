@@ -1,4 +1,5 @@
 ﻿using PipServices.Commons.Convert;
+using PipServices.Commons.Data;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
@@ -15,7 +16,7 @@ namespace PipServices.Net.Messaging
             CorrelationId = correlationId;
             MessageType = messageType;
             Message = message;
-            MessageId = Guid.NewGuid().ToString("N");
+            MessageId = IdGenerator.NextLong();
         }
 
         public MessageEnvelop(string correlationId, string messageType, object message)
@@ -23,7 +24,7 @@ namespace PipServices.Net.Messaging
             CorrelationId = correlationId;
             MessageType = messageType;
             SetMessage(message);
-            MessageId = Guid.NewGuid().ToString("N");
+            MessageId = IdGenerator.NextLong();
         }
 
         [IgnoreDataMember]
