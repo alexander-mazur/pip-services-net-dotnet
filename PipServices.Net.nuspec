@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PipServices.Net</id>
-    <version>1.0.13</version>
+    <version>1.0.14</version>
     <title>PipServices.Net</title>
     <authors>Sergey Seroukhov, Volodymyr Tkachenko</authors>
 
@@ -17,14 +17,14 @@
     <tags>pip-services microservices framework</tags>
 
     <dependencies>
-      <group targetFramework="net">
+      <group targetFramework=".NETFramework4.5">
         <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
         <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
         <dependency id="Microsoft.AspNet.WebApi.SelfHost" version="5.2.3" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="PipServices.Commons" version="1.0.40" />
+        <dependency id="PipServices.Commons" version="1.0.43" />
       </group>
-      <group targetFramework="netstandard">
+      <group targetFramework=".NETStandard1.3">
         <dependency id="Microsoft.AspNetCore.Diagnostics" version="1.1.0" />
         <dependency id="Microsoft.AspNetCore.Mvc" version="1.1.0" />
         <dependency id="Microsoft.AspNetCore.Routing" version="1.1.0" />
@@ -37,9 +37,9 @@
         <dependency id="Microsoft.Extensions.Configuration.Json" version="1.1.0" />
         <dependency id="Microsoft.Extensions.Logging.Console" version="1.1.0" />
         <dependency id="Microsoft.Extensions.Logging.Debug" version="1.1.0" />
-        <dependency id="NETStandard.Library" version="1.6.1" />
+        <dependency id="NETStandard.Library" version="1.6.0" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="PipServices.Commons" version="1.0.40" />
+        <dependency id="PipServices.Commons" version="1.0.43" />
       </group>
     </dependencies>
   </metadata>

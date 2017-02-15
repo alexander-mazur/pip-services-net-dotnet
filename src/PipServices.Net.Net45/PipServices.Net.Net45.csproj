@@ -37,7 +37,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PipServices.Commons, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PipServices.Commons.1.0.40\lib\net45\PipServices.Commons.dll</HintPath>
+      <HintPath>..\..\packages\PipServices.Commons.1.0.43\lib\net45\PipServices.Commons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

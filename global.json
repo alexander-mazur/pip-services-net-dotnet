@@ -1,6 +1,3 @@
 {
-  "projects": [ "src", "test", "../pip-services-commons-dotnet/src", "../pip-services-data-dotnet/src" ],
-  "sdk": {
-    "version": "1.0.0-preview2-003131"
-  }
+  "projects": [ "src", "test", "../pip-services-commons-dotnet/src", "../pip-services-data-dotnet/src" ]
 }
