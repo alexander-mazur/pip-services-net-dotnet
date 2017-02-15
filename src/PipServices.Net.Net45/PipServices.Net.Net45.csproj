@@ -84,11 +84,11 @@
     <Compile Include="..\PipServices.Net.NetStandard16\Messaging\MemoryMessageQueueFactory.cs">
       <Link>Messaging\MemoryMessageQueueFactory.cs</Link>
     </Compile>
-    <Compile Include="..\PipServices.Net.NetStandard16\Messaging\MemoryQueue.cs">
-      <Link>Messaging\MemoryQueue.cs</Link>
-    </Compile>
     <Compile Include="..\PipServices.Net.NetStandard16\Messaging\MessageEnvelop.cs">
       <Link>Messaging\MessageEnvelop.cs</Link>
+    </Compile>
+    <Compile Include="..\PipServices.Net.Netstandard16\Messaging\MessageQueue.cs">
+      <Link>Messaging\MessageQueue.cs</Link>
     </Compile>
     <Compile Include="..\PipServices.Net.NetStandard16\Messaging\MessagingCapabilities.cs">
       <Link>Messaging\MessagingCapabilities.cs</Link>
