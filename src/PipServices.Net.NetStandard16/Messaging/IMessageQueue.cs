@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PipServices.Net.Messaging
 {
-    public interface IMessageQueue : IOpenable, IClosable
+    public interface IMessageQueue : IOpenable
     {
         string Name { get; }
         MessagingCapabilities Capabilities { get; }

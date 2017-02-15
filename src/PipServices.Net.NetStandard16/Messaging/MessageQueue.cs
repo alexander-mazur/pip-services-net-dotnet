@@ -15,7 +15,7 @@ namespace PipServices.Net.Messaging
     /// <summary>
     /// Local message queue to be used in automated tests
     /// </summary>
-    public abstract class MessageQueue : IMessageQueue, IDescriptable, IReferenceable, IConfigurable, IOpenable
+    public abstract class MessageQueue : IMessageQueue, IDescriptable, IReferenceable, IConfigurable
     {
         protected CompositeLogger _logger = new CompositeLogger();
         protected CompositeCounters _counters = new CompositeCounters();
