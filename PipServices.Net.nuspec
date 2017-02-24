@@ -1,21 +1,18 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>PipServices.Net</id>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
     <title>PipServices.Net</title>
     <authors>Sergey Seroukhov, Volodymyr Tkachenko</authors>
-
     <projectUrl>https://github.com/pip-services/pip-services-net-dotnet</projectUrl>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <iconUrl>https://raw.githubusercontent.com/pip-services/pip-services/master/design/Icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-
     <description>Communication components for Pip.Services in .NET</description>
     <releaseNotes>Pre release</releaseNotes>
     <copyright>Conceptual Vision Consulting LLC. 2016</copyright>
     <tags>pip-services microservices framework</tags>
-
     <dependencies>
       <group targetFramework=".NETFramework4.5">
         <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
@@ -43,7 +40,6 @@
       </group>
     </dependencies>
   </metadata>
-
   <files>
     <file src="src\PipServices.Net.NetStandard16\bin\Release\netstandard1.6\PipServices.Net.deps.json" target="lib\netstandard1.6" />
     <file src="src\PipServices.Net.NetStandard16\bin\Release\netstandard1.6\PipServices.Net.dll" target="lib\netstandard1.6" />
