@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PipServices.Net
 {
-    public interface IDummyService
+    public interface IDummyClient
     {
         Task<DataPage<Dummy>> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging);
         Task<Dummy> GetOneByIdAsync(string correlationId, string id);

@@ -30,6 +30,7 @@
     <HelpKINode Title="MsmqMessageQueue.ClearAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_ClearAsync.htm" />
   </HelpKINode>
   <HelpKINode Title="CloseAsync method">
+    <HelpKINode Title="DirectClient.CloseAsync Method " Url="html/M_PipServices_Net_Direct_DirectClient_CloseAsync.htm" />
     <HelpKINode Title="MemoryMessageQueue.CloseAsync Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_CloseAsync.htm" />
     <HelpKINode Title="MessageQueue.CloseAsync Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_CloseAsync.htm" />
     <HelpKINode Title="MsmqMessageQueue.CloseAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_CloseAsync.htm" />
@@ -51,6 +52,22 @@
   <HelpKINode Title="CorrelationId property" Url="html/P_PipServices_Net_Messaging_MessageEnvelop_CorrelationId.htm" />
   <HelpKINode Title="Create method" Url="html/M_PipServices_Net_Messaging_MemoryMessageQueueFactory_Create.htm" />
   <HelpKINode Title="Descriptor field" Url="html/F_PipServices_Net_Messaging_MemoryMessageQueueFactory_Descriptor.htm" />
+  <HelpKINode Title="DirectClient class">
+    <HelpKINode Title="DirectClient Class" Url="html/T_PipServices_Net_Direct_DirectClient.htm" />
+    <HelpKINode Title="about DirectClient class" Url="html/T_PipServices_Net_Direct_DirectClient.htm" />
+    <HelpKINode Title="constructor" Url="html/M_PipServices_Net_Direct_DirectClient__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_PipServices_Net_Direct_DirectClient.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_PipServices_Net_Direct_DirectClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DirectClient.CloseAsync method" Url="html/M_PipServices_Net_Direct_DirectClient_CloseAsync.htm" />
+  <HelpKINode Title="DirectClient.DirectClient constructor" Url="html/M_PipServices_Net_Direct_DirectClient__ctor.htm" />
+  <HelpKINode Title="DirectClient.GetDescriptor method" Url="html/M_PipServices_Net_Direct_DirectClient_GetDescriptor.htm" />
+  <HelpKINode Title="DirectClient.Instrument method" Url="html/M_PipServices_Net_Direct_DirectClient_Instrument.htm" />
+  <HelpKINode Title="DirectClient.IsOpened method" Url="html/M_PipServices_Net_Direct_DirectClient_IsOpened.htm" />
+  <HelpKINode Title="DirectClient.OpenAsync method" Url="html/M_PipServices_Net_Direct_DirectClient_OpenAsync.htm" />
+  <HelpKINode Title="DirectClient.SetReferences method" Url="html/M_PipServices_Net_Direct_DirectClient_SetReferences.htm" />
+  <HelpKINode Title="DirectClient._counters field" Url="html/F_PipServices_Net_Direct_DirectClient__counters.htm" />
+  <HelpKINode Title="DirectClient._logger field" Url="html/F_PipServices_Net_Direct_DirectClient__logger.htm" />
   <HelpKINode Title="EndListen method">
     <HelpKINode Title="IMessageQueue.EndListen Method " Url="html/M_PipServices_Net_Messaging_IMessageQueue_EndListen.htm" />
     <HelpKINode Title="MemoryMessageQueue.EndListen Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_EndListen.htm" />
@@ -64,6 +81,7 @@
     <HelpKINode Title="RestService(TC, TL).GetConnectionAsync Method " Url="html/M_PipServices_Net_Rest_RestService_2_GetConnectionAsync.htm" />
   </HelpKINode>
   <HelpKINode Title="GetDescriptor method">
+    <HelpKINode Title="DirectClient.GetDescriptor Method " Url="html/M_PipServices_Net_Direct_DirectClient_GetDescriptor.htm" />
     <HelpKINode Title="MemoryMessageQueueFactory.GetDescriptor Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueueFactory_GetDescriptor.htm" />
     <HelpKINode Title="MessageQueue.GetDescriptor Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_GetDescriptor.htm" />
   </HelpKINode>
@@ -113,11 +131,13 @@
   <HelpKINode Title="IMessageReceiver.ReceiveMessageAsync method" Url="html/M_PipServices_Net_Messaging_IMessageReceiver_ReceiveMessageAsync.htm" />
   <HelpKINode Title="InnerQueue property" Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_InnerQueue.htm" />
   <HelpKINode Title="Instrument method">
+    <HelpKINode Title="DirectClient.Instrument Method " Url="html/M_PipServices_Net_Direct_DirectClient_Instrument.htm" />
     <HelpKINode Title="RestClient.Instrument Method " Url="html/M_PipServices_Net_Rest_RestClient_Instrument.htm" />
     <HelpKINode Title="RestService(TC, TL).Instrument Method " Url="html/M_PipServices_Net_Rest_RestService_2_Instrument.htm" />
   </HelpKINode>
   <HelpKINode Title="Interval property" Url="html/P_PipServices_Net_Messaging_MsmqMessageQueue_Interval.htm" />
   <HelpKINode Title="IsOpened method">
+    <HelpKINode Title="DirectClient.IsOpened Method " Url="html/M_PipServices_Net_Direct_DirectClient_IsOpened.htm" />
     <HelpKINode Title="MemoryMessageQueue.IsOpened Method " Url="html/M_PipServices_Net_Messaging_MemoryMessageQueue_IsOpened.htm" />
     <HelpKINode Title="MessageQueue.IsOpened Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_IsOpened.htm" />
     <HelpKINode Title="MsmqMessageQueue.IsOpened Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_IsOpened.htm" />
@@ -292,6 +312,7 @@
     <HelpKINode Title="MessageQueue.Name Property " Url="html/P_PipServices_Net_Messaging_MessageQueue_Name.htm" />
   </HelpKINode>
   <HelpKINode Title="OpenAsync method">
+    <HelpKINode Title="DirectClient.OpenAsync Method " Url="html/M_PipServices_Net_Direct_DirectClient_OpenAsync.htm" />
     <HelpKINode Title="MemoryMessageQueue.OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MemoryMessageQueue_OpenAsync.htm" />
     <HelpKINode Title="MessageQueue.OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MessageQueue_OpenAsync.htm" />
     <HelpKINode Title="MsmqMessageQueue.OpenAsync Method " Url="html/Overload_PipServices_Net_Messaging_MsmqMessageQueue_OpenAsync.htm" />
@@ -310,6 +331,8 @@
     <HelpKINode Title="MessageQueue.PeekBatchAsync Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_PeekBatchAsync.htm" />
     <HelpKINode Title="MsmqMessageQueue.PeekBatchAsync Method " Url="html/M_PipServices_Net_Messaging_MsmqMessageQueue_PeekBatchAsync.htm" />
   </HelpKINode>
+  <HelpKINode Title="PipServices.Net.Direct namespace" Url="html/N_PipServices_Net_Direct.htm" />
+  <HelpKINode Title="PipServices.Net.Direct.DirectClient class" Url="html/T_PipServices_Net_Direct_DirectClient.htm" />
   <HelpKINode Title="PipServices.Net.Messaging namespace" Url="html/N_PipServices_Net_Messaging.htm" />
   <HelpKINode Title="PipServices.Net.Messaging.IMessageQueue interface" Url="html/T_PipServices_Net_Messaging_IMessageQueue.htm" />
   <HelpKINode Title="PipServices.Net.Messaging.IMessageReceiver interface" Url="html/T_PipServices_Net_Messaging_IMessageReceiver.htm" />
@@ -437,6 +460,7 @@
   <HelpKINode Title="SentTimeUtc property" Url="html/P_PipServices_Net_Messaging_MessageEnvelop_SentTimeUtc.htm" />
   <HelpKINode Title="SetMessage method" Url="html/M_PipServices_Net_Messaging_MessageEnvelop_SetMessage.htm" />
   <HelpKINode Title="SetReferences method">
+    <HelpKINode Title="DirectClient.SetReferences Method " Url="html/M_PipServices_Net_Direct_DirectClient_SetReferences.htm" />
     <HelpKINode Title="MessageQueue.SetReferences Method " Url="html/M_PipServices_Net_Messaging_MessageQueue_SetReferences.htm" />
     <HelpKINode Title="RestClient.SetReferences Method " Url="html/M_PipServices_Net_Rest_RestClient_SetReferences.htm" />
     <HelpKINode Title="RestService(TC, TL).SetReferences Method " Url="html/M_PipServices_Net_Rest_RestService_2_SetReferences.htm" />
@@ -461,6 +485,7 @@
     <HelpKINode Title="RestService(TC, TL)._connectionResolver Field" Url="html/F_PipServices_Net_Rest_RestService_2__connectionResolver.htm" />
   </HelpKINode>
   <HelpKINode Title="_counters field">
+    <HelpKINode Title="DirectClient._counters Field" Url="html/F_PipServices_Net_Direct_DirectClient__counters.htm" />
     <HelpKINode Title="MessageQueue._counters Field" Url="html/F_PipServices_Net_Messaging_MessageQueue__counters.htm" />
     <HelpKINode Title="RestClient._counters Field" Url="html/F_PipServices_Net_Rest_RestClient__counters.htm" />
     <HelpKINode Title="RestService(TC, TL)._counters Field" Url="html/F_PipServices_Net_Rest_RestService_2__counters.htm" />
@@ -468,6 +493,7 @@
   <HelpKINode Title="_credentialResolver field" Url="html/F_PipServices_Net_Messaging_MessageQueue__credentialResolver.htm" />
   <HelpKINode Title="_lock field" Url="html/F_PipServices_Net_Messaging_MessageQueue__lock.htm" />
   <HelpKINode Title="_logger field">
+    <HelpKINode Title="DirectClient._logger Field" Url="html/F_PipServices_Net_Direct_DirectClient__logger.htm" />
     <HelpKINode Title="MessageQueue._logger Field" Url="html/F_PipServices_Net_Messaging_MessageQueue__logger.htm" />
     <HelpKINode Title="RestClient._logger Field" Url="html/F_PipServices_Net_Rest_RestClient__logger.htm" />
     <HelpKINode Title="RestService(TC, TL)._logger Field" Url="html/F_PipServices_Net_Rest_RestService_2__logger.htm" />

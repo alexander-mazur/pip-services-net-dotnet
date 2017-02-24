@@ -7,7 +7,7 @@ using PipServices.Net.Test;
 
 namespace PipServices.Net.Rest
 {
-    public sealed class DummyRestClient : RestClient, IDummyService, IDescriptable
+    public sealed class DummyRestClient : RestClient, IDummyClient, IDescriptable
     {
         public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "client", "rest", "default", "1.0");
 

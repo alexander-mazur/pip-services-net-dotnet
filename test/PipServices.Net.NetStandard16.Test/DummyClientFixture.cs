@@ -1,18 +1,16 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using PipServices.Net.Test;
+﻿using System.Threading.Tasks;
 using Xunit;
 
-namespace PipServices.Net.Rest
+namespace PipServices.Net
 {
     public sealed class DummyClientFixture
     {
         private readonly Dummy _dummy1 = new Dummy(null, "Key 1", "Content 1");
         private readonly Dummy _dummy2 = new Dummy(null, "Key 2", "Content 2");
 
-        private readonly IDummyService _client;
+        private readonly IDummyClient _client;
 
-        public DummyClientFixture(IDummyService client)
+        public DummyClientFixture(IDummyClient client)
         {
             Assert.NotNull(client);
             _client = client;

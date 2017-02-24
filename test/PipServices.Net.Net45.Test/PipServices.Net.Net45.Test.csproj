@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="..\..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -42,14 +42,21 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PipServices.Commons, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PipServices.Commons.1.0.43\lib\net45\PipServices.Commons.dll</HintPath>
+      <HintPath>..\..\packages\PipServices.Commons.1.0.44\lib\net45\PipServices.Commons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -78,32 +85,38 @@
       <HintPath>..\..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="YamlDotNet, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\YamlDotNet.4.0.0\lib\net35\YamlDotNet.dll</HintPath>
+    <Reference Include="YamlDotNet, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\YamlDotNet.4.1.0\lib\net35\YamlDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\PipServices.Net.NetStandard16.Test\Direct\DummyDirectClient.cs">
+      <Link>Direct\DummyDirectClient.cs</Link>
+    </Compile>
+    <Compile Include="..\PipServices.Net.NetStandard16.Test\Direct\DummyDirectClientTest.cs">
+      <Link>Direct\DummyDirectClientTest.cs</Link>
+    </Compile>
     <Compile Include="..\PipServices.Net.Netstandard16.Test\Dummy.cs">
       <Link>Dummy.cs</Link>
+    </Compile>
+    <Compile Include="..\PipServices.Net.NetStandard16.Test\DummyClientFixture.cs">
+      <Link>DummyClientFixture.cs</Link>
     </Compile>
     <Compile Include="..\PipServices.Net.Netstandard16.Test\DummyController.cs">
       <Link>DummyController.cs</Link>
     </Compile>
+    <Compile Include="..\PipServices.Net.NetStandard16.Test\IDummyClient.cs">
+      <Link>IDummyClient.cs</Link>
+    </Compile>
     <Compile Include="..\PipServices.Net.Netstandard16.Test\IDummyController.cs">
       <Link>IDummyController.cs</Link>
-    </Compile>
-    <Compile Include="..\PipServices.Net.Netstandard16.Test\IDummyService.cs">
-      <Link>IDummyService.cs</Link>
     </Compile>
     <Compile Include="..\PipServices.Net.Netstandard16.Test\Messaging\MemoryMessageQueueTest.cs">
       <Link>Messaging\MemoryMessageQueueTest.cs</Link>
     </Compile>
     <Compile Include="..\PipServices.Net.Netstandard16.Test\Messaging\MessageQueueFixture.cs">
       <Link>Messaging\MessageQueueFixture.cs</Link>
-    </Compile>
-    <Compile Include="..\PipServices.Net.Netstandard16.Test\Rest\DummyClientFixture.cs">
-      <Link>Rest\DummyClientFixture.cs</Link>
     </Compile>
     <Compile Include="..\PipServices.Net.Netstandard16.Test\Rest\DummyRestClient.cs">
       <Link>Rest\DummyRestClient.cs</Link>
@@ -130,12 +143,13 @@
       <Name>PipServices.Net.Net45</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
