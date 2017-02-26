@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PipServices.Net.Messaging
 {
-    public class MemoryMessageQueueFactory : IFactory, IDescriptable
+    public class MemoryMessageQueueFactory : IFactory
     {
         public static readonly Descriptor Descriptor = new Descriptor("pip-services-net", "factory", "message-queue", "memory", "1.0");
         public static readonly Descriptor QueueDescriptor = new Descriptor("*", "message-queue", "memory", "*", "*");

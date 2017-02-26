@@ -1,10 +1,9 @@
 # Communication components for Pip.Services in .NET Changelog
 
-## <a name="1.0.1-1.0.12"></a> 1.0.1-1.0.12 (2017-01-07)
+## <a name="2.0.0"></a> 2.0.0 (2017-02-25)
 
-### Features
-* **rest** Implemented connection parameters and credentials
-* **messaging** MsmqMessageQueue
+### Breaking Changes
+* Migrated to pip-services-commons 2.0
 
 ## <a name="1.0.0"></a> 1.0.0 (2016-11-21)
 
@@ -13,9 +12,8 @@ Initial public release
 ### Features
 * **messaging** Abstract and in-memory message queues
 * **rest** RESTful service and client
-
-### Breaking Changes
-No breaking changes since this is the first version
+* **rest** Implemented connection parameters and credentials
+* **messaging** MsmqMessageQueue
 
 ### Bug Fixes
 No fixes in this version

@@ -63,5 +63,11 @@ namespace PipServices.Net.Messaging
         {
             Fixture.TestMoveToDeadMessageAsync().Wait();
         }
+
+        [Fact]
+        public void TestMessageCount()
+        {
+            Fixture.TestMessageCountAsync().Wait();
+        }
     }
 }

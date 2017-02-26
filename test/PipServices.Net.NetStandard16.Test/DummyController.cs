@@ -4,17 +4,10 @@ using PipServices.Commons.Refer;
 
 namespace PipServices.Net
 {
-    public sealed class DummyController : IDummyController, IDescriptable
+    public sealed class DummyController : IDummyController
     {
-        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "controller", "default", "default", "1.0");
-
         private readonly object _lock = new object();
         private readonly IList<Dummy> _entities = new List<Dummy>();
-
-        public Descriptor GetDescriptor()
-        {
-            return Descriptor;
-        }
 
         public DataPage<Dummy> GetPageByFilter(string correlationId, FilterParams filter, PagingParams paging)
         {

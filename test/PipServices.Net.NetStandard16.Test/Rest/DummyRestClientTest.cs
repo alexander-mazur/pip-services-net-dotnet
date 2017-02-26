@@ -33,7 +33,11 @@ namespace PipServices.Net.Rest
             _client = new DummyRestClient();
             _client.Configure(RestConfig);
 
-            var references = References.FromList(_ctrl, _client, _service);
+            var references = References.FromTuples(
+                new Descriptor("pip-services-dummies", "controller", "default", "default", "1.0"), _ctrl,
+                new Descriptor("pip-services-dummies", "service", "rest", "default", "1.0"), _service,
+                new Descriptor("pip-services-dummies", "client", "rest", "default", "1.0"), _client
+            );
             _client.SetReferences(references);
             _service.SetReferences(references);
 

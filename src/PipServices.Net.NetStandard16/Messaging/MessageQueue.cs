@@ -15,7 +15,7 @@ namespace PipServices.Net.Messaging
     /// <summary>
     /// Local message queue to be used in automated tests
     /// </summary>
-    public abstract class MessageQueue : IMessageQueue, IDescriptable, IReferenceable, IConfigurable
+    public abstract class MessageQueue : IMessageQueue, IReferenceable, IConfigurable
     {
         protected CompositeLogger _logger = new CompositeLogger();
         protected CompositeCounters _counters = new CompositeCounters();
@@ -26,14 +26,9 @@ namespace PipServices.Net.Messaging
         public MessageQueue(string name = null, ConfigParams config = null)
         {
             Name = name;
-            //Capabilities = new MessagingCapabilities(true, true, true, true, true, true, true, true, true);
+            Capabilities = new MessagingCapabilities(true, true, true, true, true, true, true, true, true);
 
             if (config != null) Configure(config);
-        }
-
-        public Descriptor GetDescriptor()
-        {
-            return new Descriptor("pip-services-net", "message-queue", Kind ?? "unknown", Name, "1.0");
         }
 
         public virtual void SetReferences(IReferences references)

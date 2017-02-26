@@ -3,10 +3,8 @@ using PipServices.Commons.Refer;
 
 namespace PipServices.Net.Rest
 {
-    public sealed class DummyRestService : RestService<DummyWebApiController, IDummyController>, IDescriptable
+    public sealed class DummyRestService : RestService<DummyWebApiController, IDummyController>
     {
-        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "service", "rest", "default", "1.0");
-
         public DummyRestService()
         {
         }
@@ -17,11 +15,6 @@ namespace PipServices.Net.Rest
                 throw new ArgumentNullException(nameof(logic));
 
             _logic = logic;
-        }
-
-        public Descriptor GetDescriptor()
-        {
-            return Descriptor;
         }
 
         public override void SetReferences(IReferences references)

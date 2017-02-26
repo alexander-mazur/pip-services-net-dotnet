@@ -20,7 +20,9 @@ namespace PipServices.Net.Direct
             _ctrl = new DummyController();
             _client = new DummyDirectClient();
 
-            var references = References.FromList(_ctrl);
+            var references = References.FromTuples(
+                new Descriptor("pip-services-dummies", "controller", "default", "default", "1.0"), _ctrl
+            );
             _client.SetReferences(references);
 
             _fixture = new DummyClientFixture(_client);

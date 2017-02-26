@@ -7,15 +7,8 @@ using PipServices.Net.Test;
 
 namespace PipServices.Net.Rest
 {
-    public sealed class DummyRestClient : RestClient, IDummyClient, IDescriptable
+    public sealed class DummyRestClient : RestClient, IDummyClient
     {
-        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "client", "rest", "default", "1.0");
-
-        public Descriptor GetDescriptor()
-        {
-            return Descriptor;
-        }
-
         private string PrepareQueryString(string path, FilterParams filter)
         {
             var param = filter.ToString();

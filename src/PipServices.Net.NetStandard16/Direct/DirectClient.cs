@@ -8,7 +8,7 @@ using PipServices.Commons.Run;
 
 namespace PipServices.Net.Direct
 {
-    public abstract class DirectClient : IOpenable, IReferenceable, IDescriptable
+    public abstract class DirectClient : IOpenable, IReferenceable
     {
         protected CompositeLogger _logger = new CompositeLogger();
         protected CompositeCounters _counters = new CompositeCounters();
@@ -16,7 +16,7 @@ namespace PipServices.Net.Direct
         public Task CloseAsync(string correlationId)
         {
             if (IsOpened())
-                _logger.Debug(correlationId, "Closed Direct client {0}", GetDescriptor().ToString());
+                _logger.Debug(correlationId, "Closed Direct client {0}", this.GetType().Name);
 
             return Task.Delay(0);
         }
@@ -28,7 +28,7 @@ namespace PipServices.Net.Direct
             if (IsOpened())
                 return Task.Delay(0);
 
-            _logger.Info(correlationId, "Opened Direct client {0}", GetDescriptor().ToString());
+            _logger.Info(correlationId, "Opened Direct client {0}", this.GetType().Name);
 
             return Task.Delay(0);
         }
@@ -43,8 +43,6 @@ namespace PipServices.Net.Direct
         {
             return IsOpened();
         }
-
-        public abstract Descriptor GetDescriptor();
 
         protected Timing Instrument(string correlationId, string name)
         {

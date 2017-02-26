@@ -109,6 +109,16 @@ namespace PipServices.Net.Messaging
             Assert.Null(envelop);
         }
 
+        public async Task TestMessageCountAsync()
+        {
+            var envelop1 = new MessageEnvelop("123", "Test", "Test message");
+            await _queue.SendAsync(null, envelop1);
+            await Task.Delay(500);
+            var count = _queue.MessageCount;
+            Assert.NotNull(count);
+            Assert.True(count.Value >= 1);
+        }
+
         public async Task TestOnMessageAsync()
         {
             var envelop1 = new MessageEnvelop("123", "Test", "Test message");

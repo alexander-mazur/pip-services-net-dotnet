@@ -31,7 +31,10 @@ namespace PipServices.Net.Test
             var service = new DummyRestService();
             service.Configure(RestConfig);
 
-            var references = References.FromList(ctrl, service);
+            var references = References.FromTuples(
+                new Descriptor("pip-services-dummies", "controller", "default", "default", "1.0"), ctrl,
+                new Descriptor("pip-services-dummies", "service", "rest", "default", "1.0"), service
+            );
 
             service.SetReferences(references);
 

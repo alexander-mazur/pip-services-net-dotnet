@@ -6,8 +6,6 @@ namespace PipServices.Net.Direct
 {
     public class DummyDirectClient : DirectClient, IDummyClient
     {
-        public static Descriptor Descriptor { get; } = new Descriptor("pip-services-dummies", "client", "direct", "default", "1.0");
-
         private IDummyController _logic;
 
         public override void SetReferences(IReferences references)
@@ -15,11 +13,6 @@ namespace PipServices.Net.Direct
             base.SetReferences(references);
 
             _logic = references.GetOneRequired<IDummyController>(new Descriptor("pip-services-dummies", "controller", "*", "*", "*"));
-        }
-
-        public override Descriptor GetDescriptor()
-        {
-            return Descriptor;
         }
 
         public override bool IsOpened()
