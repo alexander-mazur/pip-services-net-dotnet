@@ -143,6 +143,7 @@ namespace PipServices.Net.Rest
                 // Eat exceptions
                 try
                 {
+                    _server.CloseAsync().Wait();
                     _server.Dispose();
                     _logger.Info(correlationId, "Closed REST service at {0}", _address);
                 }
