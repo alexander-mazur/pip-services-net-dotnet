@@ -3,7 +3,7 @@
 
   "dependencies": {
     "NETStandard.Library": "1.6.1",
-    "PipServices.Commons": "2.0.1"
+    "PipServices.Commons": "2.0.3"
   },
 
   "frameworks": {
