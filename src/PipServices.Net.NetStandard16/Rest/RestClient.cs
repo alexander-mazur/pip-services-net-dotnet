@@ -9,6 +9,7 @@ using PipServices.Commons.Run;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,10 +57,11 @@ namespace PipServices.Net.Rest
 	     * @return ITiming instance to be called at the end of execution of the method.
 	     */
 
-        protected Timing Instrument(string correlationId, string name)
+        protected Timing Instrument(string correlationId, [CallerMemberName]string methodName = null)
         {
-            _logger.Trace(correlationId, "Calling {0} method", name);
-            return _counters.BeginTiming(name + ".call_time");
+            var typeName = GetType().Name;
+            _logger.Trace(correlationId, "Calling {0} method of {1}", methodName, typeName);
+            return _counters.BeginTiming(typeName + "." + methodName + ".call_time");
         }
 
         protected async Task<ConnectionParams> GetConnectionAsync(string correlationId)

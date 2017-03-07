@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using PipServices.Commons.Config;
 using PipServices.Commons.Count;
@@ -44,10 +45,11 @@ namespace PipServices.Net.Direct
             return IsOpened();
         }
 
-        protected Timing Instrument(string correlationId, string name)
+        protected Timing Instrument(string correlationId, [CallerMemberName]string methodName = null)
         {
-            _logger.Trace(correlationId, "Calling {0} method", name);
-            return _counters.BeginTiming(name + ".call_time");
+            var typeName = GetType().Name;
+            _logger.Trace(correlationId, "Calling {0} method of {1}", methodName, typeName);
+            return _counters.BeginTiming(typeName + "." + methodName + ".call_time");
         }
     }
 }
