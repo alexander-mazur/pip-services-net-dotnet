@@ -9,6 +9,7 @@ using PipServices.Commons.Run;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,10 +54,10 @@ namespace PipServices.Net.Rest
             _options = _options.Override(config.GetSection("options"));
         }
 
-        protected Timing Instrument(string correlationId, string name)
+        protected Timing Instrument(string correlationId, [CallerMemberName]string methodName = null)
         {
-            _logger.Trace(correlationId, "Calling {0} method", name);
-            return _counters.BeginTiming(name + ".call_time");
+            _logger.Trace(correlationId, "Calling {0} method of {1}", methodName, GetType().Name);
+            return _counters.BeginTiming(methodName + ".call_time");
         }
 
         protected async Task<ConnectionParams> GetConnectionAsync(string correlationId)
