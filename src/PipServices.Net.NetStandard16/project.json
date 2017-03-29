@@ -1,5 +1,5 @@
 {
-  "version": "1.0.15",
+  "version": "2.0.6",
 
   "copyright": "Copyright (c) Conceptual Vision Consulting LLC. 2016",
   "title": "Pip.Services Net Framework",
@@ -12,19 +12,17 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNetCore.Diagnostics": "1.1.0",
-    "Microsoft.AspNetCore.Mvc": "1.1.1",
-    "Microsoft.AspNetCore.Routing": "1.1.0",
-    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-    "Microsoft.AspNetCore.Server.Kestrel.Https": "1.1.0",
-    "Microsoft.AspNetCore.Server.WebListener": "1.1.0",
-    "Microsoft.AspNetCore.StaticFiles": "1.1.0",
-    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
-    "Microsoft.Extensions.Configuration.Json": "1.1.0",
-    "Microsoft.Extensions.Logging.Console": "1.1.0",
-    "Microsoft.Extensions.Logging.Debug": "1.1.0",
-    "NETStandard.Library": "1.6.0",
+    "Microsoft.AspNetCore.Diagnostics": "1.1.1",
+    "Microsoft.AspNetCore.Mvc": "1.1.2",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.1",
+    "Microsoft.AspNetCore.Server.Kestrel.Https": "1.1.1",
+    "Microsoft.AspNetCore.Server.WebListener": "1.1.1",
+    "Microsoft.AspNetCore.StaticFiles": "1.1.1",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.1",
+    "Microsoft.Extensions.Configuration.Json": "1.1.1",
+    "Microsoft.Extensions.Logging.Console": "1.1.1",
+    "Microsoft.Extensions.Logging.Debug": "1.1.1",
+    "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
     "PipServices.Commons": "2.0.3"
   },

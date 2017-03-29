@@ -5,23 +5,23 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dependencies;
 using System.Web.Http.Dispatcher;
+using PipServices.Commons.Refer;
 
 namespace PipServices.Net.Rest
 {
-    internal class WebApiControllerResolver<T, I> : IDependencyResolver
-        where T : class, IHttpLogicController<I>, new()
-        where I : class
+    internal class WebApiControllerResolver<T> : IDependencyResolver
+        where T : class, IReferenceable, IHttpController, new()
     {
         private readonly IDependencyResolver _baseResolver;
-        private readonly I _logic;
+        private readonly IReferences _references;
 
-        public WebApiControllerResolver(IDependencyResolver baseResolver, I logic)
+        public WebApiControllerResolver(IDependencyResolver baseResolver, IReferences references)
         {
-            if (logic == null)
-                throw new ArgumentNullException(nameof(logic));
+            if (references == null)
+                throw new ArgumentNullException(nameof(references));
 
             _baseResolver = baseResolver;
-            _logic = logic;
+            _references = references;
         }
 
         public IDependencyScope BeginScope()
@@ -42,7 +42,7 @@ namespace PipServices.Net.Rest
 
             // Substitude our controller activator
             if (serviceType == typeof(IHttpControllerActivator))
-                return new ControllerActivator(_logic);
+                return new ControllerActivator(_references);
 
             return _baseResolver.GetService(serviceType);
         }
@@ -85,17 +85,19 @@ namespace PipServices.Net.Rest
         /// </summary>
         private class ControllerActivator : IHttpControllerActivator
         {
-            public ControllerActivator(I logic)
+            public ControllerActivator(IReferences references)
             {
-                Logic = logic;
+                References = references;
             }
 
-            private I Logic { get; }
+            private IReferences References { get; }
 
             public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor,
                 Type controllerType)
             {
-                return new T { Logic = Logic };
+                var controller = new T();
+                controller.SetReferences(References);
+                return controller;
             }
         }
     }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Web.Http;
 using PipServices.Commons.Data;
-using PipServices.Net.Test;
+using PipServices.Commons.Refer;
 
 namespace PipServices.Net.Rest
 {
     [RoutePrefix("dummies")]
     //[MicroserviceExceptionFilterAttribute]
-    public class DummyWebApiController : ApiController, IHttpLogicController<IDummyController>
+    public class DummyWebApiController : ApiController, IReferenceable
     {
         public DummyWebApiController(IDummyController controller)
         {
@@ -63,5 +63,10 @@ namespace PipServices.Net.Rest
         }
 
         public IDummyController Logic { get; set; }
+
+        public void SetReferences(IReferences references)
+        {
+            Logic = references.GetOneRequired<IDummyController>(new Descriptor("pip-services-dummies", "controller", "*", "*", "*"));
+        }
     }
 }

@@ -8,14 +8,14 @@ using PipServices.Commons.Run;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Http.SelfHost;
 
 namespace PipServices.Net.Rest
 {
-    public abstract class RestService<TC, TL> : IOpenable, IConfigurable, IReferenceable
-        where TC : class, IHttpLogicController<TL>, new()
-        where TL : class
+    public abstract class RestService<T> : IOpenable, IConfigurable, IReferenceable
+        where T : class, IReferenceable, IHttpController, new()
     {
         private static readonly ConfigParams _defaultConfig = ConfigParams.FromTuples(
             "connection.protocol", "http",
@@ -32,12 +32,14 @@ namespace PipServices.Net.Rest
         protected ConnectionResolver _connectionResolver = new ConnectionResolver();
         protected ConfigParams _options = new ConfigParams();
 
-        protected TL _logic;
+        protected IReferences _references;
         protected HttpSelfHostServer _server;
         protected string _address;
 
         public virtual void SetReferences(IReferences references)
         {
+            _references = references;
+
             _connectionResolver.SetReferences(references);
             _logger.SetReferences(references);
             _counters.SetReferences(references);
@@ -113,7 +115,7 @@ namespace PipServices.Net.Rest
             config.MapHttpAttributeRoutes();
 
             // Override dependency resolver to inject this service as a controller
-            config.DependencyResolver = new WebApiControllerResolver<TC, TL>(config.DependencyResolver, _logic);
+            config.DependencyResolver = new WebApiControllerResolver<T>(config.DependencyResolver, _references);
 
             config.Services.Replace(typeof(IExceptionHandler), new RestExceptionHandler());
 
